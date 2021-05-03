@@ -101,22 +101,8 @@ public class Main {
         main.test_trade_precreate(100);
     }
 
-    // 测试系统商交易保障调度
-    public void test_monitor_schedule_logic() {
-        // 启动交易保障线程
-        DemoHbRunner demoRunner = new DemoHbRunner(monitorService);
-        demoRunner.setDelay(5); // 设置启动后延迟5秒开始调度，不设置则默认3秒
-        demoRunner.setDuration(10); // 设置间隔10秒进行调度，不设置则默认15 * 60秒
-        demoRunner.schedule();
-
-        // 启动当面付，此处每隔5秒调用一次支付接口，并且当随机数为0时交易保障线程退出
-        while (Math.random() != 0) {
-            test_trade_pay(tradeWithHBService);
-            Utils.sleep(5 * 1000);
-        }
-
-        // 满足退出条件后可以调用shutdown优雅安全退出
-        demoRunner.shutdown();
+    public void trade_pay(String fukuanma,int munprice){
+        test_trade_pay(tradeService,fukuanma,munprice);
     }
 
     // 系统商的调用样例，填写了所有系统商商需要填写的字段
@@ -196,7 +182,7 @@ public class Main {
     }
 
     // 测试当面付2.0支付
-    public void test_trade_pay(AlipayTradeService service) {
+    public void test_trade_pay(AlipayTradeService service,String authCode,int sumprice) {
         // (必填) 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
         // 需保证商户系统端不能重复，建议通过数据库sequence生成，
         String outTradeNo = "tradepay" + System.currentTimeMillis()
@@ -210,7 +196,7 @@ public class Main {
         String totalAmount = "0.01";
 
         // (必填) 付款条码，用户支付宝钱包手机app点击“付款”产生的付款条码
-        String authCode = "用户自己的支付宝付款码"; // 条码示例，286648048691290423
+        // 条码示例，286648048691290423
         // (可选，根据需要决定是否使用) 订单可打折金额，可以配合商家平台配置折扣活动，如果订单部分商品参与打折，可以将部分商品总价填写至此字段，默认全部商品可打折
         // 如果该值未传入,但传入了【订单总金额】,【不可打折金额】 则该值默认为【订单总金额】- 【不可打折金额】
         //        String discountableAmount = "1.00"; //
@@ -432,7 +418,7 @@ public class Main {
                 dumpResponse(response);
 
                 // 需要修改为运行机器上的路径
-                String filePath = String.format("E:\\蓝桥班\\project\\xiaomaibu\\qr-%s.png",
+                String filePath = String.format("E:\\qr-%s.png",
                         response.getOutTradeNo());
                 log.info("filePath:" + filePath);
                                 ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);

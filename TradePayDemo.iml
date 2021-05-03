@@ -145,7 +145,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Oracle/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
+          <root url="jar://D:/oracle/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
