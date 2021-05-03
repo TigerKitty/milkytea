@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Mon May 03 15:09:06 CST 2021
  */
 
-package swing;
+package swing.outlinesale;
 
 import util.ShowQRCode;
 
@@ -18,8 +18,6 @@ import javax.swing.*;
  * 商家结账页面，可选择三种付款方式
  */
 public class MerPayFrame extends JFrame {
-    public static void main(String[] args) {
-    }
     public MerPayFrame(int sumprice) {
         initComponents(sumprice);
     }

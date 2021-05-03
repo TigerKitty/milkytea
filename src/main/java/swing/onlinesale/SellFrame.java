@@ -1,4 +1,4 @@
-package swing;
+package swing.onlinesale;
 
 import entity.sale.MilkTeaBean;
 import util.Dbutil;

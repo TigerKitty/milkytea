@@ -1,4 +1,4 @@
-package swing;
+package swing.onlinesale;
 
 import dao.sale.Create;
 import dao.sale.DaoInsBillOrd;
@@ -76,7 +76,7 @@ public class BillFrame extends JFrame {
                         util.Main main = new util.Main();
                         main.test_trade_precreate(Integer.parseInt(textField1.getText()));
                         List<File> list = new ArrayList<File>();
-                        list= ShowQRCode.getFileSort("E:\\蓝桥班\\project\\xiaomaibu");
+                        list= ShowQRCode.getFileSort("E:\\");
                         String endfileurl=list.get(list.size()-1).getAbsolutePath();
                         QRcodePayFrame QRcodePayFrame =new QRcodePayFrame(endfileurl);
                         //将此订单所需信息封装

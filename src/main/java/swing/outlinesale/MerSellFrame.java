@@ -2,11 +2,11 @@
  * Created by JFormDesigner on Mon May 03 11:41:30 CST 2021
  */
 
-package swing;
+package swing.outlinesale;
 
 import dao.sale.FindProduct;
 import dao.sale.ObtainPrice;
-import entity.MilkTeaBean;
+import entity.sale.MilkTeaBean;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

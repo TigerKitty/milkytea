@@ -1,22 +1,25 @@
-/*
- * Created by JFormDesigner on Mon May 03 15:23:29 CST 2021
- */
-
-package swing;
+package swing.onlinesale;
 
 import java.awt.*;
 import javax.swing.*;
+/*
+ * Created by JFormDesigner on Sun May 02 18:18:07 CST 2021
+ */
+
+
 
 /**
- * 显示二维码支付的条形码
+ * @author 1
  */
-public class MerCodePayFrame extends JFrame {
-    public MerCodePayFrame(String fileurl) {
+public class PayFrame extends JFrame {
+    public PayFrame(String fileurl) {
         initComponents(fileurl);
     }
 
     private void initComponents(String fileurl) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+
+        //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
         ImageIcon icon1=new ImageIcon(fileurl);

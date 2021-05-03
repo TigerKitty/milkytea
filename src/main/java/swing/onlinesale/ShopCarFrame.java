@@ -1,6 +1,7 @@
-package swing;
+package swing.onlinesale;
 
 import entity.sale.MilkTeaBean;
+import swing.onlinesale.BillFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

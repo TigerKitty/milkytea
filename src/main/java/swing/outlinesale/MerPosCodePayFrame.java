@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Mon May 03 15:38:39 CST 2021
  */
 
-package swing;
+package swing.outlinesale;
 
 import util.Main;
 

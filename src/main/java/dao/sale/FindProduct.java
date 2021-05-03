@@ -1,6 +1,6 @@
 package dao.sale;
 
-import entity.MilkTeaBean;
+import entity.sale.MilkTeaBean;
 import util.Dbutil;
 
 import java.sql.PreparedStatement;

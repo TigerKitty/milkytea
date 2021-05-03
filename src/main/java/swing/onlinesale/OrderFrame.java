@@ -1,6 +1,6 @@
-package swing;
+package swing.onlinesale;
 
-import entity.MilkTeaBean;
+import entity.sale.MilkTeaBean;
 import util.ShowQRCode;
 
 import java.awt.*;
