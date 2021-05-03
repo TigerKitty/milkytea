@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * 此类包含销售，下订单过程中的各种生成方法
  */
-public class Create {
+public class DaoCreate {
     /**
      * 生成订单号
      * @param username
@@ -33,5 +33,27 @@ public class Create {
         }
         //返回最终得出的订单号
         return username+format;
+    }
+    /**
+     * 获取奶茶的利润信息
+     *  @param proid
+     *  @return String profi利润
+     */
+    public static String getProProfit(String proid,int num){
+        String profit = "";
+        Dbutil dbutil = new Dbutil();
+        String sql = "SELECT profit FROM product WHERE proid=?";
+        PreparedStatement ps = dbutil.getPs(sql);
+        try {
+            ps.setString(1,proid);
+            ResultSet rs = dbutil.getRs(ps.executeQuery());
+            if (rs.next()){
+                profit = rs.getString("profit");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        profit = Integer.valueOf(profit)*num+"";
+        return profit;
     }
 }

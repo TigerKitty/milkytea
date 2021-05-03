@@ -1,9 +1,8 @@
 package swing.onlinesale;
 
-import dao.sale.Create;
-import dao.sale.DaoInsBillOrd;
-import entity.sale.BillOrdBean;
+import dao.sale.DaoCreate;
 import entity.sale.MilkTeaBean;
+import listener.sale.OrderMes;
 import util.ShowQRCode;
 
 import java.awt.*;
@@ -69,6 +68,7 @@ public class BillFrame extends JFrame {
         contentPane.add(button1);
         button1.setBounds(new Rectangle(new Point(230, 165), button1.getPreferredSize()));
         //---支付---//
+        final List<MilkTeaBean> listMilk = list;
         button1.addActionListener(
                 new ActionListener() {
                     @Override
@@ -79,17 +79,13 @@ public class BillFrame extends JFrame {
                         list= ShowQRCode.getFileSort("E:\\");
                         String endfileurl=list.get(list.size()-1).getAbsolutePath();
                         QRcodePayFrame QRcodePayFrame =new QRcodePayFrame(endfileurl);
-                        //将此订单所需信息封装
-                        final BillOrdBean bb = new BillOrdBean();
-                        bb.setOrdertime(ordertime);
-                        bb.setTrantime(trantime);
-                        bb.setStatus("0");
+                        //将订单信息加入到comorder数据库表中
                         //生成订单号(用户名称暂时写死)
-                        String orderID = Create.CreateOrdid("hzg");
-                        bb.setOrdid(orderID);
-                        //这里需要获取登录的信息
-                        bb.setUsername("hzg");
-                        DaoInsBillOrd.insOrder(bb);
+                        String orderid = DaoCreate.CreateOrdid("hzg");
+                        OrderMes.insertComOrd(orderid,ordertime,trantime);
+                        //将订单的详情信息加入到detailorder数据库表
+                        OrderMes.insertDetailOrd(orderid,listMilk);
+
                     }
                 }
         );
