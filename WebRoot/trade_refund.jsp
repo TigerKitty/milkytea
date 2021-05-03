@@ -22,7 +22,7 @@
 
     if(request.getParameter("outTradeNo")!=null){
         // 一定要在创建AlipayTradeService之前设置参数
-        Configs.init("zfbinfo.properties");
+        Configs.init("src/zfbinfo.properties");
         AlipayTradeService tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
 
         // (必填) 外部订单号，需要退款交易的商户外部订单号

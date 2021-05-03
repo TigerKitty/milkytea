@@ -28,7 +28,7 @@
 
     if(request.getParameter("outTradeNo")!=null){
         // 一定要在创建AlipayTradeService之前设置参数
-        Configs.init("zfbinfo.properties");
+        Configs.init("src/zfbinfo.properties");
         AlipayTradeService tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
 
         // (必填) 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
