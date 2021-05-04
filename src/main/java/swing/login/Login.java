@@ -86,7 +86,7 @@ public class Login extends JFrame {
             int loginRes = checkLogin.Login(username,password);
             if (loginRes == 1){
                 setVisible(false);
-                //new SellGoods();
+//                new SellGoods();
             }else{
                 new LoginLoss();
             }
