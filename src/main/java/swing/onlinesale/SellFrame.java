@@ -1,6 +1,7 @@
 package swing.onlinesale;
 
 import entity.sale.MilkTeaBean;
+import listener.sale.WarnFrame;
 import util.Dbutil;
 
 import java.awt.*;
@@ -158,16 +159,21 @@ public class SellFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        MilkTeaBean milkTeaBean1=new MilkTeaBean();
-                        milkTeaBean1.setProid(textField3.getText());
-                        milkTeaBean1.setProname(textField.getText());
-                        milkTeaBean1.setNumber(Integer.parseInt(textField1.getText()));
-                        milkTeaBean1.setSellprice(textField2.getText());
-                        list1.add(milkTeaBean1);
-                        textField.setText("");
-                        textField1.setText("");
-                        textField2.setText("");
-                        textField3.setText("");
+                        if(textField2.getText().equals("")){//判断用户输入的数量是否为空
+                            WarnFrame.shopwarnFrame();//调用弹出警告框方法，弹出警告框
+                        }
+                        else {
+                            MilkTeaBean milkTeaBean1 = new MilkTeaBean();
+                            milkTeaBean1.setProid(textField3.getText());
+                            milkTeaBean1.setProname(textField.getText());
+                            milkTeaBean1.setNumber(Integer.parseInt(textField2.getText()));
+                            milkTeaBean1.setSellprice(textField1.getText());
+                            list1.add(milkTeaBean1);
+                            textField.setText("");
+                            textField1.setText("");
+                            textField2.setText("");
+                            textField3.setText("");
+                        }
                     }
                 }
         );

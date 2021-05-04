@@ -7,6 +7,7 @@ package swing.outlinesale;
 import dao.sale.FindProduct;
 import dao.sale.ObtainPrice;
 import entity.sale.MilkTeaBean;
+import listener.sale.WarnFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -114,29 +115,34 @@ public class MerSellFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        jScrollPane.setVisible(false);
-                       MilkTeaBean milkTeaBean=new MilkTeaBean();
-                       milkTeaBean.setProid(proid[0]);
-                       milkTeaBean.setProname(proid[1]);
-                       milkTeaBean.setNumber(Integer.parseInt(textField3.getText()));
-                       milkTeaBean.setSellprice((textField2.getText()));
-                       milkTeaBeans.add(milkTeaBean);
-                       Object tableDate[][]=new Object[milkTeaBeans.size()][4];
-                       for(int i=0;i<milkTeaBeans.size();i++){
-                            tableDate[i][0]=milkTeaBeans.get(i).getProid();
-                            tableDate[i][1]=milkTeaBeans.get(i).getProname();
-                            tableDate[i][2]=milkTeaBeans.get(i).getNumber();
-                            tableDate[i][3]=milkTeaBeans.get(i).getSellprice();
+                        if(textField3.getText().equals("")){
+                            WarnFrame.shopwarnFrame();
                         }
-                        String []name ={"奶茶编号","奶茶名称","奶茶数量","奶茶售价"};
-                        DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
-                        JTable table=new JTable(tableModel);
-                        JScrollPane jScrollPane=new JScrollPane(table);
-                        jScrollPane.setBounds(0,0,530,450);
-                        contentPane.add(jScrollPane);
-                        jScrollPane.setVisible(true);
-                        textField2.setText("");
-                        textField3.setText("");
+                        else {
+                            jScrollPane.setVisible(false);
+                            MilkTeaBean milkTeaBean = new MilkTeaBean();
+                            milkTeaBean.setProid(proid[0]);
+                            milkTeaBean.setProname(proid[1]);
+                            milkTeaBean.setNumber(Integer.parseInt(textField3.getText()));
+                            milkTeaBean.setSellprice((textField2.getText()));
+                            milkTeaBeans.add(milkTeaBean);
+                            Object tableDate[][] = new Object[milkTeaBeans.size()][4];
+                            for (int i = 0; i < milkTeaBeans.size(); i++) {
+                                tableDate[i][0] = milkTeaBeans.get(i).getProid();
+                                tableDate[i][1] = milkTeaBeans.get(i).getProname();
+                                tableDate[i][2] = milkTeaBeans.get(i).getNumber();
+                                tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
+                            }
+                            String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
+                            DefaultTableModel tableModel = new DefaultTableModel(tableDate, name);
+                            JTable table = new JTable(tableModel);
+                            JScrollPane jScrollPane = new JScrollPane(table);
+                            jScrollPane.setBounds(0, 0, 530, 450);
+                            contentPane.add(jScrollPane);
+                            jScrollPane.setVisible(true);
+                            textField2.setText("");
+                            textField3.setText("");
+                        }
                     }
                 }
         );

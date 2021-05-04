@@ -1,6 +1,7 @@
 package swing.onlinesale;
 
 import entity.sale.MilkTeaBean;
+import listener.sale.WarnFrame;
 import swing.onlinesale.BillFrame;
 
 import java.awt.*;
@@ -68,7 +69,12 @@ public class ShopCarFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        BillFrame order=new BillFrame(list);
+                        if(list.size()==0){
+                            WarnFrame.orderwarnFrame();
+                        }
+                        else {
+                            BillFrame order = new BillFrame(list);
+                        }
                     }
                 }
         );
