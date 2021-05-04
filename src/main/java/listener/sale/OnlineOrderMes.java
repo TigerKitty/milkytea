@@ -9,9 +9,9 @@ import entity.sale.MilkTeaBean;
 import java.util.List;
 
 /**
- * 包含有关订单信息添加的方法
+ * 包含有关线上下订单信息添加的方法
  */
-public class OrderMes {
+public class OnlineOrderMes {
     /**
      * 将订单信息加入到comorder数据库表中
      */
@@ -44,6 +44,7 @@ public class OrderMes {
             dob.setDetailnum(num);
             dob.setDetailprice(price);
             dob.setDetailprofit(profit);
+            System.out.println(dob.toStirng());
             //插入数据
             DaoInsert.insDetailOrd(dob);
         }

@@ -48,4 +48,11 @@ public class DetailOrdBean {
     public void setDetailprofit(String detailprofit) {
         this.detailprofit = detailprofit;
     }
+    public String toStirng(){
+        return "DetailOrderBean:{ordid="+ordid+","+
+                "proid="+proid+","+
+                "detailnum="+detailnum+","+
+                "detailprice="+detailprice+","+
+                "detailprofit="+detailprofit+"}";
+    }
 }

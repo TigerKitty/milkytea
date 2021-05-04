@@ -1,7 +1,7 @@
 package entity.sale;
 
 /**
- * 用于封装用户结账后产生的对应信息
+ * 用于封装用户结账后产生的对应信息,便于插入comorder数据库表
  */
 public class BillOrdBean {
     private String ordid;

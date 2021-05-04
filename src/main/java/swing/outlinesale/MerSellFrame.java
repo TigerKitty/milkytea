@@ -105,7 +105,7 @@ public class MerSellFrame extends JFrame {
                         ObtainPrice obtainPrice=new ObtainPrice();
                         String sellpricr=obtainPrice.obtainprice(proid[0]);
                         textField2.setText(sellpricr);
-
+                        textField3.setText("1");
                     }
                 }
         );
@@ -151,7 +151,7 @@ public class MerSellFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        textField2.setText("");
+                        //textField2.setText("");
                         textField3.setText("");
                     }
                 }
@@ -165,7 +165,14 @@ public class MerSellFrame extends JFrame {
                         for(int j=0;j<milkTeaBeans.size();j++){
                             sumprice=sumprice+milkTeaBeans.get(j).getNumber()*Integer.parseInt(milkTeaBeans.get(j).getSellprice());
                         }
-                        MerPayFrame merPayFrame=new MerPayFrame(sumprice);
+                        Object tableDate[][]=new Object[milkTeaBeans.size()][4];
+                        for(int i=0;i<milkTeaBeans.size();i++){
+                            tableDate[i][0]=milkTeaBeans.get(i).getProid();
+                            tableDate[i][1]=milkTeaBeans.get(i).getProname();
+                            tableDate[i][2]=milkTeaBeans.get(i).getNumber();
+                            tableDate[i][3]=milkTeaBeans.get(i).getSellprice();
+                        }
+                        MerPayFrame merPayFrame=new MerPayFrame(sumprice,tableDate);
                     }
                 }
         );

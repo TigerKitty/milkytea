@@ -4,13 +4,13 @@
 
 package swing.outlinesale;
 
+import dao.sale.DaoCreate;
+import listener.sale.OutlineOrderMes;
 import util.ShowQRCode;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,9 @@ import javax.swing.*;
  * 商家结账页面，可选择三种付款方式
  */
 public class MerPayFrame extends JFrame {
-    public MerPayFrame(int sumprice) {
+    static Object[][] tableDate;
+    public MerPayFrame(int sumprice, Object[][] tableDate) {
+        this.tableDate = tableDate;
         initComponents(sumprice);
     }
 
@@ -73,33 +75,8 @@ public class MerPayFrame extends JFrame {
         button3.setBackground(Color.ORANGE);
         //显示总额
         textField1.setText(""+sumprice);
-        textField1.setEnabled(false);
         textField2.setText(""+sumprice);
         textField3.setText("0");
-        textField3.setEnabled(false);
-        //根据给的钱，动态获取找零
-        textField2.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                        if(!textField2.getText().equals("")){
-                            int change=Integer.parseInt(textField2.getText())-Integer.parseInt(textField1.getText());
-                            textField3.setText(""+change);
-                        }
-
-                    }
-                }
-        );
         //现金支付
         button1.addActionListener(
                 new ActionListener() {
@@ -108,6 +85,13 @@ public class MerPayFrame extends JFrame {
                         textField1.setText("");
                         textField2.setText("");
                         textField3.setText("");
+                        //生成orderid
+                        String name = "outline";
+                        String orderid = DaoCreate.CreateOutlineOrdid(name);
+                        //将订单信息加入到comorder数据库表中
+                        OutlineOrderMes.insertComOrd(name,orderid);
+                        //将订单信息加入到detailorder数据库表中
+                        OutlineOrderMes.insertDetailOrd(tableDate,orderid);
                     }
                 }
         );
@@ -131,7 +115,13 @@ public class MerPayFrame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         MerPosCodePayFrame merPosCodePayFrame=new MerPosCodePayFrame(sumprice);
-
+                        //生成orderid
+                        //String name = "outline";
+                        //String orderid = DaoCreate.CreateOutlineOrdid(name);
+                        //将订单信息加入到comorder数据库表中
+                        //OutlineOrderMes.insertComOrd(name,orderid);
+                        //将订单信息加入到detailorder数据库表中
+                        //OutlineOrderMes.insertDetailOrd(tableDate,orderid);
                     }
                 }
         );

@@ -2,7 +2,7 @@ package swing.onlinesale;
 
 import dao.sale.DaoCreate;
 import entity.sale.MilkTeaBean;
-import listener.sale.OrderMes;
+import listener.sale.OnlineOrderMes;
 import util.ShowQRCode;
 
 import java.awt.*;
@@ -54,7 +54,7 @@ public class BillFrame extends JFrame {
         label2.setBounds(new Rectangle(new Point(40, 125), label2.getPreferredSize()));
         contentPane.add(textField2);
         textField2.setBounds(105, 125, 140, textField2.getPreferredSize().height);
-        Date date1=new Date();
+        final Date date1=new Date();
         Date date2=new Date(date1.getTime()+600000);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm");
         final String ordertime = format.format(date1);//下单时间
@@ -79,13 +79,12 @@ public class BillFrame extends JFrame {
                         list= ShowQRCode.getFileSort("E:\\");
                         String endfileurl=list.get(list.size()-1).getAbsolutePath();
                         QRcodePayFrame QRcodePayFrame =new QRcodePayFrame(endfileurl);
-                        //将订单信息加入到comorder数据库表中
                         //生成订单号(用户名称暂时写死)
-                        String orderid = DaoCreate.CreateOrdid("hzg");
-                        OrderMes.insertComOrd(orderid,ordertime,trantime);
+                        String orderid = DaoCreate.CreateOrdid("hzg",date1);
+                        //将订单信息加入到comorder数据库表中
+                        OnlineOrderMes.insertComOrd(orderid,ordertime,trantime);
                         //将订单的详情信息加入到detailorder数据库表
-                        OrderMes.insertDetailOrd(orderid,listMilk);
-
+                        OnlineOrderMes.insertDetailOrd(orderid,listMilk);
                     }
                 }
         );

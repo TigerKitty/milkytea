@@ -18,7 +18,7 @@ import javax.swing.*;
 
 
 /**
- * @author 1
+ *
  */
 public class OrderFrame extends JFrame {
     public OrderFrame(List<MilkTeaBean>list) {
