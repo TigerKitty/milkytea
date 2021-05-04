@@ -102,6 +102,7 @@ public class Main {
     }
 
     public void trade_pay(String fukuanma,int munprice){
+
         test_trade_pay(tradeService,fukuanma,munprice);
     }
 

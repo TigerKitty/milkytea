@@ -22,7 +22,6 @@ public class ObtainPrice {
                 String sellprice=resultSet.getString("sellprice");
                 return sellprice;
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

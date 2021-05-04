@@ -8,12 +8,30 @@ import java.util.List;
  * 用于加入购物车时，同一种奶茶数量累加
  */
 public class JoinShopCar {
-    public static List<MilkTeaBean> joinArrays(List<MilkTeaBean> list, String proid,String number){
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getProid().equals(proid)){
-                list.get(i).setNumber(list.get(i).getNumber()+Integer.valueOf(number));
-                return list;
+    public static List<MilkTeaBean> joinArrays(List<MilkTeaBean> list, String proid,String proname,String number,String sellprice){
+        if (list.size()!=0) {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getProid().equals(proid)) {
+                    list.get(i).setNumber(list.get(i).getNumber() + Integer.valueOf(number));
+                    return list;
+                } else if (i==list.size()-1) {
+                    MilkTeaBean milkTeaBean1 = new MilkTeaBean();
+                    milkTeaBean1.setProid(proid);
+                    milkTeaBean1.setProname(proname);
+                    milkTeaBean1.setNumber(Integer.parseInt(number));
+                    milkTeaBean1.setSellprice(sellprice);
+                    list.add(milkTeaBean1);
+                    return list;
+                }
             }
+        }
+        else {
+            MilkTeaBean milkTeaBean1 = new MilkTeaBean();
+            milkTeaBean1.setProid(proid);
+            milkTeaBean1.setProname(proname);
+            milkTeaBean1.setNumber(Integer.parseInt(number));
+            milkTeaBean1.setSellprice(sellprice);
+            list.add(milkTeaBean1);
         }
         return  list;
     }

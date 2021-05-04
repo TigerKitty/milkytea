@@ -1,6 +1,7 @@
 package swing.onlinesale;
 
 import entity.sale.MilkTeaBean;
+import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
 import util.Dbutil;
 
@@ -163,12 +164,8 @@ public class SellFrame extends JFrame {
                             WarnFrame.shopwarnFrame();//调用弹出警告框方法，弹出警告框
                         }
                         else {
-                            MilkTeaBean milkTeaBean1 = new MilkTeaBean();
-                            milkTeaBean1.setProid(textField3.getText());
-                            milkTeaBean1.setProname(textField.getText());
-                            milkTeaBean1.setNumber(Integer.parseInt(textField2.getText()));
-                            milkTeaBean1.setSellprice(textField1.getText());
-                            list1.add(milkTeaBean1);
+                            //调用方法判断加入商品的id是否重复，重复改数量，不重复加入新的商品
+                            list1=JoinShopCar.joinArrays(list1,textField3.getText(),textField.getText(),textField2.getText(),textField1.getText());
                             textField.setText("");
                             textField1.setText("");
                             textField2.setText("");

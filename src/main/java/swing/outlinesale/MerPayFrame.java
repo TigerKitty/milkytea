@@ -11,6 +11,8 @@ import util.ShowQRCode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +79,29 @@ public class MerPayFrame extends JFrame {
         textField1.setText(""+sumprice);
         textField2.setText(""+sumprice);
         textField3.setText("0");
+        textField1.setEnabled(false);
+        textField3.setEnabled(false);
+        //动态获取找零
+        textField2.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (!textField2.getText().equals("")) {
+                    int change = Integer.parseInt(textField2.getText()) - Integer.parseInt(textField1.getText());
+                    textField3.setText("" + change);
+                }
+
+            }
+        });
         //现金支付
         button1.addActionListener(
                 new ActionListener() {
