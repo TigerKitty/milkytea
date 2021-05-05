@@ -1,6 +1,8 @@
-package entity.lnc;
+package entity.lnc.db;
 
-import java.sql.Timestamp;
+/*
+* 订单类，对应数据库中的订单表
+*/
 
 public class ComOrder {
     private String ordid;
