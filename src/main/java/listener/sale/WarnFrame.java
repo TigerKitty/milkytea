@@ -2,8 +2,8 @@ package listener.sale;
 
 import javax.swing.*;
 
-/*
-**用户没有输入数量时或购物车为零，提交订单时弹出警告框
+/**
+*用户没有输入数量时或购物车为零，提交订单时弹出警告框
  */
 public class WarnFrame {
     public static void shopwarnFrame(){

@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 /**
- * @author 1
+ * 线上销售主界面
  */
 public class SellFrame extends JFrame {
     public static void main(String[] args) {

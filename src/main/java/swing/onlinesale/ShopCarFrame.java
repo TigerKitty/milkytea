@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- * @author 1
+ * 购物车界面
  */
 public class ShopCarFrame extends JFrame {
 

@@ -1,5 +1,8 @@
 package entity.sale;
 
+/**
+ * 封装购买奶茶所需要的各个信息
+ */
 public class MilkTeaBean {
     private String proid;
     private String proname;
