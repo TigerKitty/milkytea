@@ -192,7 +192,6 @@ public class underway extends JFrame {
         try {
             ptem.setString(1,"黄志国");
             ptem.setString(2, String.valueOf(num));
-            System.out.println(sql);
             rs=ptem.executeQuery();
             while (rs.next()) {//每循环一次给用户赋值
                 //将数据库中用户的信息存放在集合中
