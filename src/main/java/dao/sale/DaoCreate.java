@@ -17,7 +17,7 @@ public class DaoCreate {
      * @param username
      * @return String 订单号
      */
-    public static String CreateOrdid(String username, Date date){
+    public static String CreateOnlineOrdid(String username, Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String day = sdf.format(date);//下单日期
         System.out.println("date="+date);

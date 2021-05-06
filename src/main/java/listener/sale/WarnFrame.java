@@ -25,4 +25,10 @@ public class WarnFrame {
 
                 "删除失败", JOptionPane.WARNING_MESSAGE);
     }
+    public static void outlinePaywarnFrame(){
+        JFrame frame = new JFrame("支付失败");
+        JOptionPane.showMessageDialog(frame, "支付超时，请重新结账生成",
+
+                "支付失败", JOptionPane.WARNING_MESSAGE);
+    }
 }
