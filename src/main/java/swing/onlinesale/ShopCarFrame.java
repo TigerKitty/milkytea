@@ -54,13 +54,19 @@ public class ShopCarFrame extends JFrame {
         contentPane.add(button2);
         button2.setBounds(new Rectangle(new Point(700, 460), button2.getPreferredSize()));
         //---移除购物车---//
+        n=-1;
         button1.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int n=table.getSelectedRow();
-                        tableModel.removeRow(n);
-                        list.remove(n);
+                        n=table.getSelectedRow();
+                        if(n!=-1) {
+                            tableModel.removeRow(n);
+                            list.remove(n);
+                        }
+                        else {
+                            WarnFrame.deletewarnFrame();
+                        }
                     }
                 }
         );
@@ -89,6 +95,7 @@ public class ShopCarFrame extends JFrame {
     private JButton button1;
     private JButton button2;
     private JScrollPane jScrollPane;
+    private int n;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
