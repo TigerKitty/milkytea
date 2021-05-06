@@ -3,6 +3,9 @@ package swing.onlinesale;
 import dao.sale.DaoCreate;
 import entity.sale.MilkTeaBean;
 import listener.sale.OnlineOrderMes;
+import listener.sale.OutlineOrderMes;
+import listener.sale.WarnFrame;
+import swing.outlinesale.MerCodePayFrame;
 import util.ShowQRCode;
 
 import java.awt.*;
@@ -73,18 +76,57 @@ public class BillFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        util.Main main = new util.Main();
-                        main.test_trade_precreate(Integer.parseInt(textField1.getText()));
-                        List<File> list = new ArrayList<File>();
-                        list= ShowQRCode.getFileSort("E:\\");
-                        String endfileurl=list.get(list.size()-1).getAbsolutePath();
-                        QRcodePayFrame QRcodePayFrame =new QRcodePayFrame(endfileurl);
-                        //生成订单号(用户名称暂时写死)
-                        String orderid = DaoCreate.CreateOrdid("hzg",date1);
-                        //将订单信息加入到comorder数据库表中
-                        OnlineOrderMes.insertComOrd(orderid,ordertime,trantime);
-                        //将订单的详情信息加入到detailorder数据库表
-                        OnlineOrderMes.insertDetailOrd(orderid,listMilk);
+                        final util.Main main = new util.Main();
+                        final String[] no = {""};
+                        final int[] payStatus = {0};
+                        //给生成二维码添加一个线程
+                        Thread t1=new Thread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //这里一定要变为数组的问题搞不懂为啥
+                                        no[0] = main.test_trade_precreate(Integer.parseInt(textField1.getText()));
+                                        System.out.println(no[0]);
+                                        List<File> list = new ArrayList<File>();
+                                        list= ShowQRCode.getFileSort("E:\\");
+                                        String endfileurl=list.get(list.size()-1).getAbsolutePath();
+                                        MerCodePayFrame codePayFrame=new MerCodePayFrame(endfileurl);
+                                    }
+                                }
+                        );
+                        final Object obj = new Object();
+                        //给验证支付成功的方法添加一个线程
+                        Thread t2=new Thread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        synchronized (obj){
+                                            try {
+                                                obj.wait(20000);
+                                            } catch (InterruptedException ex) {
+                                                ex.printStackTrace();
+                                            }
+                                            //这里一定要变为数组的问题搞不懂为啥
+                                            payStatus[0] = main.test_trade_query(no[0]);
+                                            System.out.println(payStatus[0]);
+                                            if (payStatus[0]==1){
+                                                System.out.println("支付成功");
+                                                //生成订单号(用户名称暂时写死)
+                                                String orderid = DaoCreate.CreateOnlineOrdid("hzg",date1);
+                                                //将订单信息加入到comorder数据库表中
+                                                OnlineOrderMes.insertComOrd(orderid,ordertime,trantime);
+                                                //将订单的详情信息加入到detailorder数据库表
+                                                OnlineOrderMes.insertDetailOrd(orderid,listMilk);
+                                            }else {
+                                                System.out.println("支付失败");
+                                                WarnFrame.outlinePaywarnFrame();
+                                            }
+                                        }
+                                    }
+                                }
+                        );
+                        t1.start();
+                        t2.start();
                     }
                 }
         );

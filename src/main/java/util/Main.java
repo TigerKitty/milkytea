@@ -194,7 +194,7 @@ public class Main {
 
         // (必填) 订单总金额，单位为元，不能超过1亿元
         // 如果同时传入了【打折金额】,【不可打折金额】,【订单总金额】三者,则必须满足如下条件:【订单总金额】=【打折金额】+【不可打折金额】
-        String totalAmount = "0.01";
+        String totalAmount = sumprice+"";
 
         // (必填) 付款条码，用户支付宝钱包手机app点击“付款”产生的付款条码
         // 条码示例，286648048691290423
@@ -271,10 +271,11 @@ public class Main {
     }
 
     // 测试当面付2.0查询订单
-    public void test_trade_query() {
+    public int test_trade_query(String no) {
         // (必填) 商户订单号，通过此商户订单号查询当面付的交易状态
-        String outTradeNo = "tradepay14817938139942440181";
-
+        String outTradeNo = no;
+        //用于返回订单状态的整数，只有1成功，其他失败
+        int payStatus = 0;
         // 创建查询请求builder，设置请求参数
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
             .setOutTradeNo(outTradeNo);
@@ -282,8 +283,8 @@ public class Main {
         AlipayF2FQueryResult result = tradeService.queryTradeResult(builder);
         switch (result.getTradeStatus()) {
             case SUCCESS:
+                payStatus = 1;
                 log.info("查询返回该订单支付成功: )");
-
                 AlipayTradeQueryResponse response = result.getResponse();
                 dumpResponse(response);
 
@@ -296,17 +297,21 @@ public class Main {
                 break;
 
             case FAILED:
+                payStatus = 2;
                 log.error("查询返回该订单支付失败或被关闭!!!");
                 break;
 
             case UNKNOWN:
+                payStatus = 3;
                 log.error("系统异常，订单支付状态未知!!!");
                 break;
 
             default:
+                payStatus = 4;
                 log.error("不支持的交易状态，交易返回异常!!!");
                 break;
         }
+        return payStatus;
     }
 
     // 测试当面付2.0退款
@@ -353,7 +358,7 @@ public class Main {
     }
 
     // 测试当面付2.0生成支付二维码
-    public void test_trade_precreate(int munprice) {
+    public String test_trade_precreate(int munprice) {
         // (必填) 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
         // 需保证商户系统端不能重复，建议通过数据库sequence生成，
         String outTradeNo = "tradeprecreate" + System.currentTimeMillis()
@@ -422,8 +427,9 @@ public class Main {
                 String filePath = String.format("E:\\qr-%s.png",
                         response.getOutTradeNo());
                 log.info("filePath:" + filePath);
-                                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
-                break;
+                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
+                //返回用于验证是否支付成功的订单编号
+                return outTradeNo;
 
             case FAILED:
                 log.error("支付宝预下单失败!!!");
@@ -437,5 +443,6 @@ public class Main {
                 log.error("不支持的交易状态，交易返回异常!!!");
                 break;
         }
+        return null;
     }
 }

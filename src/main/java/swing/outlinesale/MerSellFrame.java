@@ -126,12 +126,6 @@ public class MerSellFrame extends JFrame {
                         }
                         else {
                             jScrollPane.setVisible(false);
-//                            MilkTeaBean milkTeaBean = new MilkTeaBean();
-//                            milkTeaBean.setProid(proid[0]);
-//                            milkTeaBean.setProname(proid[1]);
-//                            milkTeaBean.setNumber(Integer.parseInt(textField3.getText()));
-//                            milkTeaBean.setSellprice((textField2.getText()));
-//                            milkTeaBeans.add(milkTeaBean);
                             milkTeaBeans = JoinShopCar.joinOutlineArr(milkTeaBeans,proid[0],proid[1],Integer.parseInt(textField3.getText())+"",textField2.getText());
                             Object tableDate[][] = new Object[milkTeaBeans.size()][4];
                             for (int i = 0; i < milkTeaBeans.size(); i++) {
