@@ -44,7 +44,7 @@ public class MerSellFrame extends JFrame {
         label1=new JLabel();
         label2=new JLabel();
         label3=new JLabel();
-        List <MilkTeaBean>list=new ArrayList<MilkTeaBean>();
+        list=new ArrayList<MilkTeaBean>();
         FindProduct findProduct=new FindProduct();
         list=findProduct.findprodyct();
         comboBoxDate=new String[list.size()];
@@ -57,6 +57,7 @@ public class MerSellFrame extends JFrame {
         button1 = new JButton();
         button2 = new JButton();
         button3 =new JButton();
+        button4=new JButton();
         label1.setText("\u5976\u8336\u540d\u79f0\uff1a");
         jPanel.add(label1);
         label1.setBounds(new Rectangle(new Point(30, 150), label1.getPreferredSize()));
@@ -87,11 +88,15 @@ public class MerSellFrame extends JFrame {
         button3.setText("\u652f\u4ed8");
         contentPane.add(button3);
         button3.setBounds(new Rectangle(new Point(440, 460), button3.getPreferredSize()));
+        //--button4--
+        button4.setText("\u5220\u9664");
+        contentPane.add(button4);
+        button4.setBounds(new Rectangle(new Point(370, 460), button4.getPreferredSize()));
 
         Object tableDate[][]=new Object[0][4];
         String []name ={"奶茶编号","奶茶名称","奶茶数量","奶茶售价"};
-        DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
-        JTable table=new JTable(tableModel);
+        tableModel=new DefaultTableModel(tableDate,name);
+        table=new JTable(tableModel);
         final JScrollPane jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,530,450);
         contentPane.add(jScrollPane);
@@ -136,8 +141,8 @@ public class MerSellFrame extends JFrame {
                                 tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
                             }
                             String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
-                            DefaultTableModel tableModel = new DefaultTableModel(tableDate, name);
-                            JTable table = new JTable(tableModel);
+                            tableModel = new DefaultTableModel(tableDate, name);
+                            table = new JTable(tableModel);
                             JScrollPane jScrollPane = new JScrollPane(table);
                             jScrollPane.setBounds(0, 0, 530, 450);
                             contentPane.add(jScrollPane);
@@ -178,6 +183,23 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
+        //把商品从购物车移除
+        n=-1;
+        button4.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        n=table.getSelectedRow();
+                        if(n!=-1) {
+                            tableModel.removeRow(n);
+                            list.remove(n);
+                        }
+                        else {
+                            WarnFrame.deletewarnFrame();
+                        }
+                    }
+                }
+        );
         contentPane.setPreferredSize(new Dimension(800, 500));
         pack();
         setLocationRelativeTo(getOwner());
@@ -194,10 +216,15 @@ public class MerSellFrame extends JFrame {
     private JButton button1;
     private JButton button2;
     private JButton button3;
+    private JButton button4;
+    private JTable table;
+    private DefaultTableModel tableModel;
     private JComboBox comboBox;
     private  String[]comboBoxDate;
     private List<MilkTeaBean>milkTeaBeans;
     private String[]proid;
+    private List <MilkTeaBean>list;
+    private int n;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

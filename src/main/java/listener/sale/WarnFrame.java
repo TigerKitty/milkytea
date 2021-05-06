@@ -18,4 +18,11 @@ public class WarnFrame {
 
                 "提交订单失败", JOptionPane.WARNING_MESSAGE);
     }
+    //从购物车删除报错时弹出该框
+    public static void deletewarnFrame(){
+        JFrame frame = new JFrame("删除失败");
+        JOptionPane.showMessageDialog(frame, "您没有选中商品，请选中商品进行删除",
+
+                "删除失败", JOptionPane.WARNING_MESSAGE);
+    }
 }
