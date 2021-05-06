@@ -1,6 +1,6 @@
 package swing.login;
 
-import dao.Check;
+import dao.login.Check;
 
 import javax.swing.*;
 import java.awt.*;

@@ -43,7 +43,8 @@ public class OutlineOrderMes {
         for(Object[] obj : tableDate){
             String proid = (String)obj[0];
             String num = obj[2].toString();
-            String price = (String)obj[3];
+            String singleprice = (String) obj[3];
+            String price = Integer.valueOf(singleprice)*Integer.valueOf(num)+"";
             String profit = DaoCreate.getProProfit(proid,Integer.valueOf(num));
             dob.setOrdid(orderid);
             dob.setProid(proid);

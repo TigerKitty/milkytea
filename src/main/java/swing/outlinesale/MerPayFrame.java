@@ -131,6 +131,13 @@ public class MerPayFrame extends JFrame {
                         list= ShowQRCode.getFileSort("E:\\");
                         String endfileurl=list.get(list.size()-1).getAbsolutePath();
                         MerCodePayFrame codePayFrame=new MerCodePayFrame(endfileurl);
+                        //生成orderid
+                        //String name = "outline";
+                        //String orderid = DaoCreate.CreateOutlineOrdid(name);
+                        //将订单信息加入到comorder数据库表中
+                        //OutlineOrderMes.insertComOrd(name,orderid);
+                        //将订单信息加入到detailorder数据库表中
+                        //OutlineOrderMes.insertDetailOrd(tableDate,orderid);
                     }
                 }
         );
