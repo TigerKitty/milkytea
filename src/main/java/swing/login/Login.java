@@ -25,10 +25,10 @@ public class Login extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         button1 = new JButton();
-        textField1 = new JTextField("hzg");
+        textField1 = new JTextField();
         label1 = new JLabel();
         button2 = new JButton();
-        textField2 = new JTextField("123");
+        textField2 = new JTextField();
         label2 = new JLabel();
 
         //======== this ========
@@ -39,14 +39,6 @@ public class Login extends JFrame {
         button1.setText("\u767b\u5f55");
         contentPane.add(button1);
         button1.setBounds(new Rectangle(new Point(85, 140), button1.getPreferredSize()));
-        button1.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        login();
-                    }
-                }
-        );
         contentPane.add(textField1);
         textField1.setBounds(145, 65, 95, textField1.getPreferredSize().height);
 
@@ -70,10 +62,6 @@ public class Login extends JFrame {
         contentPane.setPreferredSize(new Dimension(400, 300));
         pack();
         setLocationRelativeTo(getOwner());
-        //调用时显示面板,
-        setVisible(true);
-        //关闭窗口时，同时关闭本次运行
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
     private void login(){
