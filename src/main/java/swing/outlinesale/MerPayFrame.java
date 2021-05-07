@@ -27,6 +27,7 @@ public class MerPayFrame extends JFrame {
     public MerPayFrame(int sumprice, Object[][] tableDate) {
         this.tableDate = tableDate;
         initComponents(sumprice);
+
     }
 
     private void initComponents(final int sumprice) {
@@ -108,6 +109,7 @@ public class MerPayFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+
                         textField1.setText("");
                         textField2.setText("");
                         textField3.setText("");
@@ -118,6 +120,7 @@ public class MerPayFrame extends JFrame {
                         OutlineOrderMes.insertComOrd(name,orderid);
                         //将订单信息加入到detailorder数据库表中
                         OutlineOrderMes.insertDetailOrd(tableDate,orderid);
+                        MerSellFrame.Clear();//付款之后清空购物车
                     }
                 }
         );
@@ -168,6 +171,8 @@ public class MerPayFrame extends JFrame {
                                                 OutlineOrderMes.insertComOrd(name,orderid);
                                                 //将订单信息加入到detailorder数据库表中
                                                 OutlineOrderMes.insertDetailOrd(tableDate,orderid);
+                                                MerSellFrame.Clear();//付款之后清空购物车
+                                                WarnFrame.outlinePoswarnFrame1();//弹出支付成功框
                                             }else {
                                                 System.out.println("支付失败");
                                                 WarnFrame.outlinePaywarnFrame();
@@ -186,14 +191,8 @@ public class MerPayFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        MerPosCodePayFrame merPosCodePayFrame=new MerPosCodePayFrame(sumprice);
-                        //生成orderid
-                        //String name = "outline";
-                        //String orderid = DaoCreate.CreateOutlineOrdid(name);
-                        //将订单信息加入到comorder数据库表中
-                        //OutlineOrderMes.insertComOrd(name,orderid);
-                        //将订单信息加入到detailorder数据库表中
-                        //OutlineOrderMes.insertDetailOrd(tableDate,orderid);
+                        MerPosCodePayFrame merPosCodePayFrame=new MerPosCodePayFrame(sumprice,tableDate);
+
                     }
                 }
         );
@@ -202,7 +201,9 @@ public class MerPayFrame extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         setVisible(true);
+
     }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     private JLabel label1;
@@ -214,5 +215,4 @@ public class MerPayFrame extends JFrame {
     private JButton button1;
     private JButton button2;
     private JButton button3;
-
 }

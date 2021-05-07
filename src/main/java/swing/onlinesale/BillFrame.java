@@ -117,6 +117,8 @@ public class BillFrame extends JFrame {
                                                 OnlineOrderMes.insertComOrd(orderid,ordertime,trantime);
                                                 //将订单的详情信息加入到detailorder数据库表
                                                 OnlineOrderMes.insertDetailOrd(orderid,listMilk);
+                                                ShopCarFrame.ClearShopCar();//付款后清空购物车
+                                                WarnFrame.outlinePoswarnFrame1();//弹出支付成功框
                                             }else {
                                                 System.out.println("支付失败");
                                                 WarnFrame.outlinePaywarnFrame();

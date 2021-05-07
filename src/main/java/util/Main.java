@@ -101,9 +101,9 @@ public class Main {
         main.test_trade_precreate(100);
     }
 
-    public void trade_pay(String fukuanma,int munprice){
+    public int trade_pay(String fukuanma,int munprice){
 
-        test_trade_pay(tradeService,fukuanma,munprice);
+        return test_trade_pay(tradeService,fukuanma,munprice);
     }
 
     // 系统商的调用样例，填写了所有系统商商需要填写的字段
@@ -183,9 +183,10 @@ public class Main {
     }
 
     // 测试当面付2.0支付
-    public void test_trade_pay(AlipayTradeService service,String authCode,int sumprice) {
+    public int test_trade_pay(AlipayTradeService service,String authCode,int sumprice) {
         // (必填) 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
         // 需保证商户系统端不能重复，建议通过数据库sequence生成，
+        int m=0;
         String outTradeNo = "tradepay" + System.currentTimeMillis()
                             + (long) (Math.random() * 10000000L);
 
@@ -254,6 +255,7 @@ public class Main {
         switch (result.getTradeStatus()) {
             case SUCCESS:
                 log.info("支付宝支付成功: )");
+                m=1;
                 break;
 
             case FAILED:
@@ -268,6 +270,7 @@ public class Main {
                 log.error("不支持的交易状态，交易返回异常!!!");
                 break;
         }
+        return m;
     }
 
     // 测试当面付2.0查询订单

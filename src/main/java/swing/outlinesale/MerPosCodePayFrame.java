@@ -4,6 +4,9 @@
 
 package swing.outlinesale;
 
+import dao.sale.DaoCreate;
+import listener.sale.OutlineOrderMes;
+import listener.sale.WarnFrame;
 import util.Main;
 
 import java.awt.*;
@@ -16,7 +19,9 @@ import javax.swing.*;
  * 显示Pos机付款界面
  */
 public class MerPosCodePayFrame extends JFrame {
-    public MerPosCodePayFrame(int sumprice) {
+    static Object[][] tableDate;
+    public MerPosCodePayFrame(int sumprice,Object tableDate[][]) {
+        this.tableDate = tableDate;
         initComponents(sumprice);
     }
 
@@ -46,7 +51,20 @@ public class MerPosCodePayFrame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Main main=new Main();
-                        main.trade_pay(textField1.getText(),sumprice);
+                        int m=main.trade_pay(textField1.getText(),sumprice);
+                        //生成orderid
+                        if (m==1) {
+                            String name = "outline";
+                            String orderid = DaoCreate.CreateOutlineOrdid(name);
+                            //将订单信息加入到comorder数据库表中
+                            OutlineOrderMes.insertComOrd(name, orderid);
+                            //将订单信息加入到detailorder数据库表中
+                            OutlineOrderMes.insertDetailOrd(tableDate, orderid);
+                            MerSellFrame.Clear();//付款之后清空购物车
+                            WarnFrame.outlinePoswarnFrame1();//弹出支付成功框
+                        }else {
+                            WarnFrame.outlinePoswarnFrame();
+                        }
                     }
                 }
         );

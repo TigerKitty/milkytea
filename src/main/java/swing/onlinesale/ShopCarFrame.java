@@ -20,15 +20,16 @@ import javax.swing.table.DefaultTableModel;
  * 购物车界面
  */
 public class ShopCarFrame extends JFrame {
+    private static List<MilkTeaBean>list;
 
     public ShopCarFrame(List<MilkTeaBean>list) {
-
+        this.list=list;
         initComponents(list);
     }
     private void initComponents(final List<MilkTeaBean>list) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         //======== this ========
-        Container contentPane = getContentPane();
+        contentPane = getContentPane();
         contentPane.setLayout(null);
         Object[][]tableDate=new Object[list.size()][4];
         for(int i=0;i<list.size();i++){
@@ -38,7 +39,7 @@ public class ShopCarFrame extends JFrame {
             tableDate[i][3]=list.get(i).getSellprice();
         }
         String []name ={"奶茶编号","奶茶名称","购买数量","奶茶售价"};
-        final DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
+        tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,800,450);
@@ -91,10 +92,23 @@ public class ShopCarFrame extends JFrame {
         setVisible(true);
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    private JTable table;
+    //付款成功后，清空购物车
+    public static void ClearShopCar(){
+        list.clear();
+        Object tableDate1[][] = new Object[0][4];
+        String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
+        tableModel = new DefaultTableModel(tableDate1, name);
+        table = new JTable(tableModel);
+        JScrollPane jScrollPane = new JScrollPane(table);
+        jScrollPane.setBounds(0, 0, 530, 450);
+        contentPane.add(jScrollPane);
+    }
+    private static JTable table;
     private JButton button1;
     private JButton button2;
     private JScrollPane jScrollPane;
+    private static Container contentPane;
+    private static DefaultTableModel tableModel;
     private int n;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
