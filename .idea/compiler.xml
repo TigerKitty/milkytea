@@ -9,7 +9,7 @@
         <module name="TradePayDemo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8">
       <module name="TradePayDemo" target="6" />
     </bytecodeTargetLevel>
   </component>
