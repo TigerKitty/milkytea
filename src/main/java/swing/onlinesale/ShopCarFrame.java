@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- * è´­ç‰©è½¦ç•Œé¢
+ * ¹ºÎï³µ½çÃæ
  */
 public class ShopCarFrame extends JFrame {
 
@@ -37,7 +37,7 @@ public class ShopCarFrame extends JFrame {
             tableDate[i][2]=list.get(i).getNumber();
             tableDate[i][3]=list.get(i).getSellprice();
         }
-        String []name ={"å¥¶èŒ¶ç¼–å·","å¥¶èŒ¶åç§°","è´­ä¹°æ•°é‡","å¥¶èŒ¶å”®ä»·"};
+        String []name ={"ÄÌ²è±àºÅ","ÄÌ²èÃû³Æ","¹ºÂòÊıÁ¿","ÄÌ²èÊÛ¼Û"};
         final DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         jScrollPane=new JScrollPane(table);
@@ -53,7 +53,7 @@ public class ShopCarFrame extends JFrame {
         button2.setText("\u63d0\u4ea4\u8ba2\u5355");
         contentPane.add(button2);
         button2.setBounds(new Rectangle(new Point(700, 460), button2.getPreferredSize()));
-        //---ç§»é™¤è´­ç‰©è½¦---//
+        //---ÒÆ³ı¹ºÎï³µ---//
         n=-1;
         button1.addActionListener(
                 new ActionListener() {
@@ -70,7 +70,7 @@ public class ShopCarFrame extends JFrame {
                     }
                 }
         );
-        //---æäº¤è®¢å•---//
+        //---Ìá½»¶©µ¥---//
         button2.addActionListener(
                 new ActionListener() {
                     @Override

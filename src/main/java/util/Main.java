@@ -29,42 +29,42 @@ import java.util.*;
 
 /**
  * Created by liuyangkly on 15/8/9.
- * ç®€å•mainå‡½æ•°ï¼Œç”¨äºæµ‹è¯•å½“é¢ä»˜api
- * sdkå’Œdemoçš„æ„è§å’Œé—®é¢˜åé¦ˆè¯·è”ç³»ï¼šliuyang.kly@alipay.com
+ * ¼òµ¥mainº¯Êı£¬ÓÃÓÚ²âÊÔµ±Ãæ¸¶api
+ * sdkºÍdemoµÄÒâ¼ûºÍÎÊÌâ·´À¡ÇëÁªÏµ£ºliuyang.kly@alipay.com
  */
 public class Main {
     private static Log log = LogFactory.getLog(Main.class);
 
-    // æ”¯ä»˜å®å½“é¢ä»˜2.0æœåŠ¡
+    // Ö§¸¶±¦µ±Ãæ¸¶2.0·şÎñ
     private static AlipayTradeService   tradeService;
 
-    // æ”¯ä»˜å®å½“é¢ä»˜2.0æœåŠ¡ï¼ˆé›†æˆäº†äº¤æ˜“ä¿éšœæ¥å£é€»è¾‘ï¼‰
+    // Ö§¸¶±¦µ±Ãæ¸¶2.0·şÎñ£¨¼¯³ÉÁË½»Ò×±£ÕÏ½Ó¿ÚÂß¼­£©
     private static AlipayTradeService   tradeWithHBService;
 
-    // æ”¯ä»˜å®äº¤æ˜“ä¿éšœæ¥å£æœåŠ¡ï¼Œä¾›æµ‹è¯•æ¥å£apiä½¿ç”¨ï¼Œè¯·å…ˆé˜…è¯»readme.txt
+    // Ö§¸¶±¦½»Ò×±£ÕÏ½Ó¿Ú·şÎñ£¬¹©²âÊÔ½Ó¿ÚapiÊ¹ÓÃ£¬ÇëÏÈÔÄ¶Áreadme.txt
     private static AlipayMonitorService monitorService;
 
     static {
-        /** ä¸€å®šè¦åœ¨åˆ›å»ºAlipayTradeServiceä¹‹å‰è°ƒç”¨Configs.init()è®¾ç½®é»˜è®¤å‚æ•°
-         *  Configsä¼šè¯»å–classpathä¸‹çš„zfbinfo.propertiesæ–‡ä»¶é…ç½®ä¿¡æ¯ï¼Œå¦‚æœæ‰¾ä¸åˆ°è¯¥æ–‡ä»¶åˆ™ç¡®è®¤è¯¥æ–‡ä»¶æ˜¯å¦åœ¨classpathç›®å½•
+        /** Ò»¶¨ÒªÔÚ´´½¨AlipayTradeServiceÖ®Ç°µ÷ÓÃConfigs.init()ÉèÖÃÄ¬ÈÏ²ÎÊı
+         *  Configs»á¶ÁÈ¡classpathÏÂµÄzfbinfo.propertiesÎÄ¼şÅäÖÃĞÅÏ¢£¬Èç¹ûÕÒ²»µ½¸ÃÎÄ¼şÔòÈ·ÈÏ¸ÃÎÄ¼şÊÇ·ñÔÚclasspathÄ¿Â¼
          */
         Configs.init("src/zfbinfo.properties");
 
-        /** ä½¿ç”¨Configsæä¾›çš„é»˜è®¤å‚æ•°
-         *  AlipayTradeServiceå¯ä»¥ä½¿ç”¨å•ä¾‹æˆ–è€…ä¸ºé™æ€æˆå‘˜å¯¹è±¡ï¼Œä¸éœ€è¦åå¤new
+        /** Ê¹ÓÃConfigsÌá¹©µÄÄ¬ÈÏ²ÎÊı
+         *  AlipayTradeService¿ÉÒÔÊ¹ÓÃµ¥Àı»òÕßÎª¾²Ì¬³ÉÔ±¶ÔÏó£¬²»ĞèÒª·´¸´new
          */
         tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
 
-        // æ”¯ä»˜å®å½“é¢ä»˜2.0æœåŠ¡ï¼ˆé›†æˆäº†äº¤æ˜“ä¿éšœæ¥å£é€»è¾‘ï¼‰
+        // Ö§¸¶±¦µ±Ãæ¸¶2.0·şÎñ£¨¼¯³ÉÁË½»Ò×±£ÕÏ½Ó¿ÚÂß¼­£©
         tradeWithHBService = new AlipayTradeWithHBServiceImpl.ClientBuilder().build();
 
-        /** å¦‚æœéœ€è¦åœ¨ç¨‹åºä¸­è¦†ç›–Configsæä¾›çš„é»˜è®¤å‚æ•°, å¯ä»¥ä½¿ç”¨ClientBuilderç±»çš„setXXXæ–¹æ³•ä¿®æ”¹é»˜è®¤å‚æ•° å¦åˆ™ä½¿ç”¨ä»£ç ä¸­çš„é»˜è®¤è®¾ç½® */
+        /** Èç¹ûĞèÒªÔÚ³ÌĞòÖĞ¸²¸ÇConfigsÌá¹©µÄÄ¬ÈÏ²ÎÊı, ¿ÉÒÔÊ¹ÓÃClientBuilderÀàµÄsetXXX·½·¨ĞŞ¸ÄÄ¬ÈÏ²ÎÊı ·ñÔòÊ¹ÓÃ´úÂëÖĞµÄÄ¬ÈÏÉèÖÃ */
         monitorService = new AlipayMonitorServiceImpl.ClientBuilder()
             .setGatewayUrl("http://mcloudmonitor.com/gateway.do").setCharset("GBK")
             .setFormat("json").build();
     }
 
-    // ç®€å•æ‰“å°åº”ç­”
+    // ¼òµ¥´òÓ¡Ó¦´ğ
     private void dumpResponse(AlipayResponse response) {
         if (response != null) {
             log.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));
@@ -79,36 +79,36 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
 
-        // ç³»ç»Ÿå•†å•†æµ‹è¯•äº¤æ˜“ä¿éšœæ¥å£api
+        // ÏµÍ³ÉÌÉÌ²âÊÔ½»Ò×±£ÕÏ½Ó¿Úapi
         //        main.test_monitor_sys();
 
-        // POSå‚å•†æµ‹è¯•äº¤æ˜“ä¿éšœæ¥å£api
+        // POS³§ÉÌ²âÊÔ½»Ò×±£ÕÏ½Ó¿Úapi
         //        main.test_monitor_pos();
 
-        // æµ‹è¯•äº¤æ˜“ä¿éšœæ¥å£è°ƒåº¦
+        // ²âÊÔ½»Ò×±£ÕÏ½Ó¿Úµ÷¶È
         //        main.test_monitor_schedule_logic();
 
-        // æµ‹è¯•å½“é¢ä»˜2.0æ”¯ä»˜ï¼ˆä½¿ç”¨æœªé›†æˆäº¤æ˜“ä¿éšœæ¥å£çš„å½“é¢ä»˜2.0æœåŠ¡ï¼‰
+        // ²âÊÔµ±Ãæ¸¶2.0Ö§¸¶£¨Ê¹ÓÃÎ´¼¯³É½»Ò×±£ÕÏ½Ó¿ÚµÄµ±Ãæ¸¶2.0·şÎñ£©
         //        main.test_trade_pay(tradeService);
 
-        // æµ‹è¯•æŸ¥è¯¢å½“é¢ä»˜2.0äº¤æ˜“
+        // ²âÊÔ²éÑ¯µ±Ãæ¸¶2.0½»Ò×
         //        main.test_trade_query();
 
-        // æµ‹è¯•å½“é¢ä»˜2.0é€€è´§
+        // ²âÊÔµ±Ãæ¸¶2.0ÍË»õ
         //        main.test_trade_refund();
 
-        // æµ‹è¯•å½“é¢ä»˜2.0ç”Ÿæˆæ”¯ä»˜äºŒç»´ç 
+        // ²âÊÔµ±Ãæ¸¶2.0Éú³ÉÖ§¸¶¶şÎ¬Âë
         main.test_trade_precreate(100);
     }
 
-    public void trade_pay(String fukuanma,int munprice){
+    public boolean trade_pay(String fukuanma,int munprice){
 
-        test_trade_pay(tradeService,fukuanma,munprice);
+        return test_trade_pay(tradeService,fukuanma,munprice);
     }
 
-    // ç³»ç»Ÿå•†çš„è°ƒç”¨æ ·ä¾‹ï¼Œå¡«å†™äº†æ‰€æœ‰ç³»ç»Ÿå•†å•†éœ€è¦å¡«å†™çš„å­—æ®µ
+    // ÏµÍ³ÉÌµÄµ÷ÓÃÑùÀı£¬ÌîĞ´ÁËËùÓĞÏµÍ³ÉÌÉÌĞèÒªÌîĞ´µÄ×Ö¶Î
     public void test_monitor_sys() {
-        // ç³»ç»Ÿå•†ä½¿ç”¨çš„äº¤æ˜“ä¿¡æ¯æ ¼å¼ï¼Œjsonå­—ç¬¦ä¸²ç±»å‹
+        // ÏµÍ³ÉÌÊ¹ÓÃµÄ½»Ò×ĞÅÏ¢¸ñÊ½£¬json×Ö·û´®ÀàĞÍ
         List<SysTradeInfo> sysTradeInfoList = new ArrayList<SysTradeInfo>();
         sysTradeInfoList.add(SysTradeInfo.newInstance("00000001", 5.2, HbStatus.S));
         sysTradeInfoList.add(SysTradeInfo.newInstance("00000002", 4.4, HbStatus.F));
@@ -116,47 +116,47 @@ public class Main {
         sysTradeInfoList.add(SysTradeInfo.newInstance("00000004", 3.2, HbStatus.X));
         sysTradeInfoList.add(SysTradeInfo.newInstance("00000005", 4.1, HbStatus.X));
 
-        // å¡«å†™å¼‚å¸¸ä¿¡æ¯ï¼Œå¦‚æœæœ‰çš„è¯
+        // ÌîĞ´Òì³£ĞÅÏ¢£¬Èç¹ûÓĞµÄ»°
         List<ExceptionInfo> exceptionInfoList = new ArrayList<ExceptionInfo>();
         exceptionInfoList.add(ExceptionInfo.HE_SCANER);
         //        exceptionInfoList.add(ExceptionInfo.HE_PRINTER);
         //        exceptionInfoList.add(ExceptionInfo.HE_OTHER);
 
-        // å¡«å†™æ‰©å±•å‚æ•°ï¼Œå¦‚æœæœ‰çš„è¯
+        // ÌîĞ´À©Õ¹²ÎÊı£¬Èç¹ûÓĞµÄ»°
         Map<String, Object> extendInfo = new HashMap<String, Object>();
         //        extendInfo.put("SHOP_ID", "BJ_ZZ_001");
         //        extendInfo.put("TERMINAL_ID", "1234");
 
-        String appAuthToken = "åº”ç”¨æˆæƒä»¤ç‰Œ";//æ ¹æ®çœŸå®å€¼å¡«å†™
+        String appAuthToken = "Ó¦ÓÃÊÚÈ¨ÁîÅÆ";//¸ù¾İÕæÊµÖµÌîĞ´
 
         AlipayHeartbeatSynRequestBuilder builder = new AlipayHeartbeatSynRequestBuilder()
             .setAppAuthToken(appAuthToken).setProduct(Product.FP).setType(Type.CR)
             .setEquipmentId("cr1000001").setEquipmentStatus(EquipStatus.NORMAL)
             .setTime(Utils.toDate(new Date())).setStoreId("store10001").setMac("0a:00:27:00:00:00")
-            .setNetworkType("LAN").setProviderId("2088911212323549") // è®¾ç½®ç³»ç»Ÿå•†pid
-            .setSysTradeInfoList(sysTradeInfoList) // ç³»ç»Ÿå•†åŒæ­¥trade_infoä¿¡æ¯
-            //                .setExceptionInfoList(exceptionInfoList)  // å¡«å†™å¼‚å¸¸ä¿¡æ¯ï¼Œå¦‚æœæœ‰çš„è¯
-            .setExtendInfo(extendInfo) // å¡«å†™æ‰©å±•ä¿¡æ¯ï¼Œå¦‚æœæœ‰çš„è¯
+            .setNetworkType("LAN").setProviderId("2088911212323549") // ÉèÖÃÏµÍ³ÉÌpid
+            .setSysTradeInfoList(sysTradeInfoList) // ÏµÍ³ÉÌÍ¬²½trade_infoĞÅÏ¢
+            //                .setExceptionInfoList(exceptionInfoList)  // ÌîĞ´Òì³£ĞÅÏ¢£¬Èç¹ûÓĞµÄ»°
+            .setExtendInfo(extendInfo) // ÌîĞ´À©Õ¹ĞÅÏ¢£¬Èç¹ûÓĞµÄ»°
         ;
 
         MonitorHeartbeatSynResponse response = monitorService.heartbeatSyn(builder);
         dumpResponse(response);
     }
 
-    // POSå‚å•†çš„è°ƒç”¨æ ·ä¾‹ï¼Œå¡«å†™äº†æ‰€æœ‰poså‚å•†éœ€è¦å¡«å†™çš„å­—æ®µ
+    // POS³§ÉÌµÄµ÷ÓÃÑùÀı£¬ÌîĞ´ÁËËùÓĞpos³§ÉÌĞèÒªÌîĞ´µÄ×Ö¶Î
     public void test_monitor_pos() {
-        // POSå‚å•†ä½¿ç”¨çš„äº¤æ˜“ä¿¡æ¯æ ¼å¼ï¼Œå­—ç¬¦ä¸²ç±»å‹
+        // POS³§ÉÌÊ¹ÓÃµÄ½»Ò×ĞÅÏ¢¸ñÊ½£¬×Ö·û´®ÀàĞÍ
         List<PosTradeInfo> posTradeInfoList = new ArrayList<PosTradeInfo>();
         posTradeInfoList.add(PosTradeInfo.newInstance(HbStatus.S, "1324", 7));
         posTradeInfoList.add(PosTradeInfo.newInstance(HbStatus.X, "1326", 15));
         posTradeInfoList.add(PosTradeInfo.newInstance(HbStatus.S, "1401", 8));
         posTradeInfoList.add(PosTradeInfo.newInstance(HbStatus.F, "1405", 3));
 
-        // å¡«å†™å¼‚å¸¸ä¿¡æ¯ï¼Œå¦‚æœæœ‰çš„è¯
+        // ÌîĞ´Òì³£ĞÅÏ¢£¬Èç¹ûÓĞµÄ»°
         List<ExceptionInfo> exceptionInfoList = new ArrayList<ExceptionInfo>();
         exceptionInfoList.add(ExceptionInfo.HE_PRINTER);
 
-        // å¡«å†™æ‰©å±•å‚æ•°ï¼Œå¦‚æœæœ‰çš„è¯
+        // ÌîĞ´À©Õ¹²ÎÊı£¬Èç¹ûÓĞµÄ»°
         Map<String, Object> extendInfo = new HashMap<String, Object>();
         //        extendInfo.put("SHOP_ID", "BJ_ZZ_001");
         //        extendInfo.put("TERMINAL_ID", "1234");
@@ -168,79 +168,79 @@ public class Main {
             .setEquipmentStatus(EquipStatus.NORMAL)
             .setTime("2015-09-28 11:14:49")
             .setManufacturerPid("2088000000000009")
-            // å¡«å†™æœºå…·å•†çš„æ”¯ä»˜å®pid
+            // ÌîĞ´»ú¾ßÉÌµÄÖ§¸¶±¦pid
             .setStoreId("store200001").setEquipmentPosition("31.2433190000,121.5090750000")
             .setBbsPosition("2869719733-065|2896507033-091").setNetworkStatus("gggbbbgggnnn")
             .setNetworkType("3G").setBattery("98").setWifiMac("0a:00:27:00:00:00")
             .setWifiName("test_wifi_name").setIp("192.168.1.188")
-            .setPosTradeInfoList(posTradeInfoList) // POSå‚å•†åŒæ­¥trade_infoä¿¡æ¯
-            //                .setExceptionInfoList(exceptionInfoList) // å¡«å†™å¼‚å¸¸ä¿¡æ¯ï¼Œå¦‚æœæœ‰çš„è¯
-            .setExtendInfo(extendInfo) // å¡«å†™æ‰©å±•ä¿¡æ¯ï¼Œå¦‚æœæœ‰çš„è¯
+            .setPosTradeInfoList(posTradeInfoList) // POS³§ÉÌÍ¬²½trade_infoĞÅÏ¢
+            //                .setExceptionInfoList(exceptionInfoList) // ÌîĞ´Òì³£ĞÅÏ¢£¬Èç¹ûÓĞµÄ»°
+            .setExtendInfo(extendInfo) // ÌîĞ´À©Õ¹ĞÅÏ¢£¬Èç¹ûÓĞµÄ»°
         ;
 
         MonitorHeartbeatSynResponse response = monitorService.heartbeatSyn(builder);
         dumpResponse(response);
     }
 
-    // æµ‹è¯•å½“é¢ä»˜2.0æ”¯ä»˜
-    public void test_trade_pay(AlipayTradeService service,String authCode,int sumprice) {
-        // (å¿…å¡«) å•†æˆ·ç½‘ç«™è®¢å•ç³»ç»Ÿä¸­å”¯ä¸€è®¢å•å·ï¼Œ64ä¸ªå­—ç¬¦ä»¥å†…ï¼Œåªèƒ½åŒ…å«å­—æ¯ã€æ•°å­—ã€ä¸‹åˆ’çº¿ï¼Œ
-        // éœ€ä¿è¯å•†æˆ·ç³»ç»Ÿç«¯ä¸èƒ½é‡å¤ï¼Œå»ºè®®é€šè¿‡æ•°æ®åº“sequenceç”Ÿæˆï¼Œ
+    // ²âÊÔµ±Ãæ¸¶2.0Ö§¸¶
+    public boolean test_trade_pay(AlipayTradeService service,String authCode,int sumprice) {
+        // (±ØÌî) ÉÌ»§ÍøÕ¾¶©µ¥ÏµÍ³ÖĞÎ¨Ò»¶©µ¥ºÅ£¬64¸ö×Ö·ûÒÔÄÚ£¬Ö»ÄÜ°üº¬×ÖÄ¸¡¢Êı×Ö¡¢ÏÂ»®Ïß£¬
+        // Ğè±£Ö¤ÉÌ»§ÏµÍ³¶Ë²»ÄÜÖØ¸´£¬½¨ÒéÍ¨¹ıÊı¾İ¿âsequenceÉú³É£¬
         String outTradeNo = "tradepay" + System.currentTimeMillis()
                             + (long) (Math.random() * 10000000L);
 
-        // (å¿…å¡«) è®¢å•æ ‡é¢˜ï¼Œç²—ç•¥æè¿°ç”¨æˆ·çš„æ”¯ä»˜ç›®çš„ã€‚å¦‚â€œxxxå“ç‰Œxxxé—¨åº—æ¶ˆè´¹â€
-        String subject = "xxxå“ç‰Œxxxé—¨åº—å½“é¢ä»˜æ¶ˆè´¹";
+        // (±ØÌî) ¶©µ¥±êÌâ£¬´ÖÂÔÃèÊöÓÃ»§µÄÖ§¸¶Ä¿µÄ¡£Èç¡°xxxÆ·ÅÆxxxÃÅµêÏû·Ñ¡±
+        String subject = "NO.3ÄÌ²èµê";
 
-        // (å¿…å¡«) è®¢å•æ€»é‡‘é¢ï¼Œå•ä½ä¸ºå…ƒï¼Œä¸èƒ½è¶…è¿‡1äº¿å…ƒ
-        // å¦‚æœåŒæ—¶ä¼ å…¥äº†ã€æ‰“æŠ˜é‡‘é¢ã€‘,ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘,ã€è®¢å•æ€»é‡‘é¢ã€‘ä¸‰è€…,åˆ™å¿…é¡»æ»¡è¶³å¦‚ä¸‹æ¡ä»¶:ã€è®¢å•æ€»é‡‘é¢ã€‘=ã€æ‰“æŠ˜é‡‘é¢ã€‘+ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘
+        // (±ØÌî) ¶©µ¥×Ü½ğ¶î£¬µ¥Î»ÎªÔª£¬²»ÄÜ³¬¹ı1ÒÚÔª
+        // Èç¹ûÍ¬Ê±´«ÈëÁË¡¾´òÕÛ½ğ¶î¡¿,¡¾²»¿É´òÕÛ½ğ¶î¡¿,¡¾¶©µ¥×Ü½ğ¶î¡¿ÈıÕß,Ôò±ØĞëÂú×ãÈçÏÂÌõ¼ş:¡¾¶©µ¥×Ü½ğ¶î¡¿=¡¾´òÕÛ½ğ¶î¡¿+¡¾²»¿É´òÕÛ½ğ¶î¡¿
         String totalAmount = sumprice+"";
 
-        // (å¿…å¡«) ä»˜æ¬¾æ¡ç ï¼Œç”¨æˆ·æ”¯ä»˜å®é’±åŒ…æ‰‹æœºappç‚¹å‡»â€œä»˜æ¬¾â€äº§ç”Ÿçš„ä»˜æ¬¾æ¡ç 
-        // æ¡ç ç¤ºä¾‹ï¼Œ286648048691290423
-        // (å¯é€‰ï¼Œæ ¹æ®éœ€è¦å†³å®šæ˜¯å¦ä½¿ç”¨) è®¢å•å¯æ‰“æŠ˜é‡‘é¢ï¼Œå¯ä»¥é…åˆå•†å®¶å¹³å°é…ç½®æŠ˜æ‰£æ´»åŠ¨ï¼Œå¦‚æœè®¢å•éƒ¨åˆ†å•†å“å‚ä¸æ‰“æŠ˜ï¼Œå¯ä»¥å°†éƒ¨åˆ†å•†å“æ€»ä»·å¡«å†™è‡³æ­¤å­—æ®µï¼Œé»˜è®¤å…¨éƒ¨å•†å“å¯æ‰“æŠ˜
-        // å¦‚æœè¯¥å€¼æœªä¼ å…¥,ä½†ä¼ å…¥äº†ã€è®¢å•æ€»é‡‘é¢ã€‘,ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘ åˆ™è¯¥å€¼é»˜è®¤ä¸ºã€è®¢å•æ€»é‡‘é¢ã€‘- ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘
+        // (±ØÌî) ¸¶¿îÌõÂë£¬ÓÃ»§Ö§¸¶±¦Ç®°üÊÖ»úappµã»÷¡°¸¶¿î¡±²úÉúµÄ¸¶¿îÌõÂë
+        // ÌõÂëÊ¾Àı£¬286648048691290423
+        // (¿ÉÑ¡£¬¸ù¾İĞèÒª¾ö¶¨ÊÇ·ñÊ¹ÓÃ) ¶©µ¥¿É´òÕÛ½ğ¶î£¬¿ÉÒÔÅäºÏÉÌ¼ÒÆ½Ì¨ÅäÖÃÕÛ¿Û»î¶¯£¬Èç¹û¶©µ¥²¿·ÖÉÌÆ·²ÎÓë´òÕÛ£¬¿ÉÒÔ½«²¿·ÖÉÌÆ·×Ü¼ÛÌîĞ´ÖÁ´Ë×Ö¶Î£¬Ä¬ÈÏÈ«²¿ÉÌÆ·¿É´òÕÛ
+        // Èç¹û¸ÃÖµÎ´´«Èë,µ«´«ÈëÁË¡¾¶©µ¥×Ü½ğ¶î¡¿,¡¾²»¿É´òÕÛ½ğ¶î¡¿ Ôò¸ÃÖµÄ¬ÈÏÎª¡¾¶©µ¥×Ü½ğ¶î¡¿- ¡¾²»¿É´òÕÛ½ğ¶î¡¿
         //        String discountableAmount = "1.00"; //
 
-        // (å¯é€‰) è®¢å•ä¸å¯æ‰“æŠ˜é‡‘é¢ï¼Œå¯ä»¥é…åˆå•†å®¶å¹³å°é…ç½®æŠ˜æ‰£æ´»åŠ¨ï¼Œå¦‚æœé…’æ°´ä¸å‚ä¸æ‰“æŠ˜ï¼Œåˆ™å°†å¯¹åº”é‡‘é¢å¡«å†™è‡³æ­¤å­—æ®µ
-        // å¦‚æœè¯¥å€¼æœªä¼ å…¥,ä½†ä¼ å…¥äº†ã€è®¢å•æ€»é‡‘é¢ã€‘,ã€æ‰“æŠ˜é‡‘é¢ã€‘,åˆ™è¯¥å€¼é»˜è®¤ä¸ºã€è®¢å•æ€»é‡‘é¢ã€‘-ã€æ‰“æŠ˜é‡‘é¢ã€‘
+        // (¿ÉÑ¡) ¶©µ¥²»¿É´òÕÛ½ğ¶î£¬¿ÉÒÔÅäºÏÉÌ¼ÒÆ½Ì¨ÅäÖÃÕÛ¿Û»î¶¯£¬Èç¹û¾ÆË®²»²ÎÓë´òÕÛ£¬Ôò½«¶ÔÓ¦½ğ¶îÌîĞ´ÖÁ´Ë×Ö¶Î
+        // Èç¹û¸ÃÖµÎ´´«Èë,µ«´«ÈëÁË¡¾¶©µ¥×Ü½ğ¶î¡¿,¡¾´òÕÛ½ğ¶î¡¿,Ôò¸ÃÖµÄ¬ÈÏÎª¡¾¶©µ¥×Ü½ğ¶î¡¿-¡¾´òÕÛ½ğ¶î¡¿
         String undiscountableAmount = "0.0";
 
-        // å–å®¶æ”¯ä»˜å®è´¦å·IDï¼Œç”¨äºæ”¯æŒä¸€ä¸ªç­¾çº¦è´¦å·ä¸‹æ”¯æŒæ‰“æ¬¾åˆ°ä¸åŒçš„æ”¶æ¬¾è´¦å·ï¼Œ(æ‰“æ¬¾åˆ°sellerIdå¯¹åº”çš„æ”¯ä»˜å®è´¦å·)
-        // å¦‚æœè¯¥å­—æ®µä¸ºç©ºï¼Œåˆ™é»˜è®¤ä¸ºä¸æ”¯ä»˜å®ç­¾çº¦çš„å•†æˆ·çš„PIDï¼Œä¹Ÿå°±æ˜¯appidå¯¹åº”çš„PID
+        // Âô¼ÒÖ§¸¶±¦ÕËºÅID£¬ÓÃÓÚÖ§³ÖÒ»¸öÇ©Ô¼ÕËºÅÏÂÖ§³Ö´ò¿îµ½²»Í¬µÄÊÕ¿îÕËºÅ£¬(´ò¿îµ½sellerId¶ÔÓ¦µÄÖ§¸¶±¦ÕËºÅ)
+        // Èç¹û¸Ã×Ö¶ÎÎª¿Õ£¬ÔòÄ¬ÈÏÎªÓëÖ§¸¶±¦Ç©Ô¼µÄÉÌ»§µÄPID£¬Ò²¾ÍÊÇappid¶ÔÓ¦µÄPID
         String sellerId = "";
 
-        // è®¢å•æè¿°ï¼Œå¯ä»¥å¯¹äº¤æ˜“æˆ–å•†å“è¿›è¡Œä¸€ä¸ªè¯¦ç»†åœ°æè¿°ï¼Œæ¯”å¦‚å¡«å†™"è´­ä¹°å•†å“3ä»¶å…±20.00å…ƒ"
-        String body = "è´­ä¹°å•†å“3ä»¶å…±20.00å…ƒ";
+        // ¶©µ¥ÃèÊö£¬¿ÉÒÔ¶Ô½»Ò×»òÉÌÆ·½øĞĞÒ»¸öÏêÏ¸µØÃèÊö£¬±ÈÈçÌîĞ´"¹ºÂòÉÌÆ·3¼ş¹²20.00Ôª"
+        String body = "¹ºÂòÉÌÆ·3¼ş¹²20.00Ôª";
 
-        // å•†æˆ·æ“ä½œå‘˜ç¼–å·ï¼Œæ·»åŠ æ­¤å‚æ•°å¯ä»¥ä¸ºå•†æˆ·æ“ä½œå‘˜åšé”€å”®ç»Ÿè®¡
+        // ÉÌ»§²Ù×÷Ô±±àºÅ£¬Ìí¼Ó´Ë²ÎÊı¿ÉÒÔÎªÉÌ»§²Ù×÷Ô±×öÏúÊÛÍ³¼Æ
         String operatorId = "test_operator_id";
 
-        // (å¿…å¡«) å•†æˆ·é—¨åº—ç¼–å·ï¼Œé€šè¿‡é—¨åº—å·å’Œå•†å®¶åå°å¯ä»¥é…ç½®ç²¾å‡†åˆ°é—¨åº—çš„æŠ˜æ‰£ä¿¡æ¯ï¼Œè¯¦è¯¢æ”¯ä»˜å®æŠ€æœ¯æ”¯æŒ
+        // (±ØÌî) ÉÌ»§ÃÅµê±àºÅ£¬Í¨¹ıÃÅµêºÅºÍÉÌ¼ÒºóÌ¨¿ÉÒÔÅäÖÃ¾«×¼µ½ÃÅµêµÄÕÛ¿ÛĞÅÏ¢£¬ÏêÑ¯Ö§¸¶±¦¼¼ÊõÖ§³Ö
         String storeId = "test_store_id";
 
-        // ä¸šåŠ¡æ‰©å±•å‚æ•°ï¼Œç›®å‰å¯æ·»åŠ ç”±æ”¯ä»˜å®åˆ†é…çš„ç³»ç»Ÿå•†ç¼–å·(é€šè¿‡setSysServiceProviderIdæ–¹æ³•)ï¼Œè¯¦æƒ…è¯·å’¨è¯¢æ”¯ä»˜å®æŠ€æœ¯æ”¯æŒ
+        // ÒµÎñÀ©Õ¹²ÎÊı£¬Ä¿Ç°¿ÉÌí¼ÓÓÉÖ§¸¶±¦·ÖÅäµÄÏµÍ³ÉÌ±àºÅ(Í¨¹ısetSysServiceProviderId·½·¨)£¬ÏêÇéÇë×ÉÑ¯Ö§¸¶±¦¼¼ÊõÖ§³Ö
         String providerId = "2088100200300400500";
         ExtendParams extendParams = new ExtendParams();
         extendParams.setSysServiceProviderId(providerId);
 
-        // æ”¯ä»˜è¶…æ—¶ï¼Œçº¿ä¸‹æ‰«ç äº¤æ˜“å®šä¹‰ä¸º5åˆ†é’Ÿ
+        // Ö§¸¶³¬Ê±£¬ÏßÏÂÉ¨Âë½»Ò×¶¨ÒåÎª5·ÖÖÓ
         String timeoutExpress = "5m";
 
-        // å•†å“æ˜ç»†åˆ—è¡¨ï¼Œéœ€å¡«å†™è´­ä¹°å•†å“è¯¦ç»†ä¿¡æ¯ï¼Œ
+        // ÉÌÆ·Ã÷Ï¸ÁĞ±í£¬ĞèÌîĞ´¹ºÂòÉÌÆ·ÏêÏ¸ĞÅÏ¢£¬
         List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
-        // åˆ›å»ºä¸€ä¸ªå•†å“ä¿¡æ¯ï¼Œå‚æ•°å«ä¹‰åˆ†åˆ«ä¸ºå•†å“idï¼ˆä½¿ç”¨å›½æ ‡ï¼‰ã€åç§°ã€å•ä»·ï¼ˆå•ä½ä¸ºåˆ†ï¼‰ã€æ•°é‡ï¼Œå¦‚æœéœ€è¦æ·»åŠ å•†å“ç±»åˆ«ï¼Œè¯¦è§GoodsDetail
-        GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxxé¢åŒ…", 1000, 1);
-        // åˆ›å»ºå¥½ä¸€ä¸ªå•†å“åæ·»åŠ è‡³å•†å“æ˜ç»†åˆ—è¡¨
+        // ´´½¨Ò»¸öÉÌÆ·ĞÅÏ¢£¬²ÎÊıº¬Òå·Ö±ğÎªÉÌÆ·id£¨Ê¹ÓÃ¹ú±ê£©¡¢Ãû³Æ¡¢µ¥¼Û£¨µ¥Î»Îª·Ö£©¡¢ÊıÁ¿£¬Èç¹ûĞèÒªÌí¼ÓÉÌÆ·Àà±ğ£¬Ïê¼ûGoodsDetail
+        GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxxÃæ°ü", 1000, 1);
+        // ´´½¨ºÃÒ»¸öÉÌÆ·ºóÌí¼ÓÖÁÉÌÆ·Ã÷Ï¸ÁĞ±í
         goodsDetailList.add(goods1);
 
-        // ç»§ç»­åˆ›å»ºå¹¶æ·»åŠ ç¬¬ä¸€æ¡å•†å“ä¿¡æ¯ï¼Œç”¨æˆ·è´­ä¹°çš„äº§å“ä¸ºâ€œé»‘äººç‰™åˆ·â€ï¼Œå•ä»·ä¸º5.00å…ƒï¼Œè´­ä¹°äº†ä¸¤ä»¶
-        GoodsDetail goods2 = GoodsDetail.newInstance("goods_id002", "xxxç‰™åˆ·", 500, 2);
+        // ¼ÌĞø´´½¨²¢Ìí¼ÓµÚÒ»ÌõÉÌÆ·ĞÅÏ¢£¬ÓÃ»§¹ºÂòµÄ²úÆ·Îª¡°ºÚÈËÑÀË¢¡±£¬µ¥¼ÛÎª5.00Ôª£¬¹ºÂòÁËÁ½¼ş
+        GoodsDetail goods2 = GoodsDetail.newInstance("goods_id002", "xxxÑÀË¢", 500, 2);
         goodsDetailList.add(goods2);
 
-        String appAuthToken = "åº”ç”¨æˆæƒä»¤ç‰Œ";//æ ¹æ®çœŸå®å€¼å¡«å†™
+        String appAuthToken = "Ó¦ÓÃÊÚÈ¨ÁîÅÆ";//¸ù¾İÕæÊµÖµÌîĞ´
 
-        // åˆ›å»ºæ¡ç æ”¯ä»˜è¯·æ±‚builderï¼Œè®¾ç½®è¯·æ±‚å‚æ•°
+        // ´´½¨ÌõÂëÖ§¸¶ÇëÇóbuilder£¬ÉèÖÃÇëÇó²ÎÊı
         AlipayTradePayRequestBuilder builder = new AlipayTradePayRequestBuilder()
             //            .setAppAuthToken(appAuthToken)
             .setOutTradeNo(outTradeNo).setSubject(subject).setAuthCode(authCode)
@@ -249,34 +249,35 @@ public class Main {
             .setExtendParams(extendParams).setSellerId(sellerId)
             .setGoodsDetailList(goodsDetailList).setTimeoutExpress(timeoutExpress);
 
-        // è°ƒç”¨tradePayæ–¹æ³•è·å–å½“é¢ä»˜åº”ç­”
+        // µ÷ÓÃtradePay·½·¨»ñÈ¡µ±Ãæ¸¶Ó¦´ğ
         AlipayF2FPayResult result = service.tradePay(builder);
         switch (result.getTradeStatus()) {
             case SUCCESS:
-                log.info("æ”¯ä»˜å®æ”¯ä»˜æˆåŠŸ: )");
-                break;
+                log.info("Ö§¸¶±¦Ö§¸¶³É¹¦: )");
+                return true;
 
             case FAILED:
-                log.error("æ”¯ä»˜å®æ”¯ä»˜å¤±è´¥!!!");
+                log.error("Ö§¸¶±¦Ö§¸¶Ê§°Ü!!!");
                 break;
 
             case UNKNOWN:
-                log.error("ç³»ç»Ÿå¼‚å¸¸ï¼Œè®¢å•çŠ¶æ€æœªçŸ¥!!!");
+                log.error("ÏµÍ³Òì³££¬¶©µ¥×´Ì¬Î´Öª!!!");
                 break;
 
             default:
-                log.error("ä¸æ”¯æŒçš„äº¤æ˜“çŠ¶æ€ï¼Œäº¤æ˜“è¿”å›å¼‚å¸¸!!!");
+                log.error("²»Ö§³ÖµÄ½»Ò××´Ì¬£¬½»Ò×·µ»ØÒì³£!!!");
                 break;
         }
+        return false;
     }
 
-    // æµ‹è¯•å½“é¢ä»˜2.0æŸ¥è¯¢è®¢å•
+    // ²âÊÔµ±Ãæ¸¶2.0²éÑ¯¶©µ¥
     public int test_trade_query(String no) {
-        // (å¿…å¡«) å•†æˆ·è®¢å•å·ï¼Œé€šè¿‡æ­¤å•†æˆ·è®¢å•å·æŸ¥è¯¢å½“é¢ä»˜çš„äº¤æ˜“çŠ¶æ€
+        // (±ØÌî) ÉÌ»§¶©µ¥ºÅ£¬Í¨¹ı´ËÉÌ»§¶©µ¥ºÅ²éÑ¯µ±Ãæ¸¶µÄ½»Ò××´Ì¬
         String outTradeNo = no;
-        //ç”¨äºè¿”å›è®¢å•çŠ¶æ€çš„æ•´æ•°ï¼Œåªæœ‰1æˆåŠŸï¼Œå…¶ä»–å¤±è´¥
+        //ÓÃÓÚ·µ»Ø¶©µ¥×´Ì¬µÄÕûÊı£¬Ö»ÓĞ1³É¹¦£¬ÆäËûÊ§°Ü
         int payStatus = 0;
-        // åˆ›å»ºæŸ¥è¯¢è¯·æ±‚builderï¼Œè®¾ç½®è¯·æ±‚å‚æ•°
+        // ´´½¨²éÑ¯ÇëÇóbuilder£¬ÉèÖÃÇëÇó²ÎÊı
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
             .setOutTradeNo(outTradeNo);
 
@@ -284,7 +285,7 @@ public class Main {
         switch (result.getTradeStatus()) {
             case SUCCESS:
                 payStatus = 1;
-                log.info("æŸ¥è¯¢è¿”å›è¯¥è®¢å•æ”¯ä»˜æˆåŠŸ: )");
+                log.info("²éÑ¯·µ»Ø¸Ã¶©µ¥Ö§¸¶³É¹¦: )");
                 AlipayTradeQueryResponse response = result.getResponse();
                 dumpResponse(response);
 
@@ -298,41 +299,41 @@ public class Main {
 
             case FAILED:
                 payStatus = 2;
-                log.error("æŸ¥è¯¢è¿”å›è¯¥è®¢å•æ”¯ä»˜å¤±è´¥æˆ–è¢«å…³é—­!!!");
+                log.error("²éÑ¯·µ»Ø¸Ã¶©µ¥Ö§¸¶Ê§°Ü»ò±»¹Ø±Õ!!!");
                 break;
 
             case UNKNOWN:
                 payStatus = 3;
-                log.error("ç³»ç»Ÿå¼‚å¸¸ï¼Œè®¢å•æ”¯ä»˜çŠ¶æ€æœªçŸ¥!!!");
+                log.error("ÏµÍ³Òì³££¬¶©µ¥Ö§¸¶×´Ì¬Î´Öª!!!");
                 break;
 
             default:
                 payStatus = 4;
-                log.error("ä¸æ”¯æŒçš„äº¤æ˜“çŠ¶æ€ï¼Œäº¤æ˜“è¿”å›å¼‚å¸¸!!!");
+                log.error("²»Ö§³ÖµÄ½»Ò××´Ì¬£¬½»Ò×·µ»ØÒì³£!!!");
                 break;
         }
         return payStatus;
     }
 
-    // æµ‹è¯•å½“é¢ä»˜2.0é€€æ¬¾
+    // ²âÊÔµ±Ãæ¸¶2.0ÍË¿î
     public void test_trade_refund() {
-        // (å¿…å¡«) å¤–éƒ¨è®¢å•å·ï¼Œéœ€è¦é€€æ¬¾äº¤æ˜“çš„å•†æˆ·å¤–éƒ¨è®¢å•å·
+        // (±ØÌî) Íâ²¿¶©µ¥ºÅ£¬ĞèÒªÍË¿î½»Ò×µÄÉÌ»§Íâ²¿¶©µ¥ºÅ
         String outTradeNo = "tradepay14817938139942440181";
 
-        // (å¿…å¡«) é€€æ¬¾é‡‘é¢ï¼Œè¯¥é‡‘é¢å¿…é¡»å°äºç­‰äºè®¢å•çš„æ”¯ä»˜é‡‘é¢ï¼Œå•ä½ä¸ºå…ƒ
+        // (±ØÌî) ÍË¿î½ğ¶î£¬¸Ã½ğ¶î±ØĞëĞ¡ÓÚµÈÓÚ¶©µ¥µÄÖ§¸¶½ğ¶î£¬µ¥Î»ÎªÔª
         String refundAmount = "0.01";
 
-        // (å¯é€‰ï¼Œéœ€è¦æ”¯æŒé‡å¤é€€è´§æ—¶å¿…å¡«) å•†æˆ·é€€æ¬¾è¯·æ±‚å·ï¼Œç›¸åŒæ”¯ä»˜å®äº¤æ˜“å·ä¸‹çš„ä¸åŒé€€æ¬¾è¯·æ±‚å·å¯¹åº”åŒä¸€ç¬”äº¤æ˜“çš„ä¸åŒé€€æ¬¾ç”³è¯·ï¼Œ
-        // å¯¹äºç›¸åŒæ”¯ä»˜å®äº¤æ˜“å·ä¸‹å¤šç¬”ç›¸åŒå•†æˆ·é€€æ¬¾è¯·æ±‚å·çš„é€€æ¬¾äº¤æ˜“ï¼Œæ”¯ä»˜å®åªä¼šè¿›è¡Œä¸€æ¬¡é€€æ¬¾
+        // (¿ÉÑ¡£¬ĞèÒªÖ§³ÖÖØ¸´ÍË»õÊ±±ØÌî) ÉÌ»§ÍË¿îÇëÇóºÅ£¬ÏàÍ¬Ö§¸¶±¦½»Ò×ºÅÏÂµÄ²»Í¬ÍË¿îÇëÇóºÅ¶ÔÓ¦Í¬Ò»±Ê½»Ò×µÄ²»Í¬ÍË¿îÉêÇë£¬
+        // ¶ÔÓÚÏàÍ¬Ö§¸¶±¦½»Ò×ºÅÏÂ¶à±ÊÏàÍ¬ÉÌ»§ÍË¿îÇëÇóºÅµÄÍË¿î½»Ò×£¬Ö§¸¶±¦Ö»»á½øĞĞÒ»´ÎÍË¿î
         String outRequestNo = "";
 
-        // (å¿…å¡«) é€€æ¬¾åŸå› ï¼Œå¯ä»¥è¯´æ˜ç”¨æˆ·é€€æ¬¾åŸå› ï¼Œæ–¹ä¾¿ä¸ºå•†å®¶åå°æä¾›ç»Ÿè®¡
-        String refundReason = "æ­£å¸¸é€€æ¬¾ï¼Œç”¨æˆ·ä¹°å¤šäº†";
+        // (±ØÌî) ÍË¿îÔ­Òò£¬¿ÉÒÔËµÃ÷ÓÃ»§ÍË¿îÔ­Òò£¬·½±ãÎªÉÌ¼ÒºóÌ¨Ìá¹©Í³¼Æ
+        String refundReason = "Õı³£ÍË¿î£¬ÓÃ»§Âò¶àÁË";
 
-        // (å¿…å¡«) å•†æˆ·é—¨åº—ç¼–å·ï¼Œé€€æ¬¾æƒ…å†µä¸‹å¯ä»¥ä¸ºå•†å®¶åå°æä¾›é€€æ¬¾æƒé™åˆ¤å®šå’Œç»Ÿè®¡ç­‰ä½œç”¨ï¼Œè¯¦è¯¢æ”¯ä»˜å®æŠ€æœ¯æ”¯æŒ
+        // (±ØÌî) ÉÌ»§ÃÅµê±àºÅ£¬ÍË¿îÇé¿öÏÂ¿ÉÒÔÎªÉÌ¼ÒºóÌ¨Ìá¹©ÍË¿îÈ¨ÏŞÅĞ¶¨ºÍÍ³¼ÆµÈ×÷ÓÃ£¬ÏêÑ¯Ö§¸¶±¦¼¼ÊõÖ§³Ö
         String storeId = "test_store_id";
 
-        // åˆ›å»ºé€€æ¬¾è¯·æ±‚builderï¼Œè®¾ç½®è¯·æ±‚å‚æ•°
+        // ´´½¨ÍË¿îÇëÇóbuilder£¬ÉèÖÃÇëÇó²ÎÊı
         AlipayTradeRefundRequestBuilder builder = new AlipayTradeRefundRequestBuilder()
             .setOutTradeNo(outTradeNo).setRefundAmount(refundAmount).setRefundReason(refundReason)
             .setOutRequestNo(outRequestNo).setStoreId(storeId);
@@ -340,107 +341,107 @@ public class Main {
         AlipayF2FRefundResult result = tradeService.tradeRefund(builder);
         switch (result.getTradeStatus()) {
             case SUCCESS:
-                log.info("æ”¯ä»˜å®é€€æ¬¾æˆåŠŸ: )");
+                log.info("Ö§¸¶±¦ÍË¿î³É¹¦: )");
                 break;
 
             case FAILED:
-                log.error("æ”¯ä»˜å®é€€æ¬¾å¤±è´¥!!!");
+                log.error("Ö§¸¶±¦ÍË¿îÊ§°Ü!!!");
                 break;
 
             case UNKNOWN:
-                log.error("ç³»ç»Ÿå¼‚å¸¸ï¼Œè®¢å•é€€æ¬¾çŠ¶æ€æœªçŸ¥!!!");
+                log.error("ÏµÍ³Òì³££¬¶©µ¥ÍË¿î×´Ì¬Î´Öª!!!");
                 break;
 
             default:
-                log.error("ä¸æ”¯æŒçš„äº¤æ˜“çŠ¶æ€ï¼Œäº¤æ˜“è¿”å›å¼‚å¸¸!!!");
+                log.error("²»Ö§³ÖµÄ½»Ò××´Ì¬£¬½»Ò×·µ»ØÒì³£!!!");
                 break;
         }
     }
 
-    // æµ‹è¯•å½“é¢ä»˜2.0ç”Ÿæˆæ”¯ä»˜äºŒç»´ç 
+    // ²âÊÔµ±Ãæ¸¶2.0Éú³ÉÖ§¸¶¶şÎ¬Âë
     public String test_trade_precreate(int munprice) {
-        // (å¿…å¡«) å•†æˆ·ç½‘ç«™è®¢å•ç³»ç»Ÿä¸­å”¯ä¸€è®¢å•å·ï¼Œ64ä¸ªå­—ç¬¦ä»¥å†…ï¼Œåªèƒ½åŒ…å«å­—æ¯ã€æ•°å­—ã€ä¸‹åˆ’çº¿ï¼Œ
-        // éœ€ä¿è¯å•†æˆ·ç³»ç»Ÿç«¯ä¸èƒ½é‡å¤ï¼Œå»ºè®®é€šè¿‡æ•°æ®åº“sequenceç”Ÿæˆï¼Œ
+        // (±ØÌî) ÉÌ»§ÍøÕ¾¶©µ¥ÏµÍ³ÖĞÎ¨Ò»¶©µ¥ºÅ£¬64¸ö×Ö·ûÒÔÄÚ£¬Ö»ÄÜ°üº¬×ÖÄ¸¡¢Êı×Ö¡¢ÏÂ»®Ïß£¬
+        // Ğè±£Ö¤ÉÌ»§ÏµÍ³¶Ë²»ÄÜÖØ¸´£¬½¨ÒéÍ¨¹ıÊı¾İ¿âsequenceÉú³É£¬
         String outTradeNo = "tradeprecreate" + System.currentTimeMillis()
                             + (long) (Math.random() * 10000000L);
 
-        // (å¿…å¡«) è®¢å•æ ‡é¢˜ï¼Œç²—ç•¥æè¿°ç”¨æˆ·çš„æ”¯ä»˜ç›®çš„ã€‚å¦‚â€œxxxå“ç‰Œxxxé—¨åº—å½“é¢ä»˜æ‰«ç æ¶ˆè´¹â€
-        String subject = "newSubject";
+        // (±ØÌî) ¶©µ¥±êÌâ£¬´ÖÂÔÃèÊöÓÃ»§µÄÖ§¸¶Ä¿µÄ¡£Èç¡°xxxÆ·ÅÆxxxÃÅµêµ±Ãæ¸¶É¨ÂëÏû·Ñ¡±
+        String subject = "NO.3ÄÌ²èµê";
 
-        // (å¿…å¡«) è®¢å•æ€»é‡‘é¢ï¼Œå•ä½ä¸ºå…ƒï¼Œä¸èƒ½è¶…è¿‡1äº¿å…ƒ
-        // å¦‚æœåŒæ—¶ä¼ å…¥äº†ã€æ‰“æŠ˜é‡‘é¢ã€‘,ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘,ã€è®¢å•æ€»é‡‘é¢ã€‘ä¸‰è€…,åˆ™å¿…é¡»æ»¡è¶³å¦‚ä¸‹æ¡ä»¶:ã€è®¢å•æ€»é‡‘é¢ã€‘=ã€æ‰“æŠ˜é‡‘é¢ã€‘+ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘
+        // (±ØÌî) ¶©µ¥×Ü½ğ¶î£¬µ¥Î»ÎªÔª£¬²»ÄÜ³¬¹ı1ÒÚÔª
+        // Èç¹ûÍ¬Ê±´«ÈëÁË¡¾´òÕÛ½ğ¶î¡¿,¡¾²»¿É´òÕÛ½ğ¶î¡¿,¡¾¶©µ¥×Ü½ğ¶î¡¿ÈıÕß,Ôò±ØĞëÂú×ãÈçÏÂÌõ¼ş:¡¾¶©µ¥×Ü½ğ¶î¡¿=¡¾´òÕÛ½ğ¶î¡¿+¡¾²»¿É´òÕÛ½ğ¶î¡¿
         String totalAmount = ""+munprice;
 
-        // (å¯é€‰) è®¢å•ä¸å¯æ‰“æŠ˜é‡‘é¢ï¼Œå¯ä»¥é…åˆå•†å®¶å¹³å°é…ç½®æŠ˜æ‰£æ´»åŠ¨ï¼Œå¦‚æœé…’æ°´ä¸å‚ä¸æ‰“æŠ˜ï¼Œåˆ™å°†å¯¹åº”é‡‘é¢å¡«å†™è‡³æ­¤å­—æ®µ
-        // å¦‚æœè¯¥å€¼æœªä¼ å…¥,ä½†ä¼ å…¥äº†ã€è®¢å•æ€»é‡‘é¢ã€‘,ã€æ‰“æŠ˜é‡‘é¢ã€‘,åˆ™è¯¥å€¼é»˜è®¤ä¸ºã€è®¢å•æ€»é‡‘é¢ã€‘-ã€æ‰“æŠ˜é‡‘é¢ã€‘
+        // (¿ÉÑ¡) ¶©µ¥²»¿É´òÕÛ½ğ¶î£¬¿ÉÒÔÅäºÏÉÌ¼ÒÆ½Ì¨ÅäÖÃÕÛ¿Û»î¶¯£¬Èç¹û¾ÆË®²»²ÎÓë´òÕÛ£¬Ôò½«¶ÔÓ¦½ğ¶îÌîĞ´ÖÁ´Ë×Ö¶Î
+        // Èç¹û¸ÃÖµÎ´´«Èë,µ«´«ÈëÁË¡¾¶©µ¥×Ü½ğ¶î¡¿,¡¾´òÕÛ½ğ¶î¡¿,Ôò¸ÃÖµÄ¬ÈÏÎª¡¾¶©µ¥×Ü½ğ¶î¡¿-¡¾´òÕÛ½ğ¶î¡¿
         String undiscountableAmount = "0";
 
-        // å–å®¶æ”¯ä»˜å®è´¦å·IDï¼Œç”¨äºæ”¯æŒä¸€ä¸ªç­¾çº¦è´¦å·ä¸‹æ”¯æŒæ‰“æ¬¾åˆ°ä¸åŒçš„æ”¶æ¬¾è´¦å·ï¼Œ(æ‰“æ¬¾åˆ°sellerIdå¯¹åº”çš„æ”¯ä»˜å®è´¦å·)
-        // å¦‚æœè¯¥å­—æ®µä¸ºç©ºï¼Œåˆ™é»˜è®¤ä¸ºä¸æ”¯ä»˜å®ç­¾çº¦çš„å•†æˆ·çš„PIDï¼Œä¹Ÿå°±æ˜¯appidå¯¹åº”çš„PID
+        // Âô¼ÒÖ§¸¶±¦ÕËºÅID£¬ÓÃÓÚÖ§³ÖÒ»¸öÇ©Ô¼ÕËºÅÏÂÖ§³Ö´ò¿îµ½²»Í¬µÄÊÕ¿îÕËºÅ£¬(´ò¿îµ½sellerId¶ÔÓ¦µÄÖ§¸¶±¦ÕËºÅ)
+        // Èç¹û¸Ã×Ö¶ÎÎª¿Õ£¬ÔòÄ¬ÈÏÎªÓëÖ§¸¶±¦Ç©Ô¼µÄÉÌ»§µÄPID£¬Ò²¾ÍÊÇappid¶ÔÓ¦µÄPID
         String sellerId = "";
 
-        // è®¢å•æè¿°ï¼Œå¯ä»¥å¯¹äº¤æ˜“æˆ–å•†å“è¿›è¡Œä¸€ä¸ªè¯¦ç»†åœ°æè¿°ï¼Œæ¯”å¦‚å¡«å†™"è´­ä¹°å•†å“2ä»¶å…±15.00å…ƒ"
-        String body = "è´­ä¹°å•†å“3ä»¶å…±20.00å…ƒ";
+        // ¶©µ¥ÃèÊö£¬¿ÉÒÔ¶Ô½»Ò×»òÉÌÆ·½øĞĞÒ»¸öÏêÏ¸µØÃèÊö£¬±ÈÈçÌîĞ´"¹ºÂòÉÌÆ·2¼ş¹²15.00Ôª"
+        String body = "¹ºÂòÉÌÆ·3¼ş¹²20.00Ôª";
 
-        // å•†æˆ·æ“ä½œå‘˜ç¼–å·ï¼Œæ·»åŠ æ­¤å‚æ•°å¯ä»¥ä¸ºå•†æˆ·æ“ä½œå‘˜åšé”€å”®ç»Ÿè®¡
+        // ÉÌ»§²Ù×÷Ô±±àºÅ£¬Ìí¼Ó´Ë²ÎÊı¿ÉÒÔÎªÉÌ»§²Ù×÷Ô±×öÏúÊÛÍ³¼Æ
         String operatorId = "test_operator_id";
 
-        // (å¿…å¡«) å•†æˆ·é—¨åº—ç¼–å·ï¼Œé€šè¿‡é—¨åº—å·å’Œå•†å®¶åå°å¯ä»¥é…ç½®ç²¾å‡†åˆ°é—¨åº—çš„æŠ˜æ‰£ä¿¡æ¯ï¼Œè¯¦è¯¢æ”¯ä»˜å®æŠ€æœ¯æ”¯æŒ
+        // (±ØÌî) ÉÌ»§ÃÅµê±àºÅ£¬Í¨¹ıÃÅµêºÅºÍÉÌ¼ÒºóÌ¨¿ÉÒÔÅäÖÃ¾«×¼µ½ÃÅµêµÄÕÛ¿ÛĞÅÏ¢£¬ÏêÑ¯Ö§¸¶±¦¼¼ÊõÖ§³Ö
         String storeId = "test_store_id";
 
-        // ä¸šåŠ¡æ‰©å±•å‚æ•°ï¼Œç›®å‰å¯æ·»åŠ ç”±æ”¯ä»˜å®åˆ†é…çš„ç³»ç»Ÿå•†ç¼–å·(é€šè¿‡setSysServiceProviderIdæ–¹æ³•)ï¼Œè¯¦æƒ…è¯·å’¨è¯¢æ”¯ä»˜å®æŠ€æœ¯æ”¯æŒ
+        // ÒµÎñÀ©Õ¹²ÎÊı£¬Ä¿Ç°¿ÉÌí¼ÓÓÉÖ§¸¶±¦·ÖÅäµÄÏµÍ³ÉÌ±àºÅ(Í¨¹ısetSysServiceProviderId·½·¨)£¬ÏêÇéÇë×ÉÑ¯Ö§¸¶±¦¼¼ÊõÖ§³Ö
         ExtendParams extendParams = new ExtendParams();
         extendParams.setSysServiceProviderId("2088621955628435");
 
-        // æ”¯ä»˜è¶…æ—¶ï¼Œå®šä¹‰ä¸º120åˆ†é’Ÿ
+        // Ö§¸¶³¬Ê±£¬¶¨ÒåÎª120·ÖÖÓ
         String timeoutExpress = "120m";
 
-        // å•†å“æ˜ç»†åˆ—è¡¨ï¼Œéœ€å¡«å†™è´­ä¹°å•†å“è¯¦ç»†ä¿¡æ¯ï¼Œ
+        // ÉÌÆ·Ã÷Ï¸ÁĞ±í£¬ĞèÌîĞ´¹ºÂòÉÌÆ·ÏêÏ¸ĞÅÏ¢£¬
         List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
-        // åˆ›å»ºä¸€ä¸ªå•†å“ä¿¡æ¯ï¼Œå‚æ•°å«ä¹‰åˆ†åˆ«ä¸ºå•†å“idï¼ˆä½¿ç”¨å›½æ ‡ï¼‰ã€åç§°ã€å•ä»·ï¼ˆå•ä½ä¸ºåˆ†ï¼‰ã€æ•°é‡ï¼Œå¦‚æœéœ€è¦æ·»åŠ å•†å“ç±»åˆ«ï¼Œè¯¦è§GoodsDetail
-        GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxxå°é¢åŒ…", 1000, 1);
-        // åˆ›å»ºå¥½ä¸€ä¸ªå•†å“åæ·»åŠ è‡³å•†å“æ˜ç»†åˆ—è¡¨
+        // ´´½¨Ò»¸öÉÌÆ·ĞÅÏ¢£¬²ÎÊıº¬Òå·Ö±ğÎªÉÌÆ·id£¨Ê¹ÓÃ¹ú±ê£©¡¢Ãû³Æ¡¢µ¥¼Û£¨µ¥Î»Îª·Ö£©¡¢ÊıÁ¿£¬Èç¹ûĞèÒªÌí¼ÓÉÌÆ·Àà±ğ£¬Ïê¼ûGoodsDetail
+        GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxxĞ¡Ãæ°ü", 1000, 1);
+        // ´´½¨ºÃÒ»¸öÉÌÆ·ºóÌí¼ÓÖÁÉÌÆ·Ã÷Ï¸ÁĞ±í
         goodsDetailList.add(goods1);
 
-        // ç»§ç»­åˆ›å»ºå¹¶æ·»åŠ ç¬¬ä¸€æ¡å•†å“ä¿¡æ¯ï¼Œç”¨æˆ·è´­ä¹°çš„äº§å“ä¸ºâ€œé»‘äººç‰™åˆ·â€ï¼Œå•ä»·ä¸º5.00å…ƒï¼Œè´­ä¹°äº†ä¸¤ä»¶
-        GoodsDetail goods2 = GoodsDetail.newInstance("goods_id002", "xxxç‰™åˆ·", 500, 2);
+        // ¼ÌĞø´´½¨²¢Ìí¼ÓµÚÒ»ÌõÉÌÆ·ĞÅÏ¢£¬ÓÃ»§¹ºÂòµÄ²úÆ·Îª¡°ºÚÈËÑÀË¢¡±£¬µ¥¼ÛÎª5.00Ôª£¬¹ºÂòÁËÁ½¼ş
+        GoodsDetail goods2 = GoodsDetail.newInstance("goods_id002", "xxxÑÀË¢", 500, 2);
         goodsDetailList.add(goods2);
 
-        // åˆ›å»ºæ‰«ç æ”¯ä»˜è¯·æ±‚builderï¼Œè®¾ç½®è¯·æ±‚å‚æ•°
+        // ´´½¨É¨ÂëÖ§¸¶ÇëÇóbuilder£¬ÉèÖÃÇëÇó²ÎÊı
         AlipayTradePrecreateRequestBuilder builder = new AlipayTradePrecreateRequestBuilder()
             .setSubject(subject).setTotalAmount(totalAmount).setOutTradeNo(outTradeNo)
             .setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
             .setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
             .setTimeoutExpress(timeoutExpress)
-            //                .setNotifyUrl("http://www.test-notify-url.com")//æ”¯ä»˜å®æœåŠ¡å™¨ä¸»åŠ¨é€šçŸ¥å•†æˆ·æœåŠ¡å™¨é‡ŒæŒ‡å®šçš„é¡µé¢httpè·¯å¾„,æ ¹æ®éœ€è¦è®¾ç½®
+            //                .setNotifyUrl("http://www.test-notify-url.com")//Ö§¸¶±¦·şÎñÆ÷Ö÷¶¯Í¨ÖªÉÌ»§·şÎñÆ÷ÀïÖ¸¶¨µÄÒ³ÃæhttpÂ·¾¶,¸ù¾İĞèÒªÉèÖÃ
             .setGoodsDetailList(goodsDetailList);
 
         AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
         switch (result.getTradeStatus()) {
             case SUCCESS:
-                log.info("æ”¯ä»˜å®é¢„ä¸‹å•æˆåŠŸ: )");
+                log.info("Ö§¸¶±¦Ô¤ÏÂµ¥³É¹¦: )");
 
                 AlipayTradePrecreateResponse response = result.getResponse();
                 dumpResponse(response);
 
-                // éœ€è¦ä¿®æ”¹ä¸ºè¿è¡Œæœºå™¨ä¸Šçš„è·¯å¾„
+                // ĞèÒªĞŞ¸ÄÎªÔËĞĞ»úÆ÷ÉÏµÄÂ·¾¶
                 String filePath = String.format("E:\\qr-%s.png",
                         response.getOutTradeNo());
                 log.info("filePath:" + filePath);
                 ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
-                //è¿”å›ç”¨äºéªŒè¯æ˜¯å¦æ”¯ä»˜æˆåŠŸçš„è®¢å•ç¼–å·
+                //·µ»ØÓÃÓÚÑéÖ¤ÊÇ·ñÖ§¸¶³É¹¦µÄ¶©µ¥±àºÅ
                 return outTradeNo;
 
             case FAILED:
-                log.error("æ”¯ä»˜å®é¢„ä¸‹å•å¤±è´¥!!!");
+                log.error("Ö§¸¶±¦Ô¤ÏÂµ¥Ê§°Ü!!!");
                 break;
 
             case UNKNOWN:
-                log.error("ç³»ç»Ÿå¼‚å¸¸ï¼Œé¢„ä¸‹å•çŠ¶æ€æœªçŸ¥!!!");
+                log.error("ÏµÍ³Òì³££¬Ô¤ÏÂµ¥×´Ì¬Î´Öª!!!");
                 break;
 
             default:
-                log.error("ä¸æ”¯æŒçš„äº¤æ˜“çŠ¶æ€ï¼Œäº¤æ˜“è¿”å›å¼‚å¸¸!!!");
+                log.error("²»Ö§³ÖµÄ½»Ò××´Ì¬£¬½»Ò×·µ»ØÒì³£!!!");
                 break;
         }
         return null;

@@ -4,9 +4,13 @@ import dao.sale.DaoCreate;
 import dao.sale.DaoInsert;
 import entity.sale.BillOrdBean;
 import entity.sale.DetailOrdBean;
+import util.print.Goods;
+import util.print.realPrint;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 包含有关线下下订单信息添加的方法
@@ -18,7 +22,7 @@ public class OutlineOrderMes {
     public static void insertComOrd(String name,String orderid){
         //生成下单时间
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String ordertime = sdf.format(date);
         String status = "3";// “3” 代表线下销售
         //将信息封装
@@ -56,5 +60,25 @@ public class OutlineOrderMes {
             DaoInsert.insDetailOrd(dob);
         }
         return true;
+    }
+    /**
+     * 生成Good列表goods，调用realPrint函数进行打印
+     */
+    public static void printOrder(Object[][] tableDate,String orderId){
+        List<Goods> goods = new ArrayList<Goods>();
+        for (Object[] obj:tableDate){
+            Goods good = new Goods();
+            String proid = (String)obj[0];
+            String num = obj[2].toString();
+            String singleprice = (String) obj[3];
+            String totalprice = Integer.valueOf(singleprice)*Integer.valueOf(num)+"";
+            good.setGname(DaoCreate.getProName(proid));
+            good.setNum(num);
+            good.setPrice(singleprice);//单价
+            good.setTotal(totalprice);//总付款
+            goods.add(good);
+        }
+        //调用打印方法
+        realPrint.print(goods,orderId);
     }
 }

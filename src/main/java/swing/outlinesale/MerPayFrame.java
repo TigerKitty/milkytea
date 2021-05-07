@@ -186,14 +186,7 @@ public class MerPayFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        MerPosCodePayFrame merPosCodePayFrame=new MerPosCodePayFrame(sumprice);
-                        //生成orderid
-                        //String name = "outline";
-                        //String orderid = DaoCreate.CreateOutlineOrdid(name);
-                        //将订单信息加入到comorder数据库表中
-                        //OutlineOrderMes.insertComOrd(name,orderid);
-                        //将订单信息加入到detailorder数据库表中
-                        //OutlineOrderMes.insertDetailOrd(tableDate,orderid);
+                        MerPosCodePayFrame merPosCodePayFrame=new MerPosCodePayFrame(sumprice,tableDate);
                     }
                 }
         );

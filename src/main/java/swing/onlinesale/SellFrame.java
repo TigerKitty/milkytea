@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 /**
- * çº¿ä¸Šé”€å”®ä¸»ç•Œé¢
+ * ÏßÉÏÏúÊÛÖ÷½çÃæ
  */
 public class SellFrame extends JFrame {
     public static void main(String[] args) {
@@ -111,13 +111,13 @@ public class SellFrame extends JFrame {
             tableDate[i][2]=list.get(i).getSellprice();
 
         }
-        String []name ={"å¥¶èŒ¶ç¼–å·","å¥¶èŒ¶åç§°","å¥¶èŒ¶å”®ä»·"};
+        String []name ={"ÄÌ²è±àºÅ","ÄÌ²èÃû³Æ","ÄÌ²èÊÛ¼Û"};
         DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,530,450);
         contentPane.add(jScrollPane);
-        //---tableäº‹ä»¶---//
+        //---tableÊÂ¼ş---//
         table.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -155,16 +155,16 @@ public class SellFrame extends JFrame {
         textField1.setEnabled(false);
         textField3.setEnabled(false);
         list1=new ArrayList<MilkTeaBean>();
-        //--åŠ å…¥è´­ç‰©è½¦--//
+        //--¼ÓÈë¹ºÎï³µ--//
         button1.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(textField2.getText().equals("")){//åˆ¤æ–­ç”¨æˆ·è¾“å…¥çš„æ•°é‡æ˜¯å¦ä¸ºç©º
-                            WarnFrame.shopwarnFrame();//è°ƒç”¨å¼¹å‡ºè­¦å‘Šæ¡†æ–¹æ³•ï¼Œå¼¹å‡ºè­¦å‘Šæ¡†
+                        if(textField2.getText().equals("")){//ÅĞ¶ÏÓÃ»§ÊäÈëµÄÊıÁ¿ÊÇ·ñÎª¿Õ
+                            WarnFrame.shopwarnFrame();//µ÷ÓÃµ¯³ö¾¯¸æ¿ò·½·¨£¬µ¯³ö¾¯¸æ¿ò
                         }
                         else {
-                            //è°ƒç”¨æ–¹æ³•åˆ¤æ–­åŠ å…¥å•†å“çš„idæ˜¯å¦é‡å¤ï¼Œé‡å¤æ”¹æ•°é‡ï¼Œä¸é‡å¤åŠ å…¥æ–°çš„å•†å“
+                            //µ÷ÓÃ·½·¨ÅĞ¶Ï¼ÓÈëÉÌÆ·µÄidÊÇ·ñÖØ¸´£¬ÖØ¸´¸ÄÊıÁ¿£¬²»ÖØ¸´¼ÓÈëĞÂµÄÉÌÆ·
                             list1=JoinShopCar.joinArrays(list1,textField3.getText(),textField.getText(),textField2.getText(),textField1.getText());
                             textField.setText("");
                             textField1.setText("");
@@ -174,7 +174,7 @@ public class SellFrame extends JFrame {
                     }
                 }
         );
-        //--é‡ç½®äº‹ä»¶--(button)---//
+        //--ÖØÖÃÊÂ¼ş--(button)---//
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -186,7 +186,7 @@ public class SellFrame extends JFrame {
                     }
                 }
         );
-        //--æŸ¥çœ‹è´­ç‰©è½¦ï¼ˆbutton3ï¼‰--//
+        //--²é¿´¹ºÎï³µ£¨button3£©--//
         button3.addActionListener(
                 new ActionListener() {
                     @Override

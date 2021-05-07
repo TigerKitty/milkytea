@@ -1,11 +1,11 @@
-package util;
+package util.print;
 
 public class Goods {
-    private String gname; //��Ʒ����
-    private String price; //��Ʒ����
-    private String num; //��Ʒ����
-    private String total; //С��
-    private String beiZhu; //��ע
+    private String gname;
+    private String price;
+    private String num;
+    private String total;//�ܼ�
+    private String beiZhu;
 
     public String getBeiZhu() {
         return beiZhu;

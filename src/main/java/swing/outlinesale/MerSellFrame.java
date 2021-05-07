@@ -19,7 +19,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * å•†å®¶çº¿ä¸‹æ”¶é“¶ç•Œé¢
+ * ÉÌ¼ÒÏßÏÂÊÕÒø½çÃæ
  */
 
 public class MerSellFrame extends JFrame {
@@ -94,13 +94,13 @@ public class MerSellFrame extends JFrame {
         button4.setBounds(new Rectangle(new Point(370, 460), button4.getPreferredSize()));
 
         Object tableDate[][]=new Object[0][4];
-        String []name ={"å¥¶èŒ¶ç¼–å·","å¥¶èŒ¶åç§°","å¥¶èŒ¶æ•°é‡","å¥¶èŒ¶å”®ä»·"};
+        String []name ={"ÄÌ²è±àºÅ","ÄÌ²èÃû³Æ","ÄÌ²èÊıÁ¿","ÄÌ²èÊÛ¼Û"};
         tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         final JScrollPane jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,530,450);
         contentPane.add(jScrollPane);
-        //è·å–ä¸‹æ‹‰æ¡†æ•°æ®
+        //»ñÈ¡ÏÂÀ­¿òÊı¾İ
         comboBox.addActionListener(
                 new ActionListener() {
                     @Override
@@ -115,7 +115,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //åŠ å…¥è´­ç‰©è½¦
+        //¼ÓÈë¹ºÎï³µ
         milkTeaBeans=new ArrayList<MilkTeaBean>();
         button1.addActionListener(
                 new ActionListener() {
@@ -134,7 +134,7 @@ public class MerSellFrame extends JFrame {
                                 tableDate[i][2] = milkTeaBeans.get(i).getNumber();
                                 tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
                             }
-                            String[] name = {"å¥¶èŒ¶ç¼–å·", "å¥¶èŒ¶åç§°", "å¥¶èŒ¶æ•°é‡", "å¥¶èŒ¶å”®ä»·"};
+                            String[] name = {"ÄÌ²è±àºÅ", "ÄÌ²èÃû³Æ", "ÄÌ²èÊıÁ¿", "ÄÌ²èÊÛ¼Û"};
                             tableModel = new DefaultTableModel(tableDate, name);
                             table = new JTable(tableModel);
                             JScrollPane jScrollPane = new JScrollPane(table);
@@ -147,7 +147,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //é‡ç½®
+        //ÖØÖÃ
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -157,7 +157,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //æ”¯ä»˜
+        //Ö§¸¶
         button3.addActionListener(
                 new ActionListener() {
                     @Override
@@ -177,7 +177,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //æŠŠå•†å“ä»è´­ç‰©è½¦ç§»é™¤
+        //°ÑÉÌÆ·´Ó¹ºÎï³µÒÆ³ı
         n=-1;
         button4.addActionListener(
                 new ActionListener() {
