@@ -12,7 +12,7 @@ import java.util.List;
 public class DailyState {
     public List dailystate() {
         List<DailyStateBean> list1=new ArrayList<DailyStateBean>();
-        String sql = "select distinct substr(ordertime,1,10) as time from comorder";
+        String sql = "select distinct substr(ordertime,1,10) as daytime from comorder";
         Dbutil dbutil = new Dbutil();
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = dbutil.getPs(sql);
@@ -20,8 +20,8 @@ public class DailyState {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 DailyStateBean dailyStateBean=new DailyStateBean();
-                String time=resultSet.getString("time");
-                dailyStateBean.setTime(time);
+                String dailytime=resultSet.getString("daytime");
+                dailyStateBean.setDailytime(dailytime);
                 list1.add(dailyStateBean);
             }
             return list1;

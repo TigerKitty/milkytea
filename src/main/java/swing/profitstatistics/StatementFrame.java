@@ -5,9 +5,13 @@
 package swing.profitstatistics;
 
 import dao.profit.DailyState;
+import dao.profit.DailyStatis;
 import dao.profit.MonthlyState;
+import dao.profit.MonthlyStatis;
 import entity.sale.profit.DailyStateBean;
+import entity.sale.profit.DailyStatisBean;
 import entity.sale.profit.MonthlyStateBean;
+import entity.sale.profit.MonthlyStatisBean;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author lbr
@@ -76,23 +81,45 @@ public class StatementFrame extends JFrame {
         list1=dailyState.dailystate();
         comboBoxDate1=new String[list1.size()];
         for(int i=0;i<list1.size();i++){
-            comboBoxDate1[i]=list1.get(i).getTime();
+            comboBoxDate1[i]=list1.get(i).getDailytime();
         }
         comboBox1=new JComboBox(comboBoxDate1);
-
+        table1 = new JTable();
         button1 = new JButton();
+
         button1.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         scrollPane1.setVisible(true);
                         scrollPane2.setVisible(false);
+                        int index = comboBox1.getSelectedIndex();
+                        String box1Value = comboBoxDate1[index];
+                        List<DailyStatisBean> list3 ;
+                        DailyStatis dailyStatis=new DailyStatis();
+                        list3=dailyStatis.dailystatis(box1Value);
+                        String []name1 ={"时间（日）","日订单量","日销量","日销售额","日利润"};
+                        Object tableDate1[][]=new Object[list3.size()][name1.length];
+                        for(int i=0;i<list3.size();i++) {
+                            for (int j = 0; j < name1.length; j++) {
+                                tableDate1[i][0] = box1Value;
+                                tableDate1[i][1] = list3.get(i).getDorderquantity();
+                                tableDate1[i][2] = list3.get(i).getDsalesvolume();
+                                tableDate1[i][3] = list3.get(i).getDsales();
+                                tableDate1[i][4] = list3.get(i).getDprofit();
+                            }
+                        }
+                        DefaultTableModel tableModel = new DefaultTableModel(tableDate1, name1) {
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
+                            }
+                        };
+                        table1.setModel(tableModel);
                     }
                 }
         );
         button2 = new JButton();
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
         label2 = new JLabel();
 
         List<MonthlyStateBean> list2;
@@ -103,7 +130,7 @@ public class StatementFrame extends JFrame {
             comboBoxDate2[i]=list2.get(i).getMonthlytime();
         }
         comboBox2=new JComboBox(comboBoxDate2);
-
+        table2 = new JTable();
         button3 = new JButton();
         button3.addActionListener(
                 new ActionListener() {
@@ -111,12 +138,33 @@ public class StatementFrame extends JFrame {
                     public void actionPerformed(ActionEvent actionEvent) {
                         scrollPane1.setVisible(false);
                         scrollPane2.setVisible(true);
+                        int index1 = comboBox2.getSelectedIndex();
+                        String box2Value = comboBoxDate2[index1];
+                        List<MonthlyStatisBean> list4 ;
+                        MonthlyStatis monthlyStatis=new MonthlyStatis();
+                        list4=monthlyStatis.monthlystatis(box2Value);
+                        String []name2 ={"时间（月）","月订单量","月销量","月销售额","月利润"};
+                        Object tableDate2[][]=new Object[list4.size()][name2.length];
+                        for(int i=0;i<list4.size();i++) {
+                            for (int j = 0; j < name2.length; j++) {
+                                tableDate2[i][0] = box2Value;
+                                tableDate2[i][1] = list4.get(i).getMorderquantity();
+                                tableDate2[i][2] = list4.get(i).getMsalesvolume();
+                                tableDate2[i][3] = list4.get(i).getMsales();
+                                tableDate2[i][4] = list4.get(i).getMprofit();
+                            }
+                        }
+                        DefaultTableModel tableModel2 = new DefaultTableModel(tableDate2, name2) {
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
+                            }
+                        };
+                        table2.setModel(tableModel2);
                     }
                 }
         );
         button4 = new JButton();
         scrollPane2 = new JScrollPane();
-        table2 = new JTable();
 
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.BOLD | Font.ITALIC, 12));

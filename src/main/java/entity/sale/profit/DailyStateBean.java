@@ -1,49 +1,13 @@
 package entity.sale.profit;
 
 public class DailyStateBean {
-    private String time;
-    private int orderquantity;
-    private int dailysalesvolume;
-    private int dailysales;
-    private int dailyprofit;
+    private String dailytime;
 
-    public String getTime() {
-        return time;
+    public String getDailytime() {
+        return dailytime;
     }
 
-    public void setTime(String ordertime) {
-        this.time = ordertime;
-    }
-
-    public int getOrderquantity() {
-        return orderquantity;
-    }
-
-    public void setOrderquantity(int orderquantity) {
-        this.orderquantity = orderquantity;
-    }
-
-    public int getDailysalesvolume() {
-        return dailysalesvolume;
-    }
-
-    public void setDailysalesvolume(int dailysalesvolume) {
-        this.dailysalesvolume = dailysalesvolume;
-    }
-
-    public int getDailysales() {
-        return dailysales;
-    }
-
-    public void setDailysales(int dailysales) {
-        this.dailysales = dailysales;
-    }
-
-    public int getDailyprofit() {
-        return dailyprofit;
-    }
-
-    public void setDailyprofit(int dailyprofit) {
-        this.dailyprofit = dailyprofit;
+    public void setDailytime(String dailytime) {
+        this.dailytime = dailytime;
     }
 }
