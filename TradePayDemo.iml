@@ -25,9 +25,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/WebRoot" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src" />
-        </sourceRoots>
+        <sourceRoots />
       </configuration>
     </facet>
   </component>
@@ -151,5 +149,14 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="ojdbc6" level="project" />
+    <orderEntry type="library" name="oracle.client_Administrator_filemap" level="project" />
+    <orderEntry type="library" name="oracle.client_Custom_filemap" level="project" />
+    <orderEntry type="library" name="oracle.client_InstantClient_filemap" level="project" />
+    <orderEntry type="library" name="oracle.client_Runtime_filemap" level="project" />
+    <orderEntry type="library" name="racfiles" level="project" />
+    <orderEntry type="library" name="jsp-api" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.41" level="application_server_libraries" />
+    <orderEntry type="library" name="servlet-api" level="project" />
   </component>
 </module>
