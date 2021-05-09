@@ -94,19 +94,13 @@ public class ShopCarFrame extends JFrame {
     }
     //付款成功后，清空购物车
     public static void ClearShopCar(){
+        tableModel.setRowCount(0);
         list.clear();
-        Object tableDate1[][] = new Object[0][4];
-        String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
-        tableModel = new DefaultTableModel(tableDate1, name);
-        table = new JTable(tableModel);
-        JScrollPane jScrollPane = new JScrollPane(table);
-        jScrollPane.setBounds(0, 0, 530, 450);
-        contentPane.add(jScrollPane);
     }
     private static JTable table;
     private JButton button1;
     private JButton button2;
-    private JScrollPane jScrollPane;
+    private static JScrollPane jScrollPane;
     private static Container contentPane;
     private static DefaultTableModel tableModel;
     private int n;

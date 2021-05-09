@@ -205,13 +205,14 @@ public class MerSellFrame extends JFrame {
     //清空购物车
     public  static void Clear(){
         milkTeaBeans.clear();
-        Object tableDate1[][] = new Object[0][4];
+        tableModel.setRowCount(0);
+        /*Object tableDate1[][] = new Object[0][4];
         String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
         tableModel = new DefaultTableModel(tableDate1, name);
         table = new JTable(tableModel);
         JScrollPane jScrollPane = new JScrollPane(table);
         jScrollPane.setBounds(0, 0, 530, 450);
-        contentPane.add(jScrollPane);
+        contentPane.add(jScrollPane);**/
     }
     private JPanel jPanel;
     private JTextField textField2;
