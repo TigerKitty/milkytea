@@ -21,6 +21,9 @@ import javax.swing.table.DefaultTableModel;
 public class underwayFrame extends JFrame {
     public static void main(String[] args) {
         new underwayFrame();
+        Runnable runnable = new MyRunnable();
+            Thread thread = new Thread(runnable);
+            thread.start();
     }
     public underwayFrame() {
         initComponents();
@@ -206,4 +209,17 @@ public class underwayFrame extends JFrame {
     private JButton button5;
 
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+}
+class MyRunnable implements Runnable{
+    public void run(){
+        Automatic automatic = new Automatic();
+        while (true) {
+            try {
+                Thread.sleep(1000*60);
+                automatic.right();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

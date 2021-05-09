@@ -13,6 +13,7 @@ public class GetDate {
     public static int num = 1;
     public static String head[] = {"订单编号", "用户名", "下单时间","配送时间","到达时间","订单状态"};
     private Object[][] data = null;
+    private String status;
     public Object[][] UsersData() {
         java.util.List<Userinfo> list = new ArrayList<Userinfo>();
         Dbutil dbutil = new Dbutil();
@@ -35,7 +36,13 @@ public class GetDate {
                 userinfo.setOrdertime(rs.getString("ordertime"));
                 userinfo.setTrantime(rs.getString("trantime"));
                 userinfo.setReceivetime((rs.getString("receivetime")));
-                userinfo.setStatus(rs.getString("status"));
+                if(num==0) {
+                    status = "未在派送";
+                    userinfo.setStatus(status);
+                }else if(num==1){
+                    status = "正在派送";
+                    userinfo.setStatus(status);
+                }
                 list.add(userinfo);
             }
         } catch (SQLException e) {
