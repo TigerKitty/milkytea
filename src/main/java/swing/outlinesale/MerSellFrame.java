@@ -18,9 +18,6 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * 商家线下收银界面
- */
 
 public class MerSellFrame extends JFrame {
 
@@ -95,13 +92,12 @@ public class MerSellFrame extends JFrame {
         button4.setBounds(new Rectangle(new Point(370, 460), button4.getPreferredSize()));
 
         Object tableDate[][]=new Object[0][4];
-        String []name ={"奶茶编号","奶茶名称","奶茶数量","奶茶售价"};
+        String []name ={"鍟嗗搧缂栧彿","鍟嗗搧鍚嶇О","鍟嗗搧鏁伴噺","鍟嗗搧浠锋牸"};
         tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         final JScrollPane jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,530,450);
         contentPane.add(jScrollPane);
-        //获取下拉框数据
         comboBox.addActionListener(
                 new ActionListener() {
                     @Override
@@ -116,7 +112,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //加入购物车
+        //锟斤拷锟诫购锟斤车
         milkTeaBeans=new ArrayList<MilkTeaBean>();
         button1.addActionListener(
                 new ActionListener() {
@@ -135,7 +131,7 @@ public class MerSellFrame extends JFrame {
                                 tableDate[i][2] = milkTeaBeans.get(i).getNumber();
                                 tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
                             }
-                            String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
+                            String[] name = {"鍟嗗搧缂栧彿", "鍟嗗搧鍚嶇О", "鍟嗗搧鏁伴噺", "鍟嗗搧浠锋牸"};
                             tableModel = new DefaultTableModel(tableDate, name);
                             table = new JTable(tableModel);
                             JScrollPane jScrollPane = new JScrollPane(table);
@@ -148,7 +144,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //重置
+        //锟斤拷锟斤拷
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -158,7 +154,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //支付
+        //支锟斤拷
         button3.addActionListener(
                 new ActionListener() {
                     @Override
@@ -178,7 +174,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //把商品从购物车移除
+        //锟斤拷锟斤拷品锟接癸拷锟斤车锟狡筹拷
         n=-1;
         button4.addActionListener(
                 new ActionListener() {

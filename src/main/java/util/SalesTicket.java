@@ -1,5 +1,7 @@
 package util;
 
+import util.print.Goods;
+
 import java.awt.*;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
@@ -9,18 +11,18 @@ import java.util.Date;
 import java.util.List;
 
 public class SalesTicket implements Printable {
-    private List<Goods> goods; //��Ʒ�б�
-    private String operatorName; //����Ա
-    private String orderId; //�������
-    private String totalGoodsNum; //��Ʒ����
-    private String totalPrice; //�ܽ��
-    private String actualCollection; //ʵ�տ�
-    private String giveChange = "0"; //����
+    private List<Goods> goods; //商品列表
+    private String operatorName; //操作员
+    private String orderId; //订单编号
+    private String totalGoodsNum; //商品总数
+    private String totalPrice; //总金额
+    private String actualCollection; //实收款
+    private String giveChange = "0"; //找零
     private Date orderDate;
 
 
-    private String cardNumber; //��Ա���
-    private String integral; //����
+    private String cardNumber; //会员编号
+    private String integral; //积分
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss EEE");
 
@@ -73,82 +75,58 @@ public class SalesTicket implements Printable {
     }
 
     /**
-     * ��ӡ����
-     * graphics - ��������ҳ��������ģ�����ӡ��ͼ��
-     * pageFormat - ������ҳ��Ĵ�С�ͷ��򣬼����ô�ӡ��ʽ����ҳ���Сһ��Ϊ������λ����1/72 Ӣ��Ϊ��λ��1Ӣ��Ϊ25.4���ס�A4ֽ����Ϊ595 �� 842�㣩
-     * СƱֽ���һ��Ϊ58mm�����Ϊ165��
-     * pageIndex - Ҫ���Ƶ�ҳ��� 0 ��ʼ������ ����ҳ��
+     * 打印方法
+     * graphics - 用来绘制页面的上下文，即打印的图形
+     * pageFormat - 将绘制页面的大小和方向，即设置打印格式，如页面大小一点为计量单位（以1/72 英寸为单位，1英寸为25.4毫米。A4纸大致为595 × 842点）
+     * 小票纸宽度一般为58mm，大概为165点
+     * pageIndex - 要绘制的页面从 0 开始的索引 ，即页号
      */
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-//�� Graphics2D ����չ Graphics �࣬���ṩ�Լ�����״������ת������ɫ������ı����ָ�Ϊ���ӵĿ��ơ�
-//���������� Java(tm) ƽ̨�ϳ��ֶ�ά��״���ı���ͼ��Ļ����ࡣ
+//此 Graphics2D 类扩展 Graphics 类，以提供对几何形状、坐标转换、颜色管理和文本布局更为复杂的控制。
+//它是用于在 Java(tm) 平台上呈现二维形状、文本和图像的基础类。
         Graphics2D g2 = (Graphics2D) graphics;
 
 
-        g2.setColor(Color.black);//���ô�ӡ��ɫΪ��ɫ
+        g2.setColor(Color.black);//设置打印颜色为黑色
 
-//��ӡ�������
-        double x = pageFormat.getImageableX();  //������� PageFormat��ص� Paper����Ŀɳ����������Ϸ���� x���ꡣ
-        double y = pageFormat.getImageableY();  //������� PageFormat��ص� Paper����Ŀɳ����������Ϸ���� y���ꡣ
+//打印起点坐标
+        double x = pageFormat.getImageableX();  //返回与此 PageFormat相关的 Paper对象的可成像区域左上方点的 x坐标。
+        double y = pageFormat.getImageableY();  //返回与此 PageFormat相关的 Paper对象的可成像区域左上方点的 y坐标。
 
 
-//Font.PLAIN�� ��ͨ��ʽ����   Font.ITALIC б����ʽ����  Font.BOLD ������ʽ������
-        Font font = new Font("����", Font.BOLD, 10); //����ָ�����ơ���ʽ�Ͱ�ֵ��С������һ���� Font��
+//Font.PLAIN： 普通样式常量   Font.ITALIC 斜体样式常量  Font.BOLD 粗体样式常量。
+        Font font = new Font("宋体", Font.BOLD, 10); //根据指定名称、样式和磅值大小，创建一个新 Font。
 
-        g2.setFont(font);//���ñ����ӡ����
+        g2.setFont(font);//设置标题打印字体
 
-        float heigth = font.getSize2D();//��ȡ����ĸ߶�
+        float heigth = font.getSize2D();///获取字体的高度
 
-//����СƱ�ı������
-        g2.drawString("�̵�����", (float) x + 25, (float) y + heigth);
+//设置小票的标题标题
+        g2.drawString("No.3奶茶店", (float) x + 25, (float) y + heigth);
 
-        float line = 2 * heigth; //��һ�п�ʼ��ӡ�ĸ߶�
-        g2.setFont(new Font("����", Font.PLAIN, 8));//������������
-        heigth = font.getSize2D();// ����߶�
+        float line = 2 * heigth; //下一行开始打印的高度
+        g2.setFont(new Font("宋体", Font.PLAIN, 8));//设置正文字体
+        heigth = font.getSize2D();// 字体高度
 
         line += 2;
-//���ò���Ա
-        g2.drawString("����Ա:" + operatorName, (float) x , (float) y + line);
+//设置操作员
+        g2.drawString("操作员:" + operatorName, (float) x , (float) y + line);
         line += heigth;
 
-//���ö�����
-        g2.drawString("������:" + orderId, (float) x , (float) y + line);
+//设置订单号
+        g2.drawString("订单号:" + orderId, (float) x , (float) y + line);
         line += heigth + 2;
 
-//���ñ���
-        g2.drawString("����", (float) x , (float) y + line);
-        g2.drawString("����", (float) x + 35, (float) y + line);
-        g2.drawString("����", (float) x + 70, (float) y + line);
-        g2.drawString("С��", (float) x + 105, (float) y + line);
+//设置标题
+        g2.drawString("名称", (float) x , (float) y + line);
+        g2.drawString("单价", (float) x + 35, (float) y + line);
+        g2.drawString("数量", (float) x + 70, (float) y + line);
+        g2.drawString("小计", (float) x + 105, (float) y + line);
         line += heigth;
-        /*
-         * ���߻�������    setStroke(Stroke):Ϊ Graphics2D ���������� Stroke
-         * �� BasicStroke����ĳ��������������û����� Shape ���������Ƶ�ĳ����ǵ���״���Լ�Ӧ���� Shape ·���߶ε�ĩ�˺����Ӵ���װ�Ρ�
-         * ��Щ�������԰�����
-         * width�����ʵĿ�ȣ��Ǵ�ֱ�ڻ��ʹ켣�Ĳ���ֵ��  �˿�ȱ�����ڻ���� 0.0f��0.0fΪ��ϸ������
-         * end caps����δ�����·���������߶ε�ĩ��Ӧ�õ�һЩװ�Ρ������·��û�� CLOSE �Σ�����ͬһ���Ͽ�ʼ�ͽ�������·���Ա���Ϊ��δ��յġ�
-         * ���� CLOSE �εĸ�����Ϣ������� SEG_CLOSE��������ͬ��װ���ǣ�
-         * CAP_BUTT����װ�εؽ���δ��յ���·���������߶Ρ�
-         * CAP_ROUND��ʹ�ð뾶���ڻ��ʿ��һ���Բ��װ�ν���δ��յ���·���������߶Ρ�
-         * CAP_SQUARE��ʹ�������ν���δ��յ���·���������߶Σ�������Խ���߶ζ˵㣬���ӳ������������һ��ľ��롣
-         * line joins��������·���߶εĽ��㴦���Լ�ʹ�� SEG_CLOSE ��յ���·���˵�Ľ��㴦Ӧ�õ�װ�Ρ�
-         * ������ͬ��װ���ǣ�
-         * JOIN_BEVEL��ͨ��ֱ�����ӿ�����������ǣ���·���߶�������һ��
-         * JOIN_MITER����չ·���߶ε����Ե��ֱ������������һ��
-         * JOIN_ROUND��ͨ����ȥ�뾶Ϊ�߳���һ���Բ�ǣ���·���߶�������һ��
-         * miter limit���Լ��þ��� JOIN_MITER װ�ε��߽Ӻϵ�����ơ���б�ӳ�����ʻ���ȵıȴ��� miterlimit ֵʱ����Ҫ�����߽Ӻϵ㡣
-         * б�ӳ�����б�ӵĶԽ��߳��ȣ������㴦������Ǻ������֮��ľ��롣�����߶��γɵĽǶ�ԽС��б�ӳ��Ⱦ�Խ�������㴦�ĽǶȾ�Խ����
-         * Ĭ�� miterlimit ֵΪ 10.0f������ʹ����С�� 11 �ȵĽǶ������á�����б�ӻ�ʹ�߽Ӻϵ��װ�α��б�ǡ� ������ڻ���� 1.0f��
-         * dash attributes���������ͨ���ڲ�͸����͸������֮�佻���γ�һ������ģʽ�Ķ��塣 ��ʾ����ģʽ������
-         * dash phase - ��ʼ����ģʽ��ƫ����
-         */
-//��������
         g2.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 4.0f, new float[]{4.0f}, 0.0f));
-//�ڴ�ͼ�������ĵ�����ϵ��ʹ�õ�ǰ��ɫ�ڵ� (x1, y1) �� (x2, y2) ֮�仭һ���ߡ� ����������
         g2.drawLine((int) x, (int) (y + line), (int) x + 158, (int) (y + line));
         line += heigth;
-//������Ʒ�嵥
         if (goods != null && goods.size() > 0) {
             for (Goods gdf : goods) {
                 g2.drawString(gdf.getGname(), (float) x , (float) y + line);
@@ -156,35 +134,25 @@ public class SalesTicket implements Printable {
                 g2.drawString(gdf.getNum(), (float) x + 70, (float) y + line);
                 g2.drawString(gdf.getTotal(), (float) x + 105, (float) y + line);
                 line += heigth;
-
-                /*if (gdf.getBeiZhu() != null) {
-                    //��ñ��ֵ�λ��
-                    int i = gdf.getBeiZhu().lastIndexOf("��");
-                    //��ñ�ע֮ǰ���ַ���
-                    String ssss = gdf.getBeiZhu().substring(1, i-1);
-                    //����¶Ⱥ���ȵ��ַ���
-                    g2.drawString(ssss, (float) x , (float) y + line);
-                    line += heigth;
-                }*/
             }
         }
         g2.drawLine((int) x, (int) (y + line), (int) x + 158, (int) (y + line));
         line += heigth + 2;
-        g2.drawString("��Ʒ����:" + totalGoodsNum + "��", (float) x, (float) y + line);
-        g2.drawString("�ϼ�:" + totalPrice + " Ԫ", (float) x + 65, (float) y + line);
+        g2.drawString("商品总数:" + totalGoodsNum + "件", (float) x, (float) y + line);
+        g2.drawString("合计:" + totalPrice + " 元", (float) x + 65, (float) y + line);
         line += heigth;
-        g2.drawString("ʵ��:" + actualCollection + "Ԫ", (float) x , (float) y + line);
-        g2.drawString("����:" + giveChange + "Ԫ", (float) x +65, (float) y + line);
+        g2.drawString("实收:" + actualCollection + "元", (float) x , (float) y + line);
+        g2.drawString("找零:" + giveChange + "元", (float) x +65, (float) y + line);
         line += heigth;
 
         if (cardNumber != null && !"".equals(cardNumber)) {
-            g2.drawString("��ǰ��Ա:" + cardNumber, (float) x + 15, (float) y + line);
+            g2.drawString("当前会员:" + cardNumber, (float) x + 15, (float) y + line);
             line += heigth;
-            g2.drawString("����:" + integral, (float) x + 15, (float) y + line);
+            g2.drawString("积分:" + integral, (float) x + 15, (float) y + line);
         }
-        g2.drawString("ʱ��:" + sdf.format(orderDate), (float) x , (float) y + line);
+        g2.drawString("时间:" + sdf.format(orderDate), (float) x , (float) y + line);
         line += heigth;
-        g2.drawString("ǮƱ�뵱����壬�뿪��̨ˡ������", (float) x , (float) y + line);
+        g2.drawString("钱票请当面点清，离开柜台恕不负责", (float) x , (float) y + line);
         line += heigth;
         g2.drawString("------------------------------------------", (float) x , (float) y + line);
         line += heigth;

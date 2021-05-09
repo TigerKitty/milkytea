@@ -192,7 +192,6 @@ public class MerPayFrame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         MerPosCodePayFrame merPosCodePayFrame=new MerPosCodePayFrame(sumprice,tableDate);
-
                     }
                 }
         );

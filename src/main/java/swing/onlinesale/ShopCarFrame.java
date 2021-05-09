@@ -17,18 +17,19 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- * π∫ŒÔ≥µΩÁ√Ê
+ * Ë¥≠Áâ©ËΩ¶ÁïåÈù¢
  */
 public class ShopCarFrame extends JFrame {
+    private static List<MilkTeaBean>list;
 
     public ShopCarFrame(List<MilkTeaBean>list) {
-
+        this.list=list;
         initComponents(list);
     }
     private void initComponents(final List<MilkTeaBean>list) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         //======== this ========
-        Container contentPane = getContentPane();
+        contentPane = getContentPane();
         contentPane.setLayout(null);
         Object[][]tableDate=new Object[list.size()][4];
         for(int i=0;i<list.size();i++){
@@ -37,8 +38,8 @@ public class ShopCarFrame extends JFrame {
             tableDate[i][2]=list.get(i).getNumber();
             tableDate[i][3]=list.get(i).getSellprice();
         }
-        String []name ={"ƒÃ≤Ë±‡∫≈","ƒÃ≤Ë√˚≥∆","π∫¬Ú ˝¡ø","ƒÃ≤Ë €º€"};
-        final DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
+        String []name ={"Â•∂Ëå∂ÁºñÂè∑","Â•∂Ëå∂ÂêçÁß∞","Ë¥≠‰π∞Êï∞Èáè","Â•∂Ëå∂ÂîÆ‰ª∑"};
+        tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,800,450);
@@ -53,7 +54,7 @@ public class ShopCarFrame extends JFrame {
         button2.setText("\u63d0\u4ea4\u8ba2\u5355");
         contentPane.add(button2);
         button2.setBounds(new Rectangle(new Point(700, 460), button2.getPreferredSize()));
-        //---“∆≥˝π∫ŒÔ≥µ---//
+        //---ÁßªÈô§Ë¥≠Áâ©ËΩ¶---//
         n=-1;
         button1.addActionListener(
                 new ActionListener() {
@@ -70,7 +71,7 @@ public class ShopCarFrame extends JFrame {
                     }
                 }
         );
-        //---Ã·Ωª∂©µ•---//
+        //---Êèê‰∫§ËÆ¢Âçï---//
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -89,12 +90,19 @@ public class ShopCarFrame extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         setVisible(true);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //tDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    private JTable table;
+    //‰ªòÊ¨æÊàêÂäüÂêéÔºåÊ∏ÖÁ©∫Ë¥≠Áâ©ËΩ¶
+    public static void ClearShopCar(){
+        tableModel.setRowCount(0);
+        list.clear();
+    }
+    private static JTable table;
     private JButton button1;
     private JButton button2;
-    private JScrollPane jScrollPane;
+    private static JScrollPane jScrollPane;
+    private static Container contentPane;
+    private static DefaultTableModel tableModel;
     private int n;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
