@@ -3,6 +3,7 @@
  */
 
 package swing.Underway;
+import dao.Underway.Automatic;
 import dao.Underway.GetDate;
 import util.Dbutil;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class underwayFrame extends JFrame {
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        this.setTitle("我的订单信息");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         button1 = new JButton();
@@ -36,6 +38,8 @@ public class underwayFrame extends JFrame {
         button4 = new JButton();
         button5 = new JButton();
         final GetDate getDate = new GetDate();
+        Automatic automatic = new Automatic();
+        automatic.right();
         DefaultTableModel tableMode = new DefaultTableModel(getDate.UsersData(),getDate.head) {
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -83,7 +87,6 @@ public class underwayFrame extends JFrame {
                         int count=table1.getSelectedRow();//获取你选中的行号（记录）
                         String ordid= table1.getValueAt(count, 0).toString();//读取你获取行号的某一列的值（也就是字段）
                         String receivetime = df.format(new Date());
-                        System.out.println(receivetime);
                         Dbutil dbutil = new Dbutil();
                         String sql = "update comorder set status=? , receivetime = ? where ordid = ?";
                         PreparedStatement ptem = dbutil.getPs(sql);
@@ -149,6 +152,12 @@ public class underwayFrame extends JFrame {
                         button3.setVisible(false);
                         scrollPane2.setVisible(false);
                         scrollPane1.setVisible(true);
+                        DefaultTableModel tableMode = new DefaultTableModel(getDate.UsersData(),getDate.head) {
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
+                            }
+                        };
+                        table1.setModel(tableMode);
                     }
                 }
         );
@@ -168,6 +177,12 @@ public class underwayFrame extends JFrame {
                         button3.setVisible(true);
                         scrollPane2.setVisible(true);
                         scrollPane1.setVisible(false);
+                        DefaultTableModel tableMode = new DefaultTableModel(getDate.UsersData(), getDate.head) {
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
+                            }
+                        };
+                        table2.setModel(tableMode);
                     }
                 }
         );
