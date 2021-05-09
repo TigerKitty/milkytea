@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 public class MerSellFrame extends JFrame {
+
     public static void main(String[] args) {
         MerSellFrame merSellFrame=new MerSellFrame();
     }
@@ -34,7 +35,7 @@ public class MerSellFrame extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 
         //======== this ========
-        final Container contentPane = getContentPane();
+        contentPane = getContentPane();
         contentPane.setLayout(null);
         jPanel=new JPanel();
         jPanel.setLayout(null);
@@ -186,7 +187,7 @@ public class MerSellFrame extends JFrame {
                         n=table.getSelectedRow();
                         if(n!=-1) {
                             tableModel.removeRow(n);
-                            list.remove(n);
+                            milkTeaBeans.remove(n);
                         }
                         else {
                             WarnFrame.deletewarnFrame();
@@ -201,6 +202,18 @@ public class MerSellFrame extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    //清空购物车
+    public  static void Clear(){
+        milkTeaBeans.clear();
+        tableModel.setRowCount(0);
+        /*Object tableDate1[][] = new Object[0][4];
+        String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
+        tableModel = new DefaultTableModel(tableDate1, name);
+        table = new JTable(tableModel);
+        JScrollPane jScrollPane = new JScrollPane(table);
+        jScrollPane.setBounds(0, 0, 530, 450);
+        contentPane.add(jScrollPane);**/
+    }
     private JPanel jPanel;
     private JTextField textField2;
     private JTextField textField3;
@@ -211,14 +224,15 @@ public class MerSellFrame extends JFrame {
     private JButton button2;
     private JButton button3;
     private JButton button4;
-    private JTable table;
-    private DefaultTableModel tableModel;
+    private static JTable table;
+    private static DefaultTableModel tableModel;
     private JComboBox comboBox;
     private  String[]comboBoxDate;
-    private List<MilkTeaBean>milkTeaBeans;
+    private static List<MilkTeaBean>milkTeaBeans;
     private String[]proid;
     private List <MilkTeaBean>list;
     private int n;
+    private static Container contentPane;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -117,6 +117,8 @@ public class BillFrame extends JFrame {
                                                 OnlineOrderMes.insertComOrd(orderid,ordertime,trantime);
                                                 //½«¶©µ¥µÄÏêÇéĞÅÏ¢¼ÓÈëµ½detailorderÊı¾İ¿â±í
                                                 OnlineOrderMes.insertDetailOrd(orderid,listMilk);
+                                                ShopCarFrame.ClearShopCar();//ä»˜æ¬¾åæ¸…ç©ºè´­ç‰©è½¦
+                                                WarnFrame.outlinePoswarnFrame1();//å¼¹å‡ºæ”¯ä»˜æˆåŠŸæ¡†
                                             }else {
                                                 System.out.println("Ö§¸¶Ê§°Ü");
                                                 WarnFrame.outlinePaywarnFrame();
