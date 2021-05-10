@@ -1,5 +1,7 @@
 package swing.login;
 
+import swing.MainFrame.OnlineMainFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -132,11 +134,10 @@ public class Login extends JFrame {
                                 if(MD5.checkpassword(password,encodePassword)){//将用户输入的密码加密后和数据库获取到的密码进行比较
                                     System.out.println("登入成功");
                                     //隐藏登入窗口，显示MainForm窗口
-                                /*
+
                                 setVisible(false);
-                                MainForm mf = new MainForm();
+                                OnlineMainFrame mf = new OnlineMainFrame();
                                 mf.setVisible(true);
-                                * */
                                 }else{
                                     JFrame frame = new JFrame("登入失败");
                                     JOptionPane.showMessageDialog(frame, "密码错误",
