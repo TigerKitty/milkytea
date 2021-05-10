@@ -1,6 +1,6 @@
 package dao.profit;
 
-import entity.sale.profit.DailyStatisBean;
+import entity.profit.DailyStatisBean;
 import util.Dbutil;
 
 import java.sql.PreparedStatement;

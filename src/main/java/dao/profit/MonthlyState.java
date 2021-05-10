@@ -1,6 +1,6 @@
 package dao.profit;
 
-import entity.sale.profit.MonthlyStateBean;
+import entity.profit.MonthlyStateBean;
 import util.Dbutil;
 
 import java.sql.PreparedStatement;

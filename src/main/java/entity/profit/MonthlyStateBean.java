@@ -1,4 +1,4 @@
-package entity.sale.profit;
+package entity.profit;
 
 public class MonthlyStateBean {
     private String monthlytime;
