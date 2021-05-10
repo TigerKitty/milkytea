@@ -4,6 +4,8 @@
 
 package swing.outlinesale;
 
+import dao.sale.DaoCreate;
+import listener.sale.OutlineOrderMes;
 import util.Main;
 
 import java.awt.*;
@@ -16,11 +18,11 @@ import javax.swing.*;
  * 显示Pos机付款界面
  */
 public class MerPosCodePayFrame extends JFrame {
-    public MerPosCodePayFrame(int sumprice) {
-        initComponents(sumprice);
+    public MerPosCodePayFrame(int sumprice,Object[][] tableDate) {
+        initComponents(sumprice,tableDate);
     }
 
-    private void initComponents(final int sumprice) {
+    private void initComponents(final int sumprice,final Object[][] tableDate) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         textField1 = new JTextField();
         label1 = new JLabel();
@@ -46,7 +48,18 @@ public class MerPosCodePayFrame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Main main=new Main();
-                        main.trade_pay(textField1.getText(),sumprice);
+                        boolean bool = main.trade_pay(textField1.getText(),sumprice);
+                        if (bool){
+                            //生成orderid
+                            String name = "outline";
+                            String orderid = DaoCreate.CreateOutlineOrdid(name);
+                            //调用打印方法进行打印
+                            OutlineOrderMes.printOrder(tableDate,orderid);
+                            //将订单信息加入到comorder数据库表中
+                            OutlineOrderMes.insertComOrd(name,orderid);
+                            //将订单信息加入到detailorder数据库表中
+                            OutlineOrderMes.insertDetailOrd(tableDate,orderid);
+                        }
                     }
                 }
         );

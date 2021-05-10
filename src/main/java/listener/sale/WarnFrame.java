@@ -31,4 +31,17 @@ public class WarnFrame {
 
                 "支付失败", JOptionPane.WARNING_MESSAGE);
     }
+    public static void outlinePoswarnFrame(){
+        JFrame frame = new JFrame("支付失败");
+        JOptionPane.showMessageDialog(frame, "支付失败",
+
+                "支付失败", JOptionPane.WARNING_MESSAGE);
+    }
+    public static void outlinePoswarnFrame1(){
+        JFrame frame = new JFrame("支付成功");
+        JOptionPane.showMessageDialog(frame, "支付成功",
+
+                "支付成功", JOptionPane.WARNING_MESSAGE);
+    }
+
 }

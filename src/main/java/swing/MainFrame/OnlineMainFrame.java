@@ -23,7 +23,7 @@ public class OnlineMainFrame extends JFrame {
         menuBar1 = new JMenuBar();
         JMenu menu = new JMenu("点奶茶");
         menuBar1.add(menu);
-        JMenu menu1 = new JMenu("查看订单状态");
+        JMenu menu1 = new JMenu("正在进行的订单");
         menuBar1.add(menu1);
         JMenu menu2 = new JMenu("查看订单记录");
         menuBar1.add(menu2);

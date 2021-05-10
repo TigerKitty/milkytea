@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 /**
- * 线上销售主界面
+ * ??????????????
  */
 public class SellFrame extends JFrame {
     public static void main(String[] args) {
@@ -111,13 +111,13 @@ public class SellFrame extends JFrame {
             tableDate[i][2]=list.get(i).getSellprice();
 
         }
-        String []name ={"奶茶编号","奶茶名称","奶茶售价"};
+        String []name ={"编号","商品名称","商品价格"};
         DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,530,450);
         contentPane.add(jScrollPane);
-        //---table事件---//
+        //---table???---//
         table.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -155,16 +155,16 @@ public class SellFrame extends JFrame {
         textField1.setEnabled(false);
         textField3.setEnabled(false);
         list1=new ArrayList<MilkTeaBean>();
-        //--加入购物车--//
+        //--??????--//
         button1.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(textField2.getText().equals("")){//判断用户输入的数量是否为空
-                            WarnFrame.shopwarnFrame();//调用弹出警告框方法，弹出警告框
+                        if(textField2.getText().equals("")){//?ж???????????????????
+                            WarnFrame.shopwarnFrame();//????????????????????????
                         }
                         else {
-                            //调用方法判断加入商品的id是否重复，重复改数量，不重复加入新的商品
+                            //???÷????ж?????????id??????????????????????????????????
                             list1=JoinShopCar.joinArrays(list1,textField3.getText(),textField.getText(),textField2.getText(),textField1.getText());
                             textField.setText("");
                             textField1.setText("");
@@ -174,7 +174,7 @@ public class SellFrame extends JFrame {
                     }
                 }
         );
-        //--重置事件--(button)---//
+        //--???????--(button)---//
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -186,7 +186,7 @@ public class SellFrame extends JFrame {
                     }
                 }
         );
-        //--查看购物车（button3）--//
+        //--????????button3??--//
         button3.addActionListener(
                 new ActionListener() {
                     @Override

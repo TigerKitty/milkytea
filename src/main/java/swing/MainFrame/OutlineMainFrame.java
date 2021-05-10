@@ -19,7 +19,7 @@ public class OutlineMainFrame extends JFrame{
         menuBar1.add(menu1);
         item=new JMenuItem("正在进行的订单");
         menu1.add(item);
-        item1=new JMenuItem("接单记录");
+        item1=new JMenuItem("已完成订单记录");
         menu1.add(item1);
         JMenu menu2 = new JMenu("利润统计");
         menuBar1.add(menu2);

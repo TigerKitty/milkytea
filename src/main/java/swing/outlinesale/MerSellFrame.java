@@ -18,11 +18,9 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * 商家线下收银界面
- */
 
 public class MerSellFrame extends JFrame {
+
     public static void main(String[] args) {
         MerSellFrame merSellFrame=new MerSellFrame();
     }
@@ -34,7 +32,7 @@ public class MerSellFrame extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 
         //======== this ========
-        final Container contentPane = getContentPane();
+        contentPane = getContentPane();
         contentPane.setLayout(null);
         jPanel=new JPanel();
         jPanel.setLayout(null);
@@ -58,6 +56,8 @@ public class MerSellFrame extends JFrame {
         button2 = new JButton();
         button3 =new JButton();
         button4=new JButton();
+        button5=new JButton();
+        button6=new JButton();
         label1.setText("\u5976\u8336\u540d\u79f0\uff1a");
         jPanel.add(label1);
         label1.setBounds(new Rectangle(new Point(30, 150), label1.getPreferredSize()));
@@ -92,15 +92,22 @@ public class MerSellFrame extends JFrame {
         button4.setText("\u5220\u9664");
         contentPane.add(button4);
         button4.setBounds(new Rectangle(new Point(370, 460), button4.getPreferredSize()));
+        //--button5
+        button5.setText("+");
+        jPanel.add(button5);
+        button5.setBounds(new Rectangle(new Point(10, 15), button5.getPreferredSize()));
+        //--button6
+        button6.setText("-");
+        jPanel.add(button6);
+        button6.setBounds(new Rectangle(new Point(10, 45), button5.getPreferredSize()));
 
         Object tableDate[][]=new Object[0][4];
-        String []name ={"奶茶编号","奶茶名称","奶茶数量","奶茶售价"};
+        String []name ={"商品编号","商品名称","商品数量","商品价格"};
         tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
-        final JScrollPane jScrollPane=new JScrollPane(table);
+        jScrollPane=new JScrollPane(table);
         jScrollPane.setBounds(0,0,530,450);
         contentPane.add(jScrollPane);
-        //获取下拉框数据
         comboBox.addActionListener(
                 new ActionListener() {
                     @Override
@@ -115,7 +122,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //加入购物车
+        //���빺�ﳵ
         milkTeaBeans=new ArrayList<MilkTeaBean>();
         button1.addActionListener(
                 new ActionListener() {
@@ -134,10 +141,10 @@ public class MerSellFrame extends JFrame {
                                 tableDate[i][2] = milkTeaBeans.get(i).getNumber();
                                 tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
                             }
-                            String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
+                            String[] name = {"商品编号", "商品名称", "商品数量", "商品价格"};
                             tableModel = new DefaultTableModel(tableDate, name);
                             table = new JTable(tableModel);
-                            JScrollPane jScrollPane = new JScrollPane(table);
+                            jScrollPane = new JScrollPane(table);
                             jScrollPane.setBounds(0, 0, 530, 450);
                             contentPane.add(jScrollPane);
                             jScrollPane.setVisible(true);
@@ -147,7 +154,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //重置
+        //����
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -157,7 +164,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //支付
+        //֧��
         button3.addActionListener(
                 new ActionListener() {
                     @Override
@@ -177,7 +184,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //把商品从购物车移除
+        //����Ʒ�ӹ��ﳵ�Ƴ�
         n=-1;
         button4.addActionListener(
                 new ActionListener() {
@@ -186,7 +193,7 @@ public class MerSellFrame extends JFrame {
                         n=table.getSelectedRow();
                         if(n!=-1) {
                             tableModel.removeRow(n);
-                            list.remove(n);
+                            milkTeaBeans.remove(n);
                         }
                         else {
                             WarnFrame.deletewarnFrame();
@@ -194,12 +201,75 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
+        //加数量
+        button5.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        jScrollPane.setVisible(false);
+                        int m=table.getSelectedRow();
+                        milkTeaBeans.get(m).setNumber(milkTeaBeans.get(m).getNumber()+1);
+                        Object tableDate[][] = new Object[milkTeaBeans.size()][4];
+                        for (int i = 0; i < milkTeaBeans.size(); i++) {
+                            tableDate[i][0] = milkTeaBeans.get(i).getProid();
+                            tableDate[i][1] = milkTeaBeans.get(i).getProname();
+                            tableDate[i][2] = milkTeaBeans.get(i).getNumber();
+                            tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
+                        }
+                        String[] name = {"商品编号", "商品名称", "商品数量", "商品价格"};
+                        tableModel = new DefaultTableModel(tableDate, name);
+                        table = new JTable(tableModel);
+                        jScrollPane = new JScrollPane(table);
+                        jScrollPane.setBounds(0, 0, 530, 450);
+                        contentPane.add(jScrollPane);
+                        jScrollPane.setVisible(true);
+                    }
+                }
+        );
+        //减数量
+        button6.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        jScrollPane.setVisible(false);
+                        int m=table.getSelectedRow();
+                        milkTeaBeans.get(m).setNumber(milkTeaBeans.get(m).getNumber()-1);
+                        Object tableDate[][] = new Object[milkTeaBeans.size()][4];
+                        for (int i = 0; i < milkTeaBeans.size(); i++) {
+                            tableDate[i][0] = milkTeaBeans.get(i).getProid();
+                            tableDate[i][1] = milkTeaBeans.get(i).getProname();
+                            tableDate[i][2] = milkTeaBeans.get(i).getNumber();
+                            tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
+                        }
+                        String[] name = {"商品编号", "商品名称", "商品数量", "商品价格"};
+                        tableModel = new DefaultTableModel(tableDate, name);
+                        table = new JTable(tableModel);
+                        jScrollPane = new JScrollPane(table);
+                        jScrollPane.setBounds(0, 0, 530, 450);
+                        contentPane.add(jScrollPane);
+                        jScrollPane.setVisible(true);
+                    }
+                }
+        );
+
         contentPane.setPreferredSize(new Dimension(800, 500));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    //清空购物车
+    public  static void Clear(){
+        milkTeaBeans.clear();
+        tableModel.setRowCount(0);
+        /*Object tableDate1[][] = new Object[0][4];
+        String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
+        tableModel = new DefaultTableModel(tableDate1, name);
+        table = new JTable(tableModel);
+        JScrollPane jScrollPane = new JScrollPane(table);
+        jScrollPane.setBounds(0, 0, 530, 450);
+        contentPane.add(jScrollPane);**/
     }
     private JPanel jPanel;
     private JTextField textField2;
@@ -211,14 +281,18 @@ public class MerSellFrame extends JFrame {
     private JButton button2;
     private JButton button3;
     private JButton button4;
-    private JTable table;
-    private DefaultTableModel tableModel;
+    private JButton button5;//加数量
+    private JButton button6;//减数量
+    private static JTable table;
+    private static DefaultTableModel tableModel;
+    private static JScrollPane jScrollPane;
     private JComboBox comboBox;
     private  String[]comboBoxDate;
-    private List<MilkTeaBean>milkTeaBeans;
+    private static List<MilkTeaBean>milkTeaBeans;
     private String[]proid;
     private List <MilkTeaBean>list;
     private int n;
+    private static Container contentPane;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -91,4 +91,25 @@ public class DaoCreate {
         profit = Integer.valueOf(profit)*num+"";
         return profit;
     }
+    /**
+     * 获取奶茶的名称信息
+     *  @param proid
+     *  @return String profi利润
+     */
+    public static String getProName(String proid){
+        String proName = "";
+        Dbutil dbutil = new Dbutil();
+        String sql = "SELECT proname FROM product WHERE proid=?";
+        PreparedStatement ps = dbutil.getPs(sql);
+        try {
+            ps.setString(1,proid);
+            ResultSet rs = dbutil.getRs(ps.executeQuery());
+            if (rs.next()){
+                proName = rs.getString("proname");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return proName;
+    }
 }
