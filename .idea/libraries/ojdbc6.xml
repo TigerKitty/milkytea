@@ -2,6 +2,7 @@
   <library name="ojdbc6">
     <CLASSES>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <root url="jar://C:/oracleclient/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
 =======
       <root url="jar://E:/蓝桥任务/ojdbc6.jar!/" />
@@ -9,5 +10,13 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+=======
+      <root url="jar://C:/app/piggy/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://C:/app/piggy/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
+    </SOURCES>
+>>>>>>> zm
   </library>
 </component>
