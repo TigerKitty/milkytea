@@ -3,6 +3,7 @@ package swing.onlinesale;
 import entity.sale.MilkTeaBean;
 import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
+import swing.Underway.underwayFrame;
 import util.Dbutil;
 
 import java.awt.*;
@@ -19,17 +20,15 @@ import javax.swing.table.DefaultTableModel;
  */
 
 /**
- * ??????????????
+ * 线上销售界面
  */
 public class SellFrame extends JFrame {
     public static void main(String[] args) {
         SellFrame sellFrame=new SellFrame();
     }
     public SellFrame() {
-
         initComponents();
     }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         //======== this ========
@@ -111,7 +110,7 @@ public class SellFrame extends JFrame {
             tableDate[i][2]=list.get(i).getSellprice();
 
         }
-        String []name ={"缂栧彿","鍟嗗搧鍚嶇О","鍟嗗搧浠锋牸"};
+        String []name ={"编号","商品名称","商品价格"};
         DefaultTableModel tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         jScrollPane=new JScrollPane(table);
@@ -160,11 +159,11 @@ public class SellFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(textField2.getText().equals("")){//?卸???????????????????
+                        if(textField2.getText().equals("")){//?ж???????????????????
                             WarnFrame.shopwarnFrame();//????????????????????????
                         }
                         else {
-                            //???梅????卸?????????id??????????????????????????????????
+                            //???÷????ж?????????id??????????????????????????????????
                             list1=JoinShopCar.joinArrays(list1,textField3.getText(),textField.getText(),textField2.getText(),textField1.getText());
                             textField.setText("");
                             textField1.setText("");
@@ -196,13 +195,51 @@ public class SellFrame extends JFrame {
                     }
                 }
         );
-
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        menuBar1 = new JMenuBar();
+        JMenuItem menu1 = new JMenu("正在进行的订单");
+        menuBar1.add(menu1);
+        menu1.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        new underwayFrame();
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
+        JMenuItem menu2 = new JMenu("查看订单记录");
+        menuBar1.add(menu2);
+        menu2.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        new underwayFrame();
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
+        //======== this ========
+        contentPane.setLayout(null);
+        setJMenuBar(menuBar1);
         contentPane.setPreferredSize(new Dimension(800, 500));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     private JPanel jPanel;
     private JTable table;
@@ -223,6 +260,9 @@ public class SellFrame extends JFrame {
     private MilkTeaBean milkTeaBean1;
     private List<MilkTeaBean>list;//
     private List<MilkTeaBean>list1;
+    private JMenuBar menuBar1;
+    private JMenuItem item;
+    private JMenuItem item1;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

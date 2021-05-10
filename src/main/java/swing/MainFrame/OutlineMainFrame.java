@@ -13,15 +13,15 @@ public class OutlineMainFrame extends JFrame{
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
-        JMenu menu = new JMenu("ç‚¹å¥¶èŒ¶");
+        JMenuItem menu = new JMenu("µãÄÌ²è");
         menuBar1.add(menu);
-        JMenu menu1 = new JMenu("è®¢å•ç®¡ç†");
+        JMenuItem menu1 = new JMenu("¶©µ¥¹ÜÀí");
         menuBar1.add(menu1);
-        item=new JMenuItem("æ­£åœ¨è¿›è¡Œçš„è®¢å•");
+        item=new JMenuItem("ÕıÔÚ½øĞĞµÄ¶©µ¥");
         menu1.add(item);
-        item1=new JMenuItem("å·²å®Œæˆè®¢å•è®°å½•");
+        item1=new JMenuItem("ÒÑÍê³É¶©µ¥¼ÇÂ¼");
         menu1.add(item1);
-        JMenu menu2 = new JMenu("åˆ©æ¶¦ç»Ÿè®¡");
+        JMenu menu2 = new JMenu("ÀûÈóÍ³¼Æ");
         menuBar1.add(menu2);
         //======== this ========
         Container contentPane = getContentPane();

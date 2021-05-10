@@ -9,10 +9,15 @@ import dao.sale.ObtainPrice;
 import entity.sale.MilkTeaBean;
 import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
+import swing.addProduct.addProduct;
+import swing.lnc.OrdersInProgressFrame;
+import swing.onlinesale.SellFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -30,7 +35,6 @@ public class MerSellFrame extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-
         //======== this ========
         contentPane = getContentPane();
         contentPane.setLayout(null);
@@ -251,7 +255,51 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-
+        menuBar1 = new JMenuBar();
+        JMenuItem menu = new JMenu("添加商品");
+        menuBar1.add(menu);
+        menu.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        new addProduct();
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
+        JMenuItem menu1 = new JMenu("订单管理");
+          menuBar1.add(menu1);
+          menu1.addMouseListener(
+                  new MouseListener() {
+                      @Override
+                      public void mouseClicked(MouseEvent e) { }
+                      @Override
+                      public void mousePressed(MouseEvent e) {
+                          new OrdersInProgressFrame();
+                      }
+                      @Override
+                      public void mouseReleased(MouseEvent e) { }
+                      @Override
+                      public void mouseEntered(MouseEvent e) { }
+                      @Override
+                      public void mouseExited(MouseEvent e) { }
+                  });
+//        item=new JMenuItem("正在进行的订单");
+//        menu1.add(item);
+//        item1=new JMenuItem("已完成订单记录");
+//        menu1.add(item1);
+        JMenu menu2 = new JMenu("利润统计");
+        menuBar1.add(menu2);
+        //======== this ========
+        Container contentPane = getContentPane();
+        contentPane.setLayout(null);
+        setJMenuBar(menuBar1);
         contentPane.setPreferredSize(new Dimension(800, 500));
         pack();
         setLocationRelativeTo(getOwner());
@@ -263,13 +311,6 @@ public class MerSellFrame extends JFrame {
     public  static void Clear(){
         milkTeaBeans.clear();
         tableModel.setRowCount(0);
-        /*Object tableDate1[][] = new Object[0][4];
-        String[] name = {"奶茶编号", "奶茶名称", "奶茶数量", "奶茶售价"};
-        tableModel = new DefaultTableModel(tableDate1, name);
-        table = new JTable(tableModel);
-        JScrollPane jScrollPane = new JScrollPane(table);
-        jScrollPane.setBounds(0, 0, 530, 450);
-        contentPane.add(jScrollPane);**/
     }
     private JPanel jPanel;
     private JTextField textField2;
@@ -293,6 +334,9 @@ public class MerSellFrame extends JFrame {
     private List <MilkTeaBean>list;
     private int n;
     private static Container contentPane;
+    private JMenuBar menuBar1;
+    private JMenuItem item;
+    private JMenuItem item1;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

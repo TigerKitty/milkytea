@@ -1,6 +1,8 @@
 package swing.login;
 
 import swing.MainFrame.OnlineMainFrame;
+import swing.onlinesale.SellFrame;
+import swing.outlinesale.MerSellFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,19 +31,19 @@ public class Login extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         label1 = new JLabel();
-        label2 = new JLabel();//ç”¨æˆ·å
-        label3 = new JLabel();//å¯†ç 
-        label4 = new JLabel();//ç¡®è®¤å¯†ç 
-        label5 = new JLabel();//ç”¨æˆ·å§“å
+        label2 = new JLabel();//ÓÃ»§Ãû
+        label3 = new JLabel();//ÃÜÂë
+        label4 = new JLabel();//È·ÈÏÃÜÂë
+        label5 = new JLabel();//ÓÃ»§ĞÕÃû
         textField1 = new JTextField();
         textField2 = new JPasswordField();
         textField3 = new JPasswordField();
         textField4 = new JTextField();
-        button1 = new JButton();//ç™»å…¥
-        button2 = new JButton();//ç”¨æˆ·æ³¨å†Œ
-        button3 = new JButton();//ç«‹å³æ³¨å†Œ
-        button4 = new JButton();//è¿”å›ç™»å…¥
-        button5 = new JButton();//å•†å®¶ç™»å…¥
+        button1 = new JButton();//µÇÈë
+        button2 = new JButton();//ÓÃ»§×¢²á
+        button3 = new JButton();//Á¢¼´×¢²á
+        button4 = new JButton();//·µ»ØµÇÈë
+        button5 = new JButton();//ÉÌ¼ÒµÇÈë
 
 
 
@@ -56,19 +58,19 @@ public class Login extends JFrame {
         contentPane.add(label1);
         label1.setBounds(150, 30, 250, 40);
 
-        //---- label2 ----ç”¨æˆ·å
+        //---- label2 ----ÓÃ»§Ãû
         label2.setText("\u7528\u6237\u540d\uff1a");
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 3f));
         contentPane.add(label2);
         label2.setBounds(new Rectangle(new Point(150, 110), label2.getPreferredSize()));
 
-        //---- label3 ----å¯†ç 
+        //---- label3 ----ÃÜÂë
         label3.setText("\u5bc6\u7801\uff1a");
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 3f));
         contentPane.add(label3);
         label3.setBounds(160, 165, label3.getPreferredSize().width, 20);
 
-        //---- label4 ----ç¡®è®¤å¯†ç 
+        //---- label4 ----È·ÈÏÃÜÂë
         label4.setText("\u786e\u8ba4\u5bc6\u7801\uff1a");
         label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 3f));
         contentPane.add(label4);
@@ -77,7 +79,7 @@ public class Login extends JFrame {
 
         label4.setVisible(false);
 
-        //---- label5 ----ç”¨æˆ·å§“å
+        //---- label5 ----ÓÃ»§ĞÕÃû
         label5.setText("\u7528\u6237\u59d3\u540d\uff1a");
         label5.setFont(label5.getFont().deriveFont(label5.getFont().getSize() + 3f));
         contentPane.add(label5);
@@ -95,59 +97,58 @@ public class Login extends JFrame {
         textField3.setVisible(false);
         textField4.setVisible(false);
 
-        //---- button1 ----ç”¨æˆ·ç™»å…¥
+        //---- button1 ----ÓÃ»§µÇÈë
         button1.setText("\u7528\u6237\u767b\u5165");
         button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 4f));
         contentPane.add(button1);
         button1.setBounds(180, 235, 205, 40);
         button1.addActionListener(
-                //åŒ¿åå†…éƒ¨ç±»ï¼šå±€éƒ¨å†…éƒ¨ç±»
+                //ÄäÃûÄÚ²¿Àà£º¾Ö²¿ÄÚ²¿Àà
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        //æ‹¿åˆ°ç”¨æˆ·åå’Œå¯†ç 
-                        String username=textField1.getText();//è·å–ç”¨æˆ·å
-                        String password= new String(textField2.getPassword());//è·å–å¯†ç 
+                        //ÄÃµ½ÓÃ»§ÃûºÍÃÜÂë
+                        String username=textField1.getText();//»ñÈ¡ÓÃ»§Ãû
+                        String password= new String(textField2.getPassword());//»ñÈ¡ÃÜÂë
 
                         Connection conn=null;
                         String url="jdbc:oracle:thin:@112.74.59.255:1521:orcl";
-                        Statement stmt=null;//SQLè¯­å¥å¯¹è±¡ï¼Œæ‹¼SQL
+                        Statement stmt=null;//SQLÓï¾ä¶ÔÏó£¬Æ´SQL
                         /*
-                         * 1ã€æ ¹æ®ç”¨æˆ·åæŠŠåŠ å¯†åçš„å¯†ç ä»æ•°æ®åº“æ‹¿åˆ°
-                         * 2ã€æŠŠå¯†ç åŠ å¯†åäºæ•°æ®åº“ä¾‹å–å‡ºçš„å¯†ç è¿›è¡Œæ¯”å¯¹
+                         * 1¡¢¸ù¾İÓÃ»§Ãû°Ñ¼ÓÃÜºóµÄÃÜÂë´ÓÊı¾İ¿âÄÃµ½
+                         * 2¡¢°ÑÃÜÂë¼ÓÃÜºóÓÚÊı¾İ¿âÀıÈ¡³öµÄÃÜÂë½øĞĞ±È¶Ô
                          * */
                         String sql="SELECT password FROM users WHERE username='"+username+"'";
-
                         ResultSet rs=null;
                         try {
                             try {
-                                Class.forName("oracle.jdbc.driver.OracleDriver");//
+                                Class.forName("oracle.jdbc.driver.OracleDriver");
                             } catch (ClassNotFoundException ex) {
                                 ex.printStackTrace();
                             }
                             conn = DriverManager.getConnection(url, "naicha", "lanqiaoNAICHA");
                             stmt = conn.createStatement();
                             rs = stmt.executeQuery(sql);
-                            if (rs.next()){//å¯¹ç»“æœé›†è¿›è¡Œåˆ¤æ–­ï¼Œåˆ¤æ–­æ•°æ®åº“æ˜¯å¦æœ‰è¯¥ç”¨æˆ·
-                                String encodePassword = rs.getString(1);//è·å–æ•°æ®åº“ä¸­è¿›è¡ŒåŠ å¯†äº†çš„å¯†ç 
-                                if(MD5.checkpassword(password,encodePassword)){//å°†ç”¨æˆ·è¾“å…¥çš„å¯†ç åŠ å¯†åå’Œæ•°æ®åº“è·å–åˆ°çš„å¯†ç è¿›è¡Œæ¯”è¾ƒ
-                                    System.out.println("ç™»å…¥æˆåŠŸ");
-                                    //éšè—ç™»å…¥çª—å£ï¼Œæ˜¾ç¤ºMainFormçª—å£
-
+                            if (rs.next()){//¶Ô½á¹û¼¯½øĞĞÅĞ¶Ï£¬ÅĞ¶ÏÊı¾İ¿âÊÇ·ñÓĞ¸ÃÓÃ»§
+                                String encodePassword = rs.getString(1);//»ñÈ¡Êı¾İ¿âÖĞ½øĞĞ¼ÓÃÜÁËµÄÃÜÂë
+                                if(MD5.checkpassword(password,encodePassword)){//½«ÓÃ»§ÊäÈëµÄÃÜÂë¼ÓÃÜºóºÍÊı¾İ¿â»ñÈ¡µ½µÄÃÜÂë½øĞĞ±È½Ï
+                                    System.out.println("µÇÈë³É¹¦");
+                                    //Òş²ØµÇÈë´°¿Ú£¬ÏÔÊ¾MainForm´°¿Ú
                                 setVisible(false);
-                                OnlineMainFrame mf = new OnlineMainFrame();
-                                mf.setVisible(true);
+//                                OnlineMainFrame mf = new OnlineMainFrame();
+//                                mf.setVisible(true);
+                                    new SellFrame();
                                 }else{
-                                    JFrame frame = new JFrame("ç™»å…¥å¤±è´¥");
-                                    JOptionPane.showMessageDialog(frame, "å¯†ç é”™è¯¯",
-                                            "ç™»å…¥å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                                    JFrame frame = new JFrame("µÇÈëÊ§°Ü");
+                                    JOptionPane.showMessageDialog(frame, "ÃÜÂë´íÎó",
+                                            "µÇÈëÊ§°Ü", JOptionPane.WARNING_MESSAGE);
                                 }
                             }else {
-                                JFrame frame = new JFrame("ç™»å…¥å¤±è´¥");
-                                JOptionPane.showMessageDialog(frame, "ç”¨æˆ·åé”™è¯¯",
+                                JFrame frame = new JFrame("µÇÈëÊ§°Ü");
+                                JOptionPane.showMessageDialog(frame, "ÓÃ»§Ãû´íÎó",
 
-                                        "ç™»å…¥å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                                        "µÇÈëÊ§°Ü", JOptionPane.WARNING_MESSAGE);
                             }
                         } catch (SQLException ee) {
                             ee.printStackTrace();
@@ -163,11 +164,11 @@ public class Login extends JFrame {
                         } catch (UnsupportedEncodingException ex) {
                             ex.printStackTrace();
                         } finally {
-                            //é‡Šæ”¾èµ„æº
+                            //ÊÍ·Å×ÊÔ´
                             try {
                                 rs.close();
                                 stmt.close();
-                                conn.close();//å…³è¿æ¥
+                                conn.close();//¹ØÁ¬½Ó
                             } catch (SQLException throwables) {
                                 throwables.printStackTrace();
                             }
@@ -177,28 +178,26 @@ public class Login extends JFrame {
                 }
         );
 
-        //---- button5 ----å•†å®¶ç™»å…¥
+        //---- button5 ----ÉÌ¼ÒµÇÈë
         button5.setText("\u5546\u5bb6\u767b\u5165");
         button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 4f));
         contentPane.add(button5);
         button5.setBounds(180, 295, 205, 40);
         button5.addActionListener(
-                //åŒ¿åå†…éƒ¨ç±»ï¼šå±€éƒ¨å†…éƒ¨ç±»
+                //ÄäÃûÄÚ²¿Àà£º¾Ö²¿ÄÚ²¿Àà
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
-
-                        //æ‹¿åˆ°ç”¨æˆ·åå’Œå¯†ç 
-                        String username=textField1.getText();//è·å–ç”¨æˆ·å
-                        String password=new String(textField2.getPassword());//è·å–å¯†ç 
+                        //ÄÃµ½ÓÃ»§ÃûºÍÃÜÂë
+                        String username=textField1.getText();//»ñÈ¡ÓÃ»§Ãû
+                        String password=new String(textField2.getPassword());//»ñÈ¡ÃÜÂë
 
                         Connection conn=null;
                         String url="jdbc:oracle:thin:@112.74.59.255:1521:orcl";
-                        Statement stmt=null;//SQLè¯­å¥å¯¹è±¡ï¼Œæ‹¼SQL
+                        Statement stmt=null;//SQLÓï¾ä¶ÔÏó£¬Æ´SQL
                         /*
-                         * 1ã€æ ¹æ®ç”¨æˆ·åæŠŠåŠ å¯†åçš„å¯†ç ä»æ•°æ®åº“æ‹¿åˆ°
-                         * 2ã€æŠŠå¯†ç åŠ å¯†åäºæ•°æ®åº“ä¾‹å–å‡ºçš„å¯†ç è¿›è¡Œæ¯”å¯¹
+                         * 1¡¢¸ù¾İÓÃ»§Ãû°Ñ¼ÓÃÜºóµÄÃÜÂë´ÓÊı¾İ¿âÄÃµ½
+                         * 2¡¢°ÑÃÜÂë¼ÓÃÜºóÓÚÊı¾İ¿âÀıÈ¡³öµÄÃÜÂë½øĞĞ±È¶Ô
                          * */
                         String sql="SELECT password,power FROM users WHERE username='"+username+"'";
 
@@ -212,34 +211,35 @@ public class Login extends JFrame {
                             conn = DriverManager.getConnection(url, "naicha", "lanqiaoNAICHA");
                             stmt = conn.createStatement();
                             rs = stmt.executeQuery(sql);
-                            if (rs.next()){//å¯¹ç»“æœé›†è¿›è¡Œåˆ¤æ–­ï¼Œåˆ¤æ–­æ•°æ®åº“æ˜¯å¦æœ‰è¯¥ç”¨æˆ·
-                                String encodePassword = rs.getString(1);//è·å–æ•°æ®åº“ä¸­è¿›è¡ŒåŠ å¯†äº†çš„å¯†ç 
-                                String power = rs.getString(2);//è·å–è¯¥ç”¨æˆ·èº«ä»½
-                                if(MD5.checkpassword(password,encodePassword)){//å°†ç”¨æˆ·è¾“å…¥çš„å¯†ç åŠ å¯†åå’Œæ•°æ®åº“è·å–åˆ°çš„å¯†ç è¿›è¡Œæ¯”è¾ƒ
+                            if (rs.next()){//¶Ô½á¹û¼¯½øĞĞÅĞ¶Ï£¬ÅĞ¶ÏÊı¾İ¿âÊÇ·ñÓĞ¸ÃÓÃ»§
+                                String encodePassword = rs.getString(1);//»ñÈ¡Êı¾İ¿âÖĞ½øĞĞ¼ÓÃÜÁËµÄÃÜÂë
+                                String power = rs.getString(2);//»ñÈ¡¸ÃÓÃ»§Éí·İ
+                                if(MD5.checkpassword(password,encodePassword)){//½«ÓÃ»§ÊäÈëµÄÃÜÂë¼ÓÃÜºóºÍÊı¾İ¿â»ñÈ¡µ½µÄÃÜÂë½øĞĞ±È½Ï
                                     if(power.equals("0")){
-                                        System.out.println("ç™»å…¥æˆåŠŸ");
+                                        System.out.println("µÇÈë³É¹¦");
+                                        new MerSellFrame();
                                     }else{
-                                        JFrame frame = new JFrame("ç™»å…¥å¤±è´¥");
-                                        JOptionPane.showMessageDialog(frame, "è¯·è¾“å…¥å•†å®¶è´¦å·",
-                                                "ç™»å…¥å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                                        JFrame frame = new JFrame("µÇÈëÊ§°Ü");
+                                        JOptionPane.showMessageDialog(frame, "ÇëÊäÈëÉÌ¼ÒÕËºÅ",
+                                                "µÇÈëÊ§°Ü", JOptionPane.WARNING_MESSAGE);
                                     }
 
-                                    //éšè—ç™»å…¥çª—å£ï¼Œæ˜¾ç¤ºMainFormçª—å£
+                                    //Òş²ØµÇÈë´°¿Ú£¬ÏÔÊ¾MainForm´°¿Ú
                                 /*
                                 setVisible(false);
                                 MainForm mf = new MainForm();
                                 mf.setVisible(true);
                                 * */
                                 }else{
-                                    JFrame frame = new JFrame("ç™»å…¥å¤±è´¥");
-                                    JOptionPane.showMessageDialog(frame, "å¯†ç é”™è¯¯",
-                                            "ç™»å…¥å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                                    JFrame frame = new JFrame("µÇÈëÊ§°Ü");
+                                    JOptionPane.showMessageDialog(frame, "ÃÜÂë´íÎó",
+                                            "µÇÈëÊ§°Ü", JOptionPane.WARNING_MESSAGE);
                                 }
                             }else {
-                                JFrame frame = new JFrame("ç™»å…¥å¤±è´¥");
-                                JOptionPane.showMessageDialog(frame, "ç”¨æˆ·åé”™è¯¯",
+                                JFrame frame = new JFrame("µÇÈëÊ§°Ü");
+                                JOptionPane.showMessageDialog(frame, "ÓÃ»§Ãû´íÎó",
 
-                                        "ç™»å…¥å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                                        "µÇÈëÊ§°Ü", JOptionPane.WARNING_MESSAGE);
                             }
                         } catch (SQLException ee) {
                             ee.printStackTrace();
@@ -255,11 +255,11 @@ public class Login extends JFrame {
                         } catch (UnsupportedEncodingException ex) {
                             ex.printStackTrace();
                         } finally {
-                            //é‡Šæ”¾èµ„æº
+                            //ÊÍ·Å×ÊÔ´
                             try {
                                 rs.close();
                                 stmt.close();
-                                conn.close();//å…³è¿æ¥
+                                conn.close();//¹ØÁ¬½Ó
                             } catch (SQLException throwables) {
                                 throwables.printStackTrace();
                             }
@@ -269,7 +269,7 @@ public class Login extends JFrame {
                 }
         );
 
-        //---- button2 ----ç”¨æˆ·æ³¨å†Œ
+        //---- button2 ----ÓÃ»§×¢²á
         button2.setText("\u7528\u6237\u6ce8\u518c");
         button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 4f));
         contentPane.add(button2);
@@ -294,7 +294,7 @@ public class Login extends JFrame {
         );
 
 
-        //---- button3 ----ç«‹å³æ³¨å†Œ
+        //---- button3 ----Á¢¼´×¢²á
         button3.setText("\u7acb\u5373\u6ce8\u518c");
         contentPane.add(button3);
         button3.setBounds(new Rectangle(new Point(160, 335), button3.getPreferredSize()));
@@ -304,16 +304,16 @@ public class Login extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        String username=textField1.getText();//è·å–ç”¨æˆ·å
-                        String password  = new String(textField2.getPassword());//è·å–å¯†ç 
-                        String password2 = new String(textField3.getPassword());//è·å–äºŒæ¬¡è¾“å…¥å¯†ç 
-                        String uname=textField4.getText();//è·å–ç”¨æˆ·å§“å
+                        String username=textField1.getText();//»ñÈ¡ÓÃ»§Ãû
+                        String password  = new String(textField2.getPassword());//»ñÈ¡ÃÜÂë
+                        String password2 = new String(textField3.getPassword());//»ñÈ¡¶ş´ÎÊäÈëÃÜÂë
+                        String uname=textField4.getText();//»ñÈ¡ÓÃ»§ĞÕÃû
 
                         Connection conn=null;
                         String url="jdbc:oracle:thin:@112.74.59.255:1521:orcl";
-                        Statement stmt=null;//SQLè¯­å¥å¯¹è±¡ï¼Œæ‹¼SQL
+                        Statement stmt=null;//SQLÓï¾ä¶ÔÏó£¬Æ´SQL
 
-                        //å¯¹å¯†ç è¿›è¡ŒåŠ å¯†åå†æ·»åŠ è¿›æ•°æ®åº“
+                        //¶ÔÃÜÂë½øĞĞ¼ÓÃÜºóÔÙÌí¼Ó½øÊı¾İ¿â
                         String sql= null;
                         try {
                             sql = "INSERT INTO users values('"+username+"','"+MD5.encoderByMd5(password)+"','"+uname+"','"+1+"')";
@@ -322,8 +322,8 @@ public class Login extends JFrame {
                         } catch (UnsupportedEncodingException ex) {
                             ex.printStackTrace();
                         }
-                        if (password.equals(password2)){//å¦‚æœä¸¤æ¬¡å¯†ç ç›¸åŒï¼Œå°±è¿›è¡Œç”¨æˆ·ä¿¡æ¯æ·»åŠ 
-                            System.out.println("æ³¨å†ŒæˆåŠŸ");
+                        if (password.equals(password2)){//Èç¹ûÁ½´ÎÃÜÂëÏàÍ¬£¬¾Í½øĞĞÓÃ»§ĞÅÏ¢Ìí¼Ó
+                            System.out.println("×¢²á³É¹¦");
                             try{
                                 Class.forName("oracle.jdbc.driver.OracleDriver");//
                                 conn= DriverManager.getConnection(url,"naicha","lanqiaoNAICHA");
@@ -336,14 +336,14 @@ public class Login extends JFrame {
                             }
                         }
                         else{
-                            System.out.println("å¯†ç è¾“å…¥ä¸ä¸€è‡´");
+                            System.out.println("ÃÜÂëÊäÈë²»Ò»ÖÂ");
                             textField3.setText("");
                         }
                     }
                 }
         );
 
-        //---- button4 ----è¿”å›ç™»å…¥
+        //---- button4 ----·µ»ØµÇÈë
         button4.setText("\u8fd4\u56de\u767b\u5165");
         contentPane.add(button4);
         button4.setBounds(new Rectangle(new Point(310, 335), button4.getPreferredSize()));

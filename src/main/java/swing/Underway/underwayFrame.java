@@ -16,18 +16,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @author 1 ç”¨æˆ·æŸ¥çœ‹æ­£åœ¨è¿›è¡Œçš„è®¢å•
+ * @author 1 ÓÃ»§²é¿´ÕıÔÚ½øĞĞµÄ¶©µ¥
  */
 public class underwayFrame extends JFrame {
     public static void main(String[] args) {
         new underwayFrame();
+        Runnable runnable = new MyRunnable();
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
     public underwayFrame() {
         initComponents();
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        this.setTitle("æˆ‘çš„è®¢å•ä¿¡æ¯");
+        this.setTitle("ÎÒµÄ¶©µ¥ĞÅÏ¢");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         button1 = new JButton();
@@ -58,7 +61,7 @@ public class underwayFrame extends JFrame {
         scrollPane1.setBounds(60, 60, scrollPane1.getPreferredSize().width, 213);
 
         //---- button1 ----
-        button1.setText("\u5237\u65b0");//åˆ·æ–°æŒ‰é’®
+        button1.setText("\u5237\u65b0");//Ë¢ĞÂ°´Å¥
         contentPane.add(button1);
         button1.setBounds(150, 300, 90, button1.getPreferredSize().height);
         button1.addActionListener(
@@ -76,16 +79,16 @@ public class underwayFrame extends JFrame {
         );
 
         //---- button2 ----
-        button2.setText("\u786e\u8ba4\u6536\u8d27");//ç¡®è®¤æ”¶è´§
+        button2.setText("\u786e\u8ba4\u6536\u8d27");//È·ÈÏÊÕ»õ
         contentPane.add(button2);
         button2.setBounds(330, 300, 90, 23);
         button2.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//è®¾ç½®æ—¥æœŸæ ¼å¼
-                        int count=table1.getSelectedRow();//è·å–ä½ é€‰ä¸­çš„è¡Œå·ï¼ˆè®°å½•ï¼‰
-                        String ordid= table1.getValueAt(count, 0).toString();//è¯»å–ä½ è·å–è¡Œå·çš„æŸä¸€åˆ—çš„å€¼ï¼ˆä¹Ÿå°±æ˜¯å­—æ®µï¼‰
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//ÉèÖÃÈÕÆÚ¸ñÊ½
+                        int count=table1.getSelectedRow();//»ñÈ¡ÄãÑ¡ÖĞµÄĞĞºÅ£¨¼ÇÂ¼£©
+                        String ordid= table1.getValueAt(count, 0).toString();//¶ÁÈ¡Äã»ñÈ¡ĞĞºÅµÄÄ³Ò»ÁĞµÄÖµ£¨Ò²¾ÍÊÇ×Ö¶Î£©
                         String receivetime = df.format(new Date());
                         Dbutil dbutil = new Dbutil();
                         String sql = "update comorder set status=? , receivetime = ? where ordid = ?";
@@ -117,7 +120,7 @@ public class underwayFrame extends JFrame {
         scrollPane2.setBounds(60, 60, 452, 213);
 
         //---- button3 ----
-        button3.setText("\u5237\u65b0");//åˆ·æ–°
+        button3.setText("\u5237\u65b0");//Ë¢ĞÂ
         contentPane.add(button3);
         button3.setBounds(240, 300, 90, 23);
         button3.setVisible(false);
@@ -137,7 +140,7 @@ public class underwayFrame extends JFrame {
 
 
         //---- button4 ----
-        button4.setText("\u6d3e\u9001\u8ba2\u5355");//æ­£åœ¨æ´¾é€
+        button4.setText("\u6d3e\u9001\u8ba2\u5355");//ÕıÔÚÅÉËÍ
         button4.setFont(new Font("\u5b8b\u4f53", Font.PLAIN, 22));
         contentPane.add(button4);
         button4.setBounds(125, 10, 150, button4.getPreferredSize().height);
@@ -163,7 +166,7 @@ public class underwayFrame extends JFrame {
         );
 
         //---- button5 ----
-        button5.setText("\u672a\u6d3e\u9001\u8ba2\u5355");//æœªæ´¾é€è®¢å•
+        button5.setText("\u672a\u6d3e\u9001\u8ba2\u5355");//Î´ÅÉËÍ¶©µ¥
         button5.setFont(new Font("\u5b8b\u4f53", Font.PLAIN, 22));
         contentPane.add(button5);
         button5.setBounds(285, 10, 160, 35);
@@ -206,4 +209,17 @@ public class underwayFrame extends JFrame {
     private JButton button5;
 
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+}
+class MyRunnable implements Runnable{
+    public void run(){
+        Automatic automatic = new Automatic();
+        while (true) {
+            try {
+                Thread.sleep(1000*60);
+                automatic.right();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

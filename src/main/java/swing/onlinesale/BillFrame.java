@@ -1,11 +1,13 @@
 package swing.onlinesale;
 
 import dao.sale.DaoCreate;
+import entity.sale.BillOrdBean;
 import entity.sale.MilkTeaBean;
 import listener.sale.OnlineOrderMes;
 import listener.sale.OutlineOrderMes;
 import listener.sale.WarnFrame;
 import swing.outlinesale.MerCodePayFrame;
+import util.DateChooserJButton;
 import util.ShowQRCode;
 
 import java.awt.*;
@@ -20,7 +22,7 @@ import javax.swing.*;
  * Created by JFormDesigner on Sun May 02 15:45:20 CST 2021
  */
 /**
- * ½áÕËÃæ°å
+ * ç»“è´¦é¢æ¿
  */
 public class BillFrame extends JFrame {
     public BillFrame(List<MilkTeaBean>list) {
@@ -33,7 +35,8 @@ public class BillFrame extends JFrame {
         label2=new JLabel();
         textField1 = new JTextField();
         textField2=new JTextField();
-        button1 = new JButton();//½áÕË°´Å¥
+        button1 = new JButton();//ç»“è´¦æŒ‰é’®
+        dcb = new DateChooserJButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -57,11 +60,13 @@ public class BillFrame extends JFrame {
         label2.setBounds(new Rectangle(new Point(40, 125), label2.getPreferredSize()));
         contentPane.add(textField2);
         textField2.setBounds(105, 125, 140, textField2.getPreferredSize().height);
+        dcb.setBounds(105, 160, 140, dcb.getPreferredSize().height);
+        contentPane.add(dcb);
         final Date date1=new Date();
         Date date2=new Date(date1.getTime()+600000);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        final String ordertime = format.format(date1);//ÏÂµ¥Ê±¼ä
-        final String trantime=format.format(date2);//ÅäËÍÊ±¼ä
+        final String ordertime = format.format(date1);//ä¸‹å•æ—¶é—´
+        final String trantime=format.format(date2);//é…é€æ—¶é—´
 
         textField2.setText(trantime);
         textField2.setForeground(new Color(204,204,204));
@@ -70,7 +75,7 @@ public class BillFrame extends JFrame {
         button1.setText("\u7ed3\u8d26");
         contentPane.add(button1);
         button1.setBounds(new Rectangle(new Point(230, 165), button1.getPreferredSize()));
-        //---Ö§¸¶---//
+        //---æ”¯ä»˜---//
         final List<MilkTeaBean> listMilk = list;
         button1.addActionListener(
                 new ActionListener() {
@@ -79,12 +84,12 @@ public class BillFrame extends JFrame {
                         final util.Main main = new util.Main();
                         final String[] no = {""};
                         final int[] payStatus = {0};
-                        //¸øÉú³É¶şÎ¬ÂëÌí¼ÓÒ»¸öÏß³Ì
+                        //ç»™ç”ŸæˆäºŒç»´ç æ·»åŠ ä¸€ä¸ªçº¿ç¨‹
                         Thread t1=new Thread(
                                 new Runnable() {
                                     @Override
                                     public void run() {
-                                        //ÕâÀïÒ»¶¨Òª±äÎªÊı×éµÄÎÊÌâ¸ã²»¶®ÎªÉ¶
+                                        //è¿™é‡Œä¸€å®šè¦å˜ä¸ºæ•°ç»„çš„é—®é¢˜æä¸æ‡‚ä¸ºå•¥
                                         no[0] = main.test_trade_precreate(Integer.parseInt(textField1.getText()));
                                         System.out.println(no[0]);
                                         List<File> list = new ArrayList<File>();
@@ -95,7 +100,7 @@ public class BillFrame extends JFrame {
                                 }
                         );
                         final Object obj = new Object();
-                        //¸øÑéÖ¤Ö§¸¶³É¹¦µÄ·½·¨Ìí¼ÓÒ»¸öÏß³Ì
+                        //ç»™éªŒè¯æ”¯ä»˜æˆåŠŸçš„æ–¹æ³•æ·»åŠ ä¸€ä¸ªçº¿ç¨‹
                         Thread t2=new Thread(
                                 new Runnable() {
                                     @Override
@@ -106,21 +111,21 @@ public class BillFrame extends JFrame {
                                             } catch (InterruptedException ex) {
                                                 ex.printStackTrace();
                                             }
-                                            //ÕâÀïÒ»¶¨Òª±äÎªÊı×éµÄÎÊÌâ¸ã²»¶®ÎªÉ¶
+                                            //è¿™é‡Œä¸€å®šè¦å˜ä¸ºæ•°ç»„çš„é—®é¢˜æä¸æ‡‚ä¸ºå•¥
                                             payStatus[0] = main.test_trade_query(no[0]);
                                             System.out.println(payStatus[0]);
                                             if (payStatus[0]==1){
-                                                System.out.println("Ö§¸¶³É¹¦");
-                                                //Éú³É¶©µ¥ºÅ(ÓÃ»§Ãû³ÆÔİÊ±Ğ´ËÀ)
+                                                System.out.println("æ”¯ä»˜æˆåŠŸ");
+                                                //ç”Ÿæˆè®¢å•å·(ç”¨æˆ·åç§°æš‚æ—¶å†™æ­»)
                                                 String orderid = DaoCreate.CreateOnlineOrdid("hzg",date1);
-                                                //½«¶©µ¥ĞÅÏ¢¼ÓÈëµ½comorderÊı¾İ¿â±íÖĞ
+                                                //å°†è®¢å•ä¿¡æ¯åŠ å…¥åˆ°comorderæ•°æ®åº“è¡¨ä¸­
                                                 OnlineOrderMes.insertComOrd(orderid,ordertime,trantime);
-                                                //½«¶©µ¥µÄÏêÇéĞÅÏ¢¼ÓÈëµ½detailorderÊı¾İ¿â±í
+                                                //å°†è®¢å•çš„è¯¦æƒ…ä¿¡æ¯åŠ å…¥åˆ°detailorderæ•°æ®åº“è¡¨
                                                 OnlineOrderMes.insertDetailOrd(orderid,listMilk);
-                                                ShopCarFrame.ClearShopCar();//ä»˜æ¬¾åæ¸…ç©ºè´­ç‰©è½¦
-                                                WarnFrame.outlinePoswarnFrame1();//å¼¹å‡ºæ”¯ä»˜æˆåŠŸæ¡†
+                                                ShopCarFrame.ClearShopCar();//æµ æ¨»îƒ™éšåº¢ç«»ç»Œé¸¿å–˜é—â•„æº…
+                                                WarnFrame.outlinePoswarnFrame1();//å¯®ç‘°åš­é€îˆ™ç²¯é´æ„¬å§›å¦—ï¿½
                                             }else {
-                                                System.out.println("Ö§¸¶Ê§°Ü");
+                                                System.out.println("æ”¯ä»˜å¤±è´¥");
                                                 WarnFrame.outlinePaywarnFrame();
                                             }
                                         }
@@ -146,6 +151,7 @@ public class BillFrame extends JFrame {
     private JTextField textField1;
     private JTextField textField2;
     private JButton button1;
+    private  DateChooserJButton dcb;
 
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

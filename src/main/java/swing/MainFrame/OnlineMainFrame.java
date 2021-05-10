@@ -5,8 +5,13 @@
 package swing.MainFrame;
 
 
+import swing.Underway.underwayFrame;
+import swing.onlinesale.SellFrame;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * @author 1
@@ -21,12 +26,57 @@ public class OnlineMainFrame extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
-        JMenu menu = new JMenu("ç‚¹å¥¶èŒ¶");
+        JMenuItem menu = new JMenu("µãÄÌ²è");
         menuBar1.add(menu);
-        JMenu menu1 = new JMenu("æ­£åœ¨è¿›è¡Œçš„è®¢å•");
+        menu.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        new SellFrame();
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
+        JMenuItem menu1 = new JMenu("ÕıÔÚ½øĞĞµÄ¶©µ¥");
         menuBar1.add(menu1);
-        JMenu menu2 = new JMenu("æŸ¥çœ‹è®¢å•è®°å½•");
+        menu1.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        new underwayFrame();
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
+        JMenuItem menu2 = new JMenu("²é¿´¶©µ¥¼ÇÂ¼");
         menuBar1.add(menu2);
+        menu2.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        new underwayFrame();
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
