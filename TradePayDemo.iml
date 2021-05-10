@@ -41,7 +41,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library">
       <library name="commons-codec-1.10.jar">
         <CLASSES>
@@ -151,5 +151,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="alipay-sdk-java-3.3.0-source" level="project" />
+    <orderEntry type="library" name="ojdbc6" level="project" />
+    <orderEntry type="library" name="commons-codec-1.15-javadoc" level="project" />
   </component>
 </module>
