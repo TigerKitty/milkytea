@@ -43,5 +43,12 @@ public class WarnFrame {
 
                 "支付成功", JOptionPane.WARNING_MESSAGE);
     }
+    //加减出错处理
+    public static void Add_subPoswarnFrame(){
+        JFrame frame = new JFrame("加减数量失败");
+        JOptionPane.showMessageDialog(frame, "请点击相应的商品进行加减",
+
+                "加减数量失败", JOptionPane.WARNING_MESSAGE);
+    }
 
 }
