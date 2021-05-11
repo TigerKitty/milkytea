@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="ojdbc6">
+  <library name="jacob">
     <CLASSES>
-      <root url="jar://D:/app/zed/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/jacob-1.17-M2/jacob.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
