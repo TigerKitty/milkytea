@@ -4,6 +4,7 @@ import entity.sale.MilkTeaBean;
 import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
 import swing.Underway.UnderwayFrame;
+import swing.dsx.myorder;
 import util.Dbutil;
 
 import java.awt.*;
@@ -205,8 +206,7 @@ public class SellFrame extends JFrame {
                     @Override
                     public void mouseClicked(MouseEvent e) { }
                     @Override
-                    public void mousePressed(MouseEvent e) {
-                        new UnderwayFrame();
+                    public void mousePressed(MouseEvent e) { new UnderwayFrame();
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) { }
@@ -223,7 +223,7 @@ public class SellFrame extends JFrame {
                     public void mouseClicked(MouseEvent e) { }
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        new UnderwayFrame();
+                        new myorder();
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) { }

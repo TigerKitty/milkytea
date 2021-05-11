@@ -11,7 +11,6 @@ import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
 import swing.addProduct.addProduct;
 import swing.lnc.OrdersInProgressFrame;
-import swing.onlinesale.SellFrame;
 import swing.profitstatistics.StatementFrame;
 import swing.record.record;
 

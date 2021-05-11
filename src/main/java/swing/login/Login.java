@@ -136,7 +136,7 @@ public class Login extends JFrame {
                                 if(MD5.checkpassword(password,encodePassword)){//将用户输入的密码加密后和数据库获取到的密码进行比较
                                     System.out.println("登入成功");
                                     //隐藏登入窗口，显示SellForm窗口
-                                    setVisible(false);
+                                    //setVisible(false);
                                     new SellFrame();
                                     Login.username = username;
                                 }else{
