@@ -134,22 +134,27 @@ public class ShopCarFrame extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         m=table.getSelectedRow();
                         if(m!=-1) {
-                            jScrollPane.setVisible(false);
-                            list.get(m).setNumber(list.get(m).getNumber() -1);
-                            Object tableDate[][] = new Object[list.size()][4];
-                            for (int i = 0; i < list.size(); i++) {
-                                tableDate[i][0] = list.get(i).getProid();
-                                tableDate[i][1] = list.get(i).getProname();
-                                tableDate[i][2] = list.get(i).getNumber();
-                                tableDate[i][3] = list.get(i).getSellprice();
+                            if (list.get(m).getNumber() - 1 == 0) {
+                                tableModel.removeRow(m);
+                                list.remove(m);
+                            } else {
+                                jScrollPane.setVisible(false);
+                                list.get(m).setNumber(list.get(m).getNumber() - 1);
+                                Object tableDate[][] = new Object[list.size()][4];
+                                for (int i = 0; i < list.size(); i++) {
+                                    tableDate[i][0] = list.get(i).getProid();
+                                    tableDate[i][1] = list.get(i).getProname();
+                                    tableDate[i][2] = list.get(i).getNumber();
+                                    tableDate[i][3] = list.get(i).getSellprice();
+                                }
+                                String[] name = {"ÄÌ²è±àºÅ", "ÄÌ²èÃû³Æ", "¹ºÂòÊýÁ¿", "ÄÌ²èÊÛ¼Û"};
+                                tableModel = new DefaultTableModel(tableDate, name);
+                                table = new JTable(tableModel);
+                                jScrollPane = new JScrollPane(table);
+                                jScrollPane.setBounds(0, 0, 750, 450);
+                                contentPane.add(jScrollPane);
+                                jScrollPane.setVisible(true);
                             }
-                            String[] name = {"ÄÌ²è±àºÅ", "ÄÌ²èÃû³Æ", "¹ºÂòÊýÁ¿", "ÄÌ²èÊÛ¼Û"};
-                            tableModel = new DefaultTableModel(tableDate, name);
-                            table = new JTable(tableModel);
-                            jScrollPane = new JScrollPane(table);
-                            jScrollPane.setBounds(0, 0, 750, 450);
-                            contentPane.add(jScrollPane);
-                            jScrollPane.setVisible(true);
                         }
                         else{
                             WarnFrame.Add_subPoswarnFrame();
