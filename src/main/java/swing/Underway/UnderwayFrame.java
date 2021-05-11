@@ -18,14 +18,14 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @author 1 用户查看正在进行的订单
  */
-public class underwayFrame extends JFrame {
+public class UnderwayFrame extends JFrame {
     public static void main(String[] args) {
-        new underwayFrame();
+        new UnderwayFrame();
         Runnable runnable = new MyRunnable();
-            Thread thread = new Thread(runnable);
-            thread.start();
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
-    public underwayFrame() {
+    public UnderwayFrame() {
         initComponents();
     }
     private void initComponents() {
@@ -43,7 +43,7 @@ public class underwayFrame extends JFrame {
         final GetDate getDate = new GetDate();
         Automatic automatic = new Automatic();
         automatic.right();
-        DefaultTableModel tableMode = new DefaultTableModel(getDate.UsersData(),getDate.head) {
+        DefaultTableModel tableMode = new DefaultTableModel(getDate.UsersData(), getDate.head) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -98,6 +98,12 @@ public class underwayFrame extends JFrame {
                             ptem.setString(2,receivetime);
                             ptem.setString(3,ordid);
                             ptem.executeUpdate();
+                            DefaultTableModel tableMode = new DefaultTableModel(getDate.UsersData(), getDate.head) {
+                                public boolean isCellEditable(int row, int column) {
+                                    return false;
+                                }
+                            };
+                            table1.setModel(tableMode);
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         } finally {
@@ -194,7 +200,8 @@ public class underwayFrame extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         setVisible(true);
-        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

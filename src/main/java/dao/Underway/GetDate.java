@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 /*用于提取数据库中用户正在进行的订单，然后保存与二维数组中。
-* */
+ * */
 public class GetDate {
     public static int num = 1;
     public static String head[] = {"订单编号", "用户名", "下单时间","配送时间","到达时间","订单状态"};

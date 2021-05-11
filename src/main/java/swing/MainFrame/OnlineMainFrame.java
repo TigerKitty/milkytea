@@ -5,7 +5,7 @@
 package swing.MainFrame;
 
 
-import swing.Underway.underwayFrame;
+import swing.Underway.UnderwayFrame;
 import swing.onlinesale.SellFrame;
 
 import javax.swing.*;
@@ -51,7 +51,7 @@ public class OnlineMainFrame extends JFrame {
                     public void mouseClicked(MouseEvent e) { }
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        new underwayFrame();
+                        new UnderwayFrame();
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) { }
@@ -68,7 +68,7 @@ public class OnlineMainFrame extends JFrame {
                     public void mouseClicked(MouseEvent e) { }
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        new underwayFrame();
+                        new UnderwayFrame();
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) { }

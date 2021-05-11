@@ -3,7 +3,7 @@ package swing.onlinesale;
 import entity.sale.MilkTeaBean;
 import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
-import swing.Underway.underwayFrame;
+import swing.Underway.UnderwayFrame;
 import util.Dbutil;
 
 import java.awt.*;
@@ -206,7 +206,7 @@ public class SellFrame extends JFrame {
                     public void mouseClicked(MouseEvent e) { }
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        new underwayFrame();
+                        new UnderwayFrame();
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) { }
@@ -223,7 +223,7 @@ public class SellFrame extends JFrame {
                     public void mouseClicked(MouseEvent e) { }
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        new underwayFrame();
+                        new UnderwayFrame();
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) { }

@@ -145,13 +145,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Oracle/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
+          <root url="jar://D:/oracle/product/11.2.0/client_1/jdbc/lib/ojdbc6.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jacob" level="project" />
     <orderEntry type="library" name="Maven: com.github.qcloudsms:qcloudsms:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20170516" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.3" level="project" />
