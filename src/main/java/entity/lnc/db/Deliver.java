@@ -12,5 +12,6 @@ public class Deliver {
 //    }
     public String phone1="18007886230";
     public String phone2="18177028834";
-    public String phone3="15246604968";
+    public String phone3="15246604968";//小狗
+    public String phone4="15177326017";//辣椒
 }
