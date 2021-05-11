@@ -1,6 +1,6 @@
 package dao.Underway;
 /**
- * 鐢ㄤ簬灏佽鐢ㄦ埛鏌ョ湅姝ｅ湪杩涜鐨勮鍗曠殑淇℃伅
+ * 用于封装用户查看正在进行的订单的信息
  */
 public class Userinfo {
     private String ordid;

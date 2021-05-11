@@ -32,6 +32,7 @@ public class SellFrame extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         //======== this ========
+        this.setTitle("欢迎使用NO.3奶茶店线上点餐系统");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
         jPanel=new JPanel();

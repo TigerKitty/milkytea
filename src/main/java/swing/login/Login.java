@@ -30,6 +30,7 @@ public class Login extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        this.setTitle("登录/注册");
         label1 = new JLabel();
         label2 = new JLabel();//用户名
         label3 = new JLabel();//密码
@@ -134,11 +135,10 @@ public class Login extends JFrame {
                                 String encodePassword = rs.getString(1);//获取数据库中进行加密了的密码
                                 if(MD5.checkpassword(password,encodePassword)){//将用户输入的密码加密后和数据库获取到的密码进行比较
                                     System.out.println("登入成功");
-                                    //隐藏登入窗口，显示MainForm窗口
-                                setVisible(false);
-//                                OnlineMainFrame mf = new OnlineMainFrame();
-//                                mf.setVisible(true);
+                                    //隐藏登入窗口，显示SellForm窗口
+                                    setVisible(false);
                                     new SellFrame();
+                                    Login.username = username;
                                 }else{
                                     JFrame frame = new JFrame("登入失败");
                                     JOptionPane.showMessageDialog(frame, "密码错误",
@@ -218,6 +218,7 @@ public class Login extends JFrame {
                                     if(power.equals("0")){
                                         System.out.println("登入成功");
                                         new MerSellFrame();
+                                        Login.username = username;
                                     }else{
                                         JFrame frame = new JFrame("登入失败");
                                         JOptionPane.showMessageDialog(frame, "请输入商家账号",
@@ -394,5 +395,6 @@ public class Login extends JFrame {
     private JButton button5;
     private JTextField textField4;
     private JLabel label5;
+    public static String username;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

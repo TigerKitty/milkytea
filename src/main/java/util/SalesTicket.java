@@ -11,18 +11,18 @@ import java.util.Date;
 import java.util.List;
 
 public class SalesTicket implements Printable {
-    private List<Goods> goods; //å•†å“åˆ—è¡¨
-    private String operatorName; //æ“ä½œå‘˜
-    private String orderId; //è®¢å•ç¼–å·
-    private String totalGoodsNum; //å•†å“æ€»æ•°
-    private String totalPrice; //æ€»é‡‘é¢
-    private String actualCollection; //å®æ”¶æ¬¾
-    private String giveChange = "0"; //æ‰¾é›¶
+    private List<Goods> goods; //ÉÌÆ·ÁĞ±í
+    private String operatorName; //²Ù×÷Ô±
+    private String orderId; //¶©µ¥±àºÅ
+    private String totalGoodsNum; //ÉÌÆ·×ÜÊı
+    private String totalPrice; //×Ü½ğ¶î
+    private String actualCollection; //ÊµÊÕ¿î
+    private String giveChange = "0"; //ÕÒÁã
     private Date orderDate;
 
 
-    private String cardNumber; //ä¼šå‘˜ç¼–å·
-    private String integral; //ç§¯åˆ†
+    private String cardNumber; //»áÔ±±àºÅ
+    private String integral; //»ı·Ö
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss EEE");
 
@@ -75,54 +75,54 @@ public class SalesTicket implements Printable {
     }
 
     /**
-     * æ‰“å°æ–¹æ³•
-     * graphics - ç”¨æ¥ç»˜åˆ¶é¡µé¢çš„ä¸Šä¸‹æ–‡ï¼Œå³æ‰“å°çš„å›¾å½¢
-     * pageFormat - å°†ç»˜åˆ¶é¡µé¢çš„å¤§å°å’Œæ–¹å‘ï¼Œå³è®¾ç½®æ‰“å°æ ¼å¼ï¼Œå¦‚é¡µé¢å¤§å°ä¸€ç‚¹ä¸ºè®¡é‡å•ä½ï¼ˆä»¥1/72 è‹±å¯¸ä¸ºå•ä½ï¼Œ1è‹±å¯¸ä¸º25.4æ¯«ç±³ã€‚A4çº¸å¤§è‡´ä¸º595 Ã— 842ç‚¹ï¼‰
-     * å°ç¥¨çº¸å®½åº¦ä¸€èˆ¬ä¸º58mmï¼Œå¤§æ¦‚ä¸º165ç‚¹
-     * pageIndex - è¦ç»˜åˆ¶çš„é¡µé¢ä» 0 å¼€å§‹çš„ç´¢å¼• ï¼Œå³é¡µå·
+     * ´òÓ¡·½·¨
+     * graphics - ÓÃÀ´»æÖÆÒ³ÃæµÄÉÏÏÂÎÄ£¬¼´´òÓ¡µÄÍ¼ĞÎ
+     * pageFormat - ½«»æÖÆÒ³ÃæµÄ´óĞ¡ºÍ·½Ïò£¬¼´ÉèÖÃ´òÓ¡¸ñÊ½£¬ÈçÒ³Ãæ´óĞ¡Ò»µãÎª¼ÆÁ¿µ¥Î»£¨ÒÔ1/72 Ó¢´çÎªµ¥Î»£¬1Ó¢´çÎª25.4ºÁÃ×¡£A4Ö½´óÖÂÎª595 ¡Á 842µã£©
+     * Ğ¡Æ±Ö½¿í¶ÈÒ»°ãÎª58mm£¬´ó¸ÅÎª165µã
+     * pageIndex - Òª»æÖÆµÄÒ³Ãæ´Ó 0 ¿ªÊ¼µÄË÷Òı £¬¼´Ò³ºÅ
      */
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-//æ­¤ Graphics2D ç±»æ‰©å±• Graphics ç±»ï¼Œä»¥æä¾›å¯¹å‡ ä½•å½¢çŠ¶ã€åæ ‡è½¬æ¢ã€é¢œè‰²ç®¡ç†å’Œæ–‡æœ¬å¸ƒå±€æ›´ä¸ºå¤æ‚çš„æ§åˆ¶ã€‚
-//å®ƒæ˜¯ç”¨äºåœ¨ Java(tm) å¹³å°ä¸Šå‘ˆç°äºŒç»´å½¢çŠ¶ã€æ–‡æœ¬å’Œå›¾åƒçš„åŸºç¡€ç±»ã€‚
+//´Ë Graphics2D ÀàÀ©Õ¹ Graphics Àà£¬ÒÔÌá¹©¶Ô¼¸ºÎĞÎ×´¡¢×ø±ê×ª»»¡¢ÑÕÉ«¹ÜÀíºÍÎÄ±¾²¼¾Ö¸üÎª¸´ÔÓµÄ¿ØÖÆ¡£
+//ËüÊÇÓÃÓÚÔÚ Java(tm) Æ½Ì¨ÉÏ³ÊÏÖ¶şÎ¬ĞÎ×´¡¢ÎÄ±¾ºÍÍ¼ÏñµÄ»ù´¡Àà¡£
         Graphics2D g2 = (Graphics2D) graphics;
 
 
-        g2.setColor(Color.black);//è®¾ç½®æ‰“å°é¢œè‰²ä¸ºé»‘è‰²
+        g2.setColor(Color.black);//ÉèÖÃ´òÓ¡ÑÕÉ«ÎªºÚÉ«
 
-//æ‰“å°èµ·ç‚¹åæ ‡
-        double x = pageFormat.getImageableX();  //è¿”å›ä¸æ­¤ PageFormatç›¸å…³çš„ Paperå¯¹è±¡çš„å¯æˆåƒåŒºåŸŸå·¦ä¸Šæ–¹ç‚¹çš„ xåæ ‡ã€‚
-        double y = pageFormat.getImageableY();  //è¿”å›ä¸æ­¤ PageFormatç›¸å…³çš„ Paperå¯¹è±¡çš„å¯æˆåƒåŒºåŸŸå·¦ä¸Šæ–¹ç‚¹çš„ yåæ ‡ã€‚
+//´òÓ¡Æğµã×ø±ê
+        double x = pageFormat.getImageableX();  //·µ»ØÓë´Ë PageFormatÏà¹ØµÄ Paper¶ÔÏóµÄ¿É³ÉÏñÇøÓò×óÉÏ·½µãµÄ x×ø±ê¡£
+        double y = pageFormat.getImageableY();  //·µ»ØÓë´Ë PageFormatÏà¹ØµÄ Paper¶ÔÏóµÄ¿É³ÉÏñÇøÓò×óÉÏ·½µãµÄ y×ø±ê¡£
 
 
-//Font.PLAINï¼š æ™®é€šæ ·å¼å¸¸é‡   Font.ITALIC æ–œä½“æ ·å¼å¸¸é‡  Font.BOLD ç²—ä½“æ ·å¼å¸¸é‡ã€‚
-        Font font = new Font("å®‹ä½“", Font.BOLD, 10); //æ ¹æ®æŒ‡å®šåç§°ã€æ ·å¼å’Œç£…å€¼å¤§å°ï¼Œåˆ›å»ºä¸€ä¸ªæ–° Fontã€‚
+//Font.PLAIN£º ÆÕÍ¨ÑùÊ½³£Á¿   Font.ITALIC Ğ±ÌåÑùÊ½³£Á¿  Font.BOLD ´ÖÌåÑùÊ½³£Á¿¡£
+        Font font = new Font("ËÎÌå", Font.BOLD, 10); //¸ù¾İÖ¸¶¨Ãû³Æ¡¢ÑùÊ½ºÍ°õÖµ´óĞ¡£¬´´½¨Ò»¸öĞÂ Font¡£
 
-        g2.setFont(font);//è®¾ç½®æ ‡é¢˜æ‰“å°å­—ä½“
+        g2.setFont(font);//ÉèÖÃ±êÌâ´òÓ¡×ÖÌå
 
-        float heigth = font.getSize2D();///è·å–å­—ä½“çš„é«˜åº¦
+        float heigth = font.getSize2D();///»ñÈ¡×ÖÌåµÄ¸ß¶È
 
-//è®¾ç½®å°ç¥¨çš„æ ‡é¢˜æ ‡é¢˜
-        g2.drawString("No.3å¥¶èŒ¶åº—", (float) x + 25, (float) y + heigth);
+//ÉèÖÃĞ¡Æ±µÄ±êÌâ±êÌâ
+        g2.drawString("No.3ÄÌ²èµê", (float) x + 25, (float) y + heigth);
 
-        float line = 2 * heigth; //ä¸‹ä¸€è¡Œå¼€å§‹æ‰“å°çš„é«˜åº¦
-        g2.setFont(new Font("å®‹ä½“", Font.PLAIN, 8));//è®¾ç½®æ­£æ–‡å­—ä½“
-        heigth = font.getSize2D();// å­—ä½“é«˜åº¦
+        float line = 2 * heigth; //ÏÂÒ»ĞĞ¿ªÊ¼´òÓ¡µÄ¸ß¶È
+        g2.setFont(new Font("ËÎÌå", Font.PLAIN, 8));//ÉèÖÃÕıÎÄ×ÖÌå
+        heigth = font.getSize2D();// ×ÖÌå¸ß¶È
 
         line += 2;
-//è®¾ç½®æ“ä½œå‘˜
-        g2.drawString("æ“ä½œå‘˜:" + operatorName, (float) x , (float) y + line);
+//ÉèÖÃ²Ù×÷Ô±
+        g2.drawString("²Ù×÷Ô±:" + operatorName, (float) x , (float) y + line);
         line += heigth;
 
-//è®¾ç½®è®¢å•å·
-        g2.drawString("è®¢å•å·:" + orderId, (float) x , (float) y + line);
+//ÉèÖÃ¶©µ¥ºÅ
+        g2.drawString("¶©µ¥ºÅ:" + orderId, (float) x , (float) y + line);
         line += heigth + 2;
 
-//è®¾ç½®æ ‡é¢˜
-        g2.drawString("åç§°", (float) x , (float) y + line);
-        g2.drawString("å•ä»·", (float) x + 35, (float) y + line);
-        g2.drawString("æ•°é‡", (float) x + 70, (float) y + line);
-        g2.drawString("å°è®¡", (float) x + 105, (float) y + line);
+//ÉèÖÃ±êÌâ
+        g2.drawString("Ãû³Æ", (float) x , (float) y + line);
+        g2.drawString("µ¥¼Û", (float) x + 35, (float) y + line);
+        g2.drawString("ÊıÁ¿", (float) x + 70, (float) y + line);
+        g2.drawString("Ğ¡¼Æ", (float) x + 105, (float) y + line);
         line += heigth;
         g2.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 4.0f, new float[]{4.0f}, 0.0f));
         g2.drawLine((int) x, (int) (y + line), (int) x + 158, (int) (y + line));
@@ -138,21 +138,21 @@ public class SalesTicket implements Printable {
         }
         g2.drawLine((int) x, (int) (y + line), (int) x + 158, (int) (y + line));
         line += heigth + 2;
-        g2.drawString("å•†å“æ€»æ•°:" + totalGoodsNum + "ä»¶", (float) x, (float) y + line);
-        g2.drawString("åˆè®¡:" + totalPrice + " å…ƒ", (float) x + 65, (float) y + line);
+        g2.drawString("ÉÌÆ·×ÜÊı:" + totalGoodsNum + "¼ş", (float) x, (float) y + line);
+        g2.drawString("ºÏ¼Æ:" + totalPrice + " Ôª", (float) x + 65, (float) y + line);
         line += heigth;
-        g2.drawString("å®æ”¶:" + actualCollection + "å…ƒ", (float) x , (float) y + line);
-        g2.drawString("æ‰¾é›¶:" + giveChange + "å…ƒ", (float) x +65, (float) y + line);
+        g2.drawString("ÊµÊÕ:" + actualCollection + "Ôª", (float) x , (float) y + line);
+        g2.drawString("ÕÒÁã:" + giveChange + "Ôª", (float) x +65, (float) y + line);
         line += heigth;
 
         if (cardNumber != null && !"".equals(cardNumber)) {
-            g2.drawString("å½“å‰ä¼šå‘˜:" + cardNumber, (float) x + 15, (float) y + line);
+            g2.drawString("µ±Ç°»áÔ±:" + cardNumber, (float) x + 15, (float) y + line);
             line += heigth;
-            g2.drawString("ç§¯åˆ†:" + integral, (float) x + 15, (float) y + line);
+            g2.drawString("»ı·Ö:" + integral, (float) x + 15, (float) y + line);
         }
-        g2.drawString("æ—¶é—´:" + sdf.format(orderDate), (float) x , (float) y + line);
+        g2.drawString("Ê±¼ä:" + sdf.format(orderDate), (float) x , (float) y + line);
         line += heigth;
-        g2.drawString("é’±ç¥¨è¯·å½“é¢ç‚¹æ¸…ï¼Œç¦»å¼€æŸœå°æ•ä¸è´Ÿè´£", (float) x , (float) y + line);
+        g2.drawString("Ç®Æ±Çëµ±ÃæµãÇå£¬Àë¿ª¹ñÌ¨Ë¡²»¸ºÔğ", (float) x , (float) y + line);
         line += heigth;
         g2.drawString("------------------------------------------", (float) x , (float) y + line);
         line += heigth;

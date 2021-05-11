@@ -6,6 +6,8 @@ package swing.outlinesale;
 
 import dao.sale.DaoCreate;
 import listener.sale.OutlineOrderMes;
+import listener.sale.WarnFrame;
+import swing.login.Login;
 import util.Main;
 
 import java.awt.*;
@@ -15,7 +17,7 @@ import java.beans.Visibility;
 import javax.swing.*;
 
 /**
- * æ˜¾ç¤ºPosæœºä»˜æ¬¾ç•Œé¢
+ * ÏÔÊ¾Pos»ú¸¶¿î½çÃæ
  */
 public class MerPosCodePayFrame extends JFrame {
     public MerPosCodePayFrame(int sumprice,Object[][] tableDate) {
@@ -47,23 +49,28 @@ public class MerPosCodePayFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Main main=new Main();
-                        boolean bool = main.trade_pay(textField1.getText(),sumprice);
-                        if (bool){
-                            //ç”Ÿæˆorderid
-                            String name = "outline";
+                        String code = textField1.getText();
+                        boolean bool = Main.trade_pay(code,sumprice);
+                        if(bool){
+                            System.out.println("Ö§¸¶³É¹¦");
+                            //Éú³Éorderid
+                            String name = Login.username;
                             String orderid = DaoCreate.CreateOutlineOrdid(name);
-                            //è°ƒç”¨æ‰“å°æ–¹æ³•è¿›è¡Œæ‰“å°
-                            OutlineOrderMes.printOrder(tableDate,orderid);
-                            //å°†è®¢å•ä¿¡æ¯åŠ å…¥åˆ°comorderæ•°æ®åº“è¡¨ä¸­
+                            //½«¶©µ¥ĞÅÏ¢¼ÓÈëµ½comorderÊı¾İ¿â±íÖĞ
                             OutlineOrderMes.insertComOrd(name,orderid);
-                            //å°†è®¢å•ä¿¡æ¯åŠ å…¥åˆ°detailorderæ•°æ®åº“è¡¨ä¸­
+                            //½«¶©µ¥ĞÅÏ¢¼ÓÈëµ½detailorderÊı¾İ¿â±íÖĞ
                             OutlineOrderMes.insertDetailOrd(tableDate,orderid);
+                            MerSellFrame.Clear();//¸¶¿îÖ®ºóÇå¿Õ¹ºÎï³µ
+                            WarnFrame.outlinePoswarnFrame1();//µ¯³öÖ§¸¶³É¹¦¿ò
+                            //´òÓ¡Ğ¡Æ±
+                            OutlineOrderMes.printOrder(tableDate,name);
+                        }else{
+                            System.out.println("Ö§¸¶Ê§°Ü");
+                            WarnFrame.outlinePaywarnFrame();
                         }
                     }
                 }
         );
-
         contentPane.setPreferredSize(new Dimension(400, 300));
         pack();
         setLocationRelativeTo(getOwner());

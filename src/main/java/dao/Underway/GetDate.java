@@ -7,12 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-/*ç”¨äºæå–æ•°æ®åº“ä¸­ç”¨æˆ·æ­£åœ¨è¿›è¡Œçš„è®¢å•ï¼Œç„¶åä¿å­˜ä¸äºŒç»´æ•°ç»„ä¸­ã€‚
+/*ÓÃÓÚÌáÈ¡Êı¾İ¿âÖĞÓÃ»§ÕıÔÚ½øĞĞµÄ¶©µ¥£¬È»ºó±£´æÓë¶şÎ¬Êı×éÖĞ¡£
 * */
 public class GetDate {
     public static int num = 1;
-    public static String head[] = {"è®¢å•ç¼–å·", "ç”¨æˆ·å", "ä¸‹å•æ—¶é—´","é…é€æ—¶é—´","åˆ°è¾¾æ—¶é—´","è®¢å•çŠ¶æ€"};
+    public static String head[] = {"¶©µ¥±àºÅ", "ÓÃ»§Ãû", "ÏÂµ¥Ê±¼ä","ÅäËÍÊ±¼ä","µ½´ïÊ±¼ä","¶©µ¥×´Ì¬"};
     private Object[][] data = null;
+    private String status;
     public Object[][] UsersData() {
         java.util.List<Userinfo> list = new ArrayList<Userinfo>();
         Dbutil dbutil = new Dbutil();
@@ -24,25 +25,31 @@ public class GetDate {
         ResultSet rs = null;
         PreparedStatement ptem = dbutil.getPs(sql);
         try {
-            ptem.setString(1,"é»„å¿—å›½");
+            ptem.setString(1,"»ÆÖ¾¹ú");
             ptem.setString(2, String.valueOf(num));
             rs=ptem.executeQuery();
-            while (rs.next()) {//æ¯å¾ªç¯ä¸€æ¬¡ç»™ç”¨æˆ·èµ‹å€¼
-                //å°†æ•°æ®åº“ä¸­ç”¨æˆ·çš„ä¿¡æ¯å­˜æ”¾åœ¨é›†åˆä¸­
+            while (rs.next()) {//Ã¿Ñ­»·Ò»´Î¸øÓÃ»§¸³Öµ
+                //½«Êı¾İ¿âÖĞÓÃ»§µÄĞÅÏ¢´æ·ÅÔÚ¼¯ºÏÖĞ
                 Userinfo userinfo = new Userinfo();
                 userinfo.setOrdid(rs.getString("ordid"));
                 userinfo.setUsername(rs.getString("uname"));
                 userinfo.setOrdertime(rs.getString("ordertime"));
                 userinfo.setTrantime(rs.getString("trantime"));
                 userinfo.setReceivetime((rs.getString("receivetime")));
-                userinfo.setStatus(rs.getString("status"));
+                if(num==0) {
+                    status = "Î´ÔÚÅÉËÍ";
+                    userinfo.setStatus(status);
+                }else if(num==1){
+                    status = "ÕıÔÚÅÉËÍ";
+                    userinfo.setStatus(status);
+                }
                 list.add(userinfo);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         data = new Object[list.size()][head.length];
-        for (int i = 0; i < list.size(); i++) {//å°†é›†åˆä¸­çš„ä¿¡æ¯æ”¾å…¥äºŒç»´æ•°ç»„ä¸­
+        for (int i = 0; i < list.size(); i++) {//½«¼¯ºÏÖĞµÄĞÅÏ¢·ÅÈë¶şÎ¬Êı×éÖĞ
             for (int j = 0; j < head.length; j++) {
                 data[i][0] = list.get(i).getOrdid();
                 data[i][1] = list.get(i).getUsername();

@@ -13,8 +13,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * å•†å®¶æ­£åœ¨è¿›è¡Œçš„è®¢å•ï¼šå•†å®¶åœ¨æ­¤ç•Œé¢æŸ¥çœ‹æ­£åœ¨è¿›è¡Œçš„è®¢å•ï¼Œè®¢å•çŠ¶æ€ä¸ºâ€œ0â€ æˆ–è€…â€œ1â€
- * å¯ä»¥å°†è®¢å•çŠ¶æ€ç”±æœªæ´¾é€æ”¹ä¸ºæ­£åœ¨æ´¾é€ï¼Œä¹Ÿå¯ä»¥æ’¤é”€æ´¾é€ï¼Œå˜å›æœªæ´¾é€
+ * ÉÌ¼ÒÕıÔÚ½øĞĞµÄ¶©µ¥£ºÉÌ¼ÒÔÚ´Ë½çÃæ²é¿´ÕıÔÚ½øĞĞµÄ¶©µ¥£¬¶©µ¥×´Ì¬Îª¡°0¡± »òÕß¡°1¡±
+ * ¿ÉÒÔ½«¶©µ¥×´Ì¬ÓÉÎ´ÅÉËÍ¸ÄÎªÕıÔÚÅÉËÍ£¬Ò²¿ÉÒÔ³·ÏúÅÉËÍ£¬±ä»ØÎ´ÅÉËÍ
  */
 public class OrdersInProgressFrame extends JFrame {
 //    public static void main(String[] args) {
@@ -26,6 +26,7 @@ public class OrdersInProgressFrame extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        this.setTitle("ÕıÔÚ½øĞĞµÄ¶©µ¥");
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
@@ -55,7 +56,7 @@ public class OrdersInProgressFrame extends JFrame {
         contentPane.setLayout(null);
 
         //---- label1 ----
-        label1.setText("\u672a\u6d3e\u9001\u8ba2\u5355");//æœªæ´¾é€è®¢å•æ ‡ç­¾
+        label1.setText("\u672a\u6d3e\u9001\u8ba2\u5355");//Î´ÅÉËÍ¶©µ¥±êÇ©
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 13f));
         contentPane.add(label1);
         label1.setBounds(215, 10, 150, 25);
@@ -68,7 +69,7 @@ public class OrdersInProgressFrame extends JFrame {
         scrollPane1.setBounds(25, 55, 550, 125);
 
         //---- label2 ----
-        label2.setText("\u6b63\u5728\u6d3e\u9001\u8ba2\u5355");//æ­£åœ¨æ´¾é€è®¢å•æ ‡ç­¾
+        label2.setText("\u6b63\u5728\u6d3e\u9001\u8ba2\u5355");//ÕıÔÚÅÉËÍ¶©µ¥±êÇ©
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 13f));
         contentPane.add(label2);
         label2.setBounds(210, 210, 185, 25);
@@ -81,20 +82,20 @@ public class OrdersInProgressFrame extends JFrame {
         scrollPane2.setBounds(25, 255, 550, 135);
 
         //---- button1 ----
-        button1.setText("\u5f00\u59cb\u6d3e\u9001");//â€œå¼€å§‹æ´¾é€â€æŒ‰é’®
+        button1.setText("\u5f00\u59cb\u6d3e\u9001");//¡°¿ªÊ¼ÅÉËÍ¡±°´Å¥
         contentPane.add(button1);
         button1.setBounds(635, 130, 95, 40);
         button1.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int count=table1.getSelectedRow();//è·å–ä½ é€‰ä¸­çš„è¡Œå·ï¼ˆè®°å½•ï¼‰
-                        if(count == -1){//æ²¡é€‰ä¸­ä»»ä½•è¡Œåˆ™æ²¡æœ‰å˜åŒ–
+                        int count=table1.getSelectedRow();//»ñÈ¡ÄãÑ¡ÖĞµÄĞĞºÅ£¨¼ÇÂ¼£©
+                        if(count == -1){//Ã»Ñ¡ÖĞÈÎºÎĞĞÔòÃ»ÓĞ±ä»¯
                             return;
                         }
-                        String ordid= table1.getValueAt(count, 0).toString();//è¯»å–ä½ è·å–è¡Œå·çš„æŸä¸€åˆ—çš„å€¼ï¼ˆä¹Ÿå°±æ˜¯å­—æ®µï¼‰
-                        Dbutil dbutil = new Dbutil();//è¿æ¥æ•°æ®åº“
-                        String sql = "update comorder set status= ? where ordid = ?";//?å ä½ç¬¦
+                        String ordid= table1.getValueAt(count, 0).toString();//¶ÁÈ¡Äã»ñÈ¡ĞĞºÅµÄÄ³Ò»ÁĞµÄÖµ£¨Ò²¾ÍÊÇ×Ö¶Î£©
+                        Dbutil dbutil = new Dbutil();//Á¬½ÓÊı¾İ¿â
+                        String sql = "update comorder set status= ? where ordid = ?";//?Õ¼Î»·û
                         PreparedStatement pstmt = dbutil.getPs(sql);
                         try {
                             pstmt.setString(1,"1");
@@ -103,7 +104,7 @@ public class OrdersInProgressFrame extends JFrame {
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
-                        //åˆ·æ–°è¡¨æ ¼
+                        //Ë¢ĞÂ±í¸ñ
 
                         DefaultTableModel tableMode1 = new DefaultTableModel(queryData(0), head) {
                             public boolean isCellEditable(int row, int column) {
@@ -123,7 +124,7 @@ public class OrdersInProgressFrame extends JFrame {
         );
 
         //---- button2 ----
-        button2.setText("\u5237\u65b0");//â€œæ›´æ–°â€æŒ‰é’®ï¼Œåˆ·æ–°ä¸¤ä¸ªè¡¨
+        button2.setText("\u5237\u65b0");//¡°¸üĞÂ¡±°´Å¥£¬Ë¢ĞÂÁ½¸ö±í
         contentPane.add(button2);
         button2.setBounds(635, 215, 95, 40);
         button2.addActionListener(
@@ -148,20 +149,20 @@ public class OrdersInProgressFrame extends JFrame {
         );
 
         //---- button3 ----
-        button3.setText("\u64a4\u9500\u6d3e\u9001");//â€œæ’¤é”€æ´¾é€â€æŒ‰é’®
+        button3.setText("\u64a4\u9500\u6d3e\u9001");//¡°³·ÏúÅÉËÍ¡±°´Å¥
         contentPane.add(button3);
         button3.setBounds(635, 300, 95, 40);
         button3.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int count=table2.getSelectedRow();//è·å–ä½ é€‰ä¸­çš„è¡Œå·ï¼ˆè®°å½•ï¼‰
-                        if(count == -1){//æ²¡é€‰ä¸­ä»»ä½•è¡Œåˆ™æ²¡æœ‰å˜åŒ–
+                        int count=table2.getSelectedRow();//»ñÈ¡ÄãÑ¡ÖĞµÄĞĞºÅ£¨¼ÇÂ¼£©
+                        if(count == -1){//Ã»Ñ¡ÖĞÈÎºÎĞĞÔòÃ»ÓĞ±ä»¯
                             return;
                         }
-                        String ordid= table2.getValueAt(count, 0).toString();//è¯»å–ä½ è·å–è¡Œå·çš„æŸä¸€åˆ—çš„å€¼ï¼ˆä¹Ÿå°±æ˜¯å­—æ®µï¼‰
-                        Dbutil dbutil = new Dbutil();//è¿æ¥æ•°æ®åº“
-                        String sql = "update comorder set status= ? where ordid = ?";//?å ä½ç¬¦
+                        String ordid= table2.getValueAt(count, 0).toString();//¶ÁÈ¡Äã»ñÈ¡ĞĞºÅµÄÄ³Ò»ÁĞµÄÖµ£¨Ò²¾ÍÊÇ×Ö¶Î£©
+                        Dbutil dbutil = new Dbutil();//Á¬½ÓÊı¾İ¿â
+                        String sql = "update comorder set status= ? where ordid = ?";//?Õ¼Î»·û
                         PreparedStatement pstmt = dbutil.getPs(sql);
                         try {
                             pstmt.setString(1,"0");
@@ -191,12 +192,12 @@ public class OrdersInProgressFrame extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    //æ–¹æ³•ä¸€ï¼Œå¾—åˆ°statusä¸º0æˆ–è€…1çš„è®°å½•
-    public Object[][] queryData(int num) {//numç”¨äºæ§åˆ¶æœªæ´¾é€è¡¨å’Œæ­£åœ¨æ´¾é€è¡¨çš„ç»“æœï¼Œ0è¡¨ç¤ºæœªæ´¾é€è¡¨ï¼Œ1è¡¨ç¤ºæ­£åœ¨æ´¾é€è¡¨
+    //·½·¨Ò»£¬µÃµ½statusÎª0»òÕß1µÄ¼ÇÂ¼
+    public Object[][] queryData(int num) {//numÓÃÓÚ¿ØÖÆÎ´ÅÉËÍ±íºÍÕıÔÚÅÉËÍ±íµÄ½á¹û£¬0±íÊ¾Î´ÅÉËÍ±í£¬1±íÊ¾ÕıÔÚÅÉËÍ±í
         java.util.List<ComOrder> list = new ArrayList<ComOrder>();
         Dbutil dbutil = new Dbutil();
         String sql = "SELECT * FROM comorder";
@@ -205,27 +206,27 @@ public class OrdersInProgressFrame extends JFrame {
             ResultSet rs = dbutil.getRs(pstmt.executeQuery());
             if(num == 0){
                 while (rs.next()) {
-                    //å¾ªç¯ä¸€æ¬¡å°±æ˜¯ä¸€ä¸ªå¯¹è±¡
+                    //Ñ­»·Ò»´Î¾ÍÊÇÒ»¸ö¶ÔÏó
                     if(Integer.parseInt(rs.getString("status")) == num){
                         ComOrder co = new ComOrder();
                         co.setOrdid(rs.getString("ordid"));
-                        co.setUsername(getRealName(rs.getString("USERNAME")/*æ–¹æ³•äºŒ*/));
+                        co.setUsername(getRealName(rs.getString("USERNAME")/*·½·¨¶ş*/));
                         co.setOrdertime(rs.getString("ordertime"));
                         co.setTrantime(rs.getString("trantime"));
-                        co.setStatus("æœªæ´¾é€");
+                        co.setStatus("Î´ÅÉËÍ");
                         list.add(co);
                     }
             }
             }else if(num == 1){
                     while (rs.next()) {
-                        //å¾ªç¯ä¸€æ¬¡å°±æ˜¯ä¸€ä¸ªå¯¹è±¡
+                        //Ñ­»·Ò»´Î¾ÍÊÇÒ»¸ö¶ÔÏó
                         if(Integer.parseInt(rs.getString("status")) == num){
                             ComOrder co = new ComOrder();
                             co.setOrdid(rs.getString("ordid"));
-                            co.setUsername(getRealName(rs.getString("USERNAME")/*æ–¹æ³•äºŒ*/));
+                            co.setUsername(getRealName(rs.getString("USERNAME")/*·½·¨¶ş*/));
                             co.setOrdertime(rs.getString("ordertime"));
                             co.setTrantime(rs.getString("trantime"));
-                            co.setStatus("æ­£åœ¨æ´¾é€");
+                            co.setStatus("ÕıÔÚÅÉËÍ");
                             list.add(co);
                         }
                     }
@@ -247,7 +248,7 @@ public class OrdersInProgressFrame extends JFrame {
         return data;
     }
 
-    //æ–¹æ³•äºŒï¼Œæ ¹æ®usernameå¾—åˆ°uname
+    //·½·¨¶ş£¬¸ù¾İusernameµÃµ½uname
     public String getRealName(String username){
         java.util.List<ComOrder> list = new ArrayList<ComOrder>();
         Dbutil dbutil = new Dbutil();
@@ -276,6 +277,6 @@ public class OrdersInProgressFrame extends JFrame {
     private JButton button2;
     private JButton button3;
     private Object[][] data = null;
-    private String head[] = {"è®¢å•å·", "ç”¨æˆ·å", "ä¸‹å•æ—¶é—´", "æ´¾é€æ—¶é—´","çŠ¶æ€"};
+    private String head[] = {"¶©µ¥ºÅ", "ÓÃ»§Ãû", "ÏÂµ¥Ê±¼ä", "ÅÉËÍÊ±¼ä","×´Ì¬"};
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

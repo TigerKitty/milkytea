@@ -45,15 +45,32 @@ public class DateChooserJButton extends JButton {
     private SimpleDateFormat sdf = null ;
 
     public DateChooserJButton() {
-        this (getNowDate());
+        //获取当前时间
+        //this (getNowDate());
+        this(getTrantime());
+    }
+    private static Date getTrantime() {
+        //获取当前时间再加十分钟作为默认的配送时间
+        Date date1=new Date();
+        Date date2=new Date(date1.getTime()+600000);
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String trantime=format.format(date2);//配送时间
+        Date date3 = new Date();
+        try {
+            date3 = format.parse(trantime);
+            //String test = format.format("dddd"+date3);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date3;
     }
 
-    public DateChooserJButton(String dateString) {
-        this ();
-        setText(getDefaultDateFormat(), dateString);
-        //保存原始是日期时间
-        initOriginalText(dateString);
-    }
+//    public DateChooserJButton(String dateString) {
+//        this ();
+//        setText(getDefaultDateFormat(), dateString);
+//        //保存原始的日期时间
+//        initOriginalText(dateString);
+//    }
 
     public DateChooserJButton(SimpleDateFormat df, String dateString) {
         this ();
@@ -115,7 +132,7 @@ public class DateChooserJButton extends JButton {
      * @return 日期格式化器
      */
     public SimpleDateFormat getCurrentSimpleDateFormat(){
-        if ( this .sdf != null ){
+        if ( this.sdf != null ){
             return sdf;
         } else {
             return getDefaultDateFormat();
@@ -198,13 +215,13 @@ public class DateChooserJButton extends JButton {
         Color backGroundColor = Color.gray; // 底色
         // 月历表格配色----------------//
         Color palletTableColor = Color.white; // 日历表底色
-        Color todayBackColor = Color.orange; // 今天背景色
-        Color weekFontColor = Color.blue; // 星期文字色
+        Color todayBackColor = Color.green; // 今天背景色
+        Color weekFontColor = Color.black; // 星期文字色
         Color dateFontColor = Color.black; // 日期文字色
         Color weekendFontColor = Color.red; // 周末文字色
         // 控制条配色------------------//
-        Color controlLineColor = Color.pink; // 控制条底色
-        Color controlTextColor = Color.white; // 控制条标签文字色
+        Color controlLineColor = Color.white; // 控制条底色
+        Color controlTextColor = Color.black; // 控制条标签文字色
         Color rbFontColor = Color.white; // RoundBox文字色
         Color rbBorderColor = Color.red; // RoundBox边框色
         Color rbButtonColor = Color.pink; // RoundBox按钮色
@@ -249,6 +266,8 @@ public class DateChooserJButton extends JButton {
             yearSpin.setPreferredSize( new Dimension( 48 , 20 ));
             yearSpin.setName( "Year" );
             yearSpin.setEditor( new JSpinner.NumberEditor(yearSpin, "####" ));
+            //用户不能更改年份月份以及日
+            yearSpin.setEnabled( false );
             yearSpin.addChangeListener( this );
             result.add(yearSpin);
 
@@ -260,6 +279,8 @@ public class DateChooserJButton extends JButton {
             monthSpin.setPreferredSize( new Dimension( 35 , 20 ));
             monthSpin.setName( "Month" );
             monthSpin.addChangeListener( this );
+            //用户不能更改年份月份以及日
+            monthSpin.setEnabled( false );
             result.add(monthSpin);
 
             JLabel monthLabel = new JLabel( "月" );
@@ -271,6 +292,7 @@ public class DateChooserJButton extends JButton {
             daySpin.setPreferredSize( new Dimension( 35 , 20 ));
             daySpin.setName( "Day" );
             daySpin.addChangeListener( this );
+            //用户不能更改年份月份以及日
             daySpin.setEnabled( false );
             daySpin.setToolTipText( "请下下面的日历面板中进行选择哪一天！" );
             result.add(daySpin);
@@ -299,16 +321,15 @@ public class DateChooserJButton extends JButton {
             hourLabel.setForeground(controlTextColor);
             result.add(minuteLabel);
 
-            secondSpin = new JSpinner( new SpinnerNumberModel(currentSecond, 0 , 59 , 1 ));
-            secondSpin.setPreferredSize( new Dimension( 35 , 20 ));
-            secondSpin.setName( "Second" );
-            secondSpin.addChangeListener( this );
-            result.add(secondSpin);
-
-            JLabel secondLabel = new JLabel( "秒" );
-            hourLabel.setForeground(controlTextColor);
-            result.add(secondLabel);
-
+//            secondSpin = new JSpinner( new SpinnerNumberModel(currentSecond, 0 , 59 , 1 ));
+//            secondSpin.setPreferredSize( new Dimension( 35 , 20 ));
+//            secondSpin.setName( "Second" );
+//            secondSpin.addChangeListener( this );
+//            result.add(secondSpin);
+//
+//            JLabel secondLabel = new JLabel( "秒" );
+//            hourLabel.setForeground(controlTextColor);
+//            result.add(secondLabel);
             return result;
         }
 

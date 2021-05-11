@@ -32,6 +32,7 @@ public class record extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        this.setTitle("ÒÑÍê³ÉµÄ¶©µ¥");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         label1 = new JLabel();
@@ -42,6 +43,7 @@ public class record extends JFrame {
 
         //======== scrollPane1 ========
         {
+            table1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
@@ -59,8 +61,8 @@ public class record extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         Dbutil dbutil=new Dbutil();
         list=new ArrayList<RecordBean>();
-        String sql="select c.ordid,c.username,c.ordertime,p.proname,d.detailnum,d.detailprice,c.status from product p,comorder c,detailorder d where p.proid=d.proid and c.ordid=d.ordid and c.status=2";
-        System.out.println("æ‰§è¡Œçš„SQLï¼š"+sql);
+        String sql="select c.ordid,c.username,c.ordertime,p.proname,d.detailnum,d.detailprice,c.status from product p,comorder c,detailorder d where p.proid=d.proid and c.ordid=d.ordid and c.status IN (2,3)";
+        System.out.println("Ö´ĞĞµÄSQL£º"+sql);
         preparedStatement=dbutil.getPs(sql);
         try {
             resultSet=preparedStatement.executeQuery();
@@ -89,17 +91,23 @@ public class record extends JFrame {
             tableDate[i][4]=list.get(i).getDetailnum();
             tableDate[i][5]=list.get(i).getDetailprice();
             tableDate[i][6]=list.get(i).getStatus();
-
         }
-        String []name ={"è®¢å•ç¼–å·","ç”¨æˆ·ID","ä¸‹å•æ—¶é—´","å¥¶èŒ¶åç§°","æ•°é‡","é‡‘é¢","è®¢å•çŠ¶æ€"};
+        String []name ={"¶©µ¥±àºÅ","ÓÃ»§ID","ÏÂµ¥Ê±¼ä","ÄÌ²èÃû³Æ","ÊıÁ¿","½ğ¶î","¶©µ¥×´Ì¬"};
         DefaultTableModel tableModel=new DefaultTableModel(tableDate,name){
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         table1.setModel(tableModel);
+        table1.getColumnModel().getColumn(0).setPreferredWidth(100);
+        table1.getColumnModel().getColumn(1).setPreferredWidth(7);
+        table1.getColumnModel().getColumn(2).setPreferredWidth(100);
+        table1.getColumnModel().getColumn(3).setPreferredWidth(50);
+        table1.getColumnModel().getColumn(4).setPreferredWidth(7);
+        table1.getColumnModel().getColumn(5).setPreferredWidth(7);
+        table1.getColumnModel().getColumn(6).setPreferredWidth(7);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 

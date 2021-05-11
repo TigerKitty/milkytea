@@ -8,7 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * æ˜¾ç¤ºäºŒç»´ç æ”¯ä»˜çš„æ¡å½¢ç 
+ * ÏÔÊ¾¶şÎ¬ÂëÖ§¸¶µÄÌõĞÎÂë
  */
 public class MerCodePayFrame extends JFrame {
     public MerCodePayFrame(String fileurl) {
@@ -17,6 +17,7 @@ public class MerCodePayFrame extends JFrame {
 
     private void initComponents(String fileurl) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        this.setTitle("ÇëÓÃÖ§¸¶±¦É¨ÂëÖ§¸¶");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
         ImageIcon icon1=new ImageIcon(fileurl);

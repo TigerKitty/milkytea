@@ -43,8 +43,8 @@ public class ShowQRCode {
             File realFile = new File(realpath);
             if (realFile.isDirectory()) {
                 File[] subfiles = realFile.listFiles();
-                System.out.println("è·¯å¾„ï¼š"+realpath);
-                System.out.println("è·¯å¾„ä¸‹çš„æ–‡ä»¶æ•°ç»„ï¼š"+subfiles);
+                System.out.println("Â·¾¶£º"+realpath);
+                System.out.println("Â·¾¶ÏÂµÄÎÄ¼þÊý×é£º"+subfiles);
                 for (File file : subfiles) {
                     if(file.getName().endsWith(".png")){
                         files.add(file);

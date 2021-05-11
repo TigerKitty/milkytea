@@ -13,10 +13,10 @@ import java.util.List;
 
 /**
  * Created by liuyangkly on 15/10/23.
- æ‰§è¡Œè°ƒåº¦ï¼Œä¸»è¦ä»»åŠ¡ç”±ä¸¤ä¸ªçº¿ç¨‹å®Œæˆï¼Œäº¤æ˜“çº¿ç¨‹ï¼ˆè°ƒç”¨å½“é¢ä»˜2.0æ¥å£ï¼‰å’Œäº¤æ˜“ä¿éšœçº¿ç¨‹ï¼ˆè½®è¯¢ï¼‰ï¼Œå…·ä½“éœ€è¦åšçš„äº‹æƒ…
- 1.å½“é¢ä»˜ç¨‹åºæ¯æ‰§è¡Œå®Œä¸€ç¬”äº¤æ˜“åå°†äº¤æ˜“ç»“æœä¿å­˜åœ¨ä¸´æ—¶é˜Ÿåˆ—
- 2.è½®è¯¢çº¿ç¨‹è¯»å–ä¸´æ—¶é˜Ÿåˆ—ï¼Œè·å–åŸºç¡€é‡‡é›†ä¿¡æ¯å’Œæœ€å¤š30æ¡trade_infoä¿¡æ¯ï¼Œè°ƒç”¨æ”¯ä»˜å®monitor.heartbeat.synæ¥å£
- ç¤ºä¾‹ä»£ç ä»…å°è£…äº†å¦‚ä½•è°ƒç”¨è¯¥æ¥å£apiï¼Œé‡‡é›†æ•°æ®ï¼Œæ¯”å¦‚é‡‡é›†ç½‘ç»œä¿¡æ¯ã€äº¤æ˜“è€—æ—¶ã€å¼‚å¸¸ä¿¡æ¯ç­‰ï¼Œéœ€è¦ç³»ç»Ÿå•†å¼€å‘è€…è‡ªè¡Œå®Œæˆã€‚
+ Ö´ĞĞµ÷¶È£¬Ö÷ÒªÈÎÎñÓÉÁ½¸öÏß³ÌÍê³É£¬½»Ò×Ïß³Ì£¨µ÷ÓÃµ±Ãæ¸¶2.0½Ó¿Ú£©ºÍ½»Ò×±£ÕÏÏß³Ì£¨ÂÖÑ¯£©£¬¾ßÌåĞèÒª×öµÄÊÂÇé
+ 1.µ±Ãæ¸¶³ÌĞòÃ¿Ö´ĞĞÍêÒ»±Ê½»Ò×ºó½«½»Ò×½á¹û±£´æÔÚÁÙÊ±¶ÓÁĞ
+ 2.ÂÖÑ¯Ïß³Ì¶ÁÈ¡ÁÙÊ±¶ÓÁĞ£¬»ñÈ¡»ù´¡²É¼¯ĞÅÏ¢ºÍ×î¶à30Ìõtrade_infoĞÅÏ¢£¬µ÷ÓÃÖ§¸¶±¦monitor.heartbeat.syn½Ó¿Ú
+ Ê¾Àı´úÂë½ö·â×°ÁËÈçºÎµ÷ÓÃ¸Ã½Ó¿Úapi£¬²É¼¯Êı¾İ£¬±ÈÈç²É¼¯ÍøÂçĞÅÏ¢¡¢½»Ò×ºÄÊ±¡¢Òì³£ĞÅÏ¢µÈ£¬ĞèÒªÏµÍ³ÉÌ¿ª·¢Õß×ÔĞĞÍê³É¡£
  */
 public class DemoHbRunner extends AbsHbRunner {
 
@@ -26,16 +26,16 @@ public class DemoHbRunner extends AbsHbRunner {
 
     @Override
     public String getAppAuthToken() {
-        // å¯¹äºç³»ç»Ÿå•†ï¼Œå¦‚æœæ˜¯ä¸ºäº†å•†æˆ·å¼€å‘ç›‘æ§ä¿éšœæ¥å£ï¼Œåˆ™éœ€è¦ä¼ æ­¤å€¼ï¼Œå¦åˆ™å¦‚æœä¸ºç³»ç»Ÿå•†è‡ªå·±åšäº¤æ˜“ä¿éšœæ¥å£å¼€å‘ï¼Œåˆ™å¯ä¸ä¼ ã€‚
+        // ¶ÔÓÚÏµÍ³ÉÌ£¬Èç¹ûÊÇÎªÁËÉÌ»§¿ª·¢¼à¿Ø±£ÕÏ½Ó¿Ú£¬ÔòĞèÒª´«´ËÖµ£¬·ñÔòÈç¹ûÎªÏµÍ³ÉÌ×Ô¼º×ö½»Ò×±£ÕÏ½Ó¿Ú¿ª·¢£¬Ôò¿É²»´«¡£
         return null;
     }
 
     @Override
     public AlipayHeartbeatSynRequestBuilder getBuilder() {
-        // ç³»ç»Ÿå•†ä½¿ç”¨çš„äº¤æ˜“ä¿¡æ¯æ ¼å¼ï¼Œjsonå­—ç¬¦ä¸²ç±»å‹ï¼Œä»äº¤æ˜“é˜Ÿåˆ—ä¸­è·å–
+        // ÏµÍ³ÉÌÊ¹ÓÃµÄ½»Ò×ĞÅÏ¢¸ñÊ½£¬json×Ö·û´®ÀàĞÍ£¬´Ó½»Ò×¶ÓÁĞÖĞ»ñÈ¡
         List<SysTradeInfo> sysTradeInfoList = HbQueue.poll();
 
-        // å¼‚å¸¸ä¿¡æ¯çš„é‡‡é›†ï¼Œç³»ç»Ÿå•†è‡ªè¡Œå®Œæˆ
+        // Òì³£ĞÅÏ¢µÄ²É¼¯£¬ÏµÍ³ÉÌ×ÔĞĞÍê³É
         List<ExceptionInfo> exceptionInfoList = new ArrayList<ExceptionInfo>();
         //        exceptionInfoList.add(ExceptionInfo.HE_SCANER);
         //        exceptionInfoList.add(ExceptionInfo.HE_PRINTER);
@@ -45,9 +45,9 @@ public class DemoHbRunner extends AbsHbRunner {
             .setProduct(Product.FP).setType(Type.CR).setEquipmentId("cr1000001")
             .setEquipmentStatus(EquipStatus.NORMAL).setTime(Utils.toDate(new Date()))
             .setStoreId("store10001").setMac("0a:00:27:00:00:00").setNetworkType("LAN")
-            .setProviderId("2088911212323549") // è®¾ç½®ç³»ç»Ÿå•†pid
-            .setSysTradeInfoList(sysTradeInfoList) // ç³»ç»Ÿå•†åŒæ­¥trade_infoä¿¡æ¯
-            .setExceptionInfoList(exceptionInfoList) // å¡«å†™å¼‚å¸¸ä¿¡æ¯ï¼Œå¦‚æœæœ‰çš„è¯
+            .setProviderId("2088911212323549") // ÉèÖÃÏµÍ³ÉÌpid
+            .setSysTradeInfoList(sysTradeInfoList) // ÏµÍ³ÉÌÍ¬²½trade_infoĞÅÏ¢
+            .setExceptionInfoList(exceptionInfoList) // ÌîĞ´Òì³£ĞÅÏ¢£¬Èç¹ûÓĞµÄ»°
         ;
         return builder;
     }

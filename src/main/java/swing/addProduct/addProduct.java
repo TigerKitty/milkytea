@@ -26,6 +26,7 @@ public class addProduct extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        this.setTitle("添加商品");
         label1 = new JLabel();
         label2 = new JLabel();
         label3 = new JLabel();

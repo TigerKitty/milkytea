@@ -3,45 +3,52 @@ package listener.sale;
 import javax.swing.*;
 
 /**
-*ç”¨æˆ·æ²¡æœ‰è¾“å…¥æ•°é‡æ—¶æˆ–è´­ç‰©è½¦ä¸ºé›¶ï¼Œæäº¤è®¢å•æ—¶å¼¹å‡ºè­¦å‘Šæ¡†
+ *ÓÃ»§Ã»ÓĞÊäÈëÊıÁ¿Ê±»ò¹ºÎï³µÎªÁã£¬Ìá½»¶©µ¥Ê±µ¯³ö¾¯¸æ¿ò
  */
 public class WarnFrame {
     public static void shopwarnFrame(){
-        JFrame frame = new JFrame("åŠ å…¥è´­ç‰©è½¦å¤±è´¥");
-        JOptionPane.showMessageDialog(frame, "è¯·æ·»åŠ æ•°é‡",
+        JFrame frame = new JFrame("¼ÓÈë¹ºÎï³µÊ§°Ü");
+        JOptionPane.showMessageDialog(frame, "ÇëÌí¼ÓÊıÁ¿",
 
-                "åŠ å…¥è´­ç‰©è½¦å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                "¼ÓÈë¹ºÎï³µÊ§°Ü", JOptionPane.WARNING_MESSAGE);
     }
     public static void orderwarnFrame(){
-        JFrame frame = new JFrame("æäº¤è®¢å•å¤±è´¥");
-        JOptionPane.showMessageDialog(frame, "æ‚¨çš„è´­ç‰©è½¦ä¸ºé›¶ï¼Œè¯·é€‰è´­å•†å“",
+        JFrame frame = new JFrame("Ìá½»¶©µ¥Ê§°Ü");
+        JOptionPane.showMessageDialog(frame, "ÄúµÄ¹ºÎï³µÎªÁã£¬ÇëÑ¡¹ºÉÌÆ·",
 
-                "æäº¤è®¢å•å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                "Ìá½»¶©µ¥Ê§°Ü", JOptionPane.WARNING_MESSAGE);
     }
-    //ä»è´­ç‰©è½¦åˆ é™¤æŠ¥é”™æ—¶å¼¹å‡ºè¯¥æ¡†
+    //´Ó¹ºÎï³µÉ¾³ı±¨´íÊ±µ¯³ö¸Ã¿ò
     public static void deletewarnFrame(){
-        JFrame frame = new JFrame("åˆ é™¤å¤±è´¥");
-        JOptionPane.showMessageDialog(frame, "æ‚¨æ²¡æœ‰é€‰ä¸­å•†å“ï¼Œè¯·é€‰ä¸­å•†å“è¿›è¡Œåˆ é™¤",
+        JFrame frame = new JFrame("É¾³ıÊ§°Ü");
+        JOptionPane.showMessageDialog(frame, "ÄúÃ»ÓĞÑ¡ÖĞÉÌÆ·£¬ÇëÑ¡ÖĞÉÌÆ·½øĞĞÉ¾³ı",
 
-                "åˆ é™¤å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                "É¾³ıÊ§°Ü", JOptionPane.WARNING_MESSAGE);
     }
     public static void outlinePaywarnFrame(){
-        JFrame frame = new JFrame("æ”¯ä»˜å¤±è´¥");
-        JOptionPane.showMessageDialog(frame, "æ”¯ä»˜è¶…æ—¶ï¼Œè¯·é‡æ–°ç»“è´¦ç”Ÿæˆ",
+        JFrame frame = new JFrame("Ö§¸¶Ê§°Ü");
+        JOptionPane.showMessageDialog(frame, "Ö§¸¶³¬Ê±£¬ÇëÖØĞÂ½áÕËÉú³É",
 
-                "æ”¯ä»˜å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                "Ö§¸¶Ê§°Ü", JOptionPane.WARNING_MESSAGE);
     }
     public static void outlinePoswarnFrame(){
-        JFrame frame = new JFrame("æ”¯ä»˜å¤±è´¥");
-        JOptionPane.showMessageDialog(frame, "æ”¯ä»˜å¤±è´¥",
+        JFrame frame = new JFrame("Ö§¸¶Ê§°Ü");
+        JOptionPane.showMessageDialog(frame, "Ö§¸¶Ê§°Ü",
 
-                "æ”¯ä»˜å¤±è´¥", JOptionPane.WARNING_MESSAGE);
+                "Ö§¸¶Ê§°Ü", JOptionPane.WARNING_MESSAGE);
     }
     public static void outlinePoswarnFrame1(){
-        JFrame frame = new JFrame("æ”¯ä»˜æˆåŠŸ");
-        JOptionPane.showMessageDialog(frame, "æ”¯ä»˜æˆåŠŸ",
+        JFrame frame = new JFrame("Ö§¸¶³É¹¦");
+        JOptionPane.showMessageDialog(frame, "Ö§¸¶³É¹¦",
 
-                "æ”¯ä»˜æˆåŠŸ", JOptionPane.WARNING_MESSAGE);
+                "Ö§¸¶³É¹¦", JOptionPane.WARNING_MESSAGE);
+    }
+    //¼Ó¼õ³ö´í´¦Àí
+    public static void Add_subPoswarnFrame(){
+        JFrame frame = new JFrame("¼Ó¼õÊıÁ¿Ê§°Ü");
+        JOptionPane.showMessageDialog(frame, "Çëµã»÷ÏàÓ¦µÄÉÌÆ·½øĞĞ¼Ó¼õ",
+
+                "¼Ó¼õÊıÁ¿Ê§°Ü", JOptionPane.WARNING_MESSAGE);
     }
 
 }

@@ -7,6 +7,7 @@ package swing.outlinesale;
 import dao.sale.DaoCreate;
 import listener.sale.OutlineOrderMes;
 import listener.sale.WarnFrame;
+import swing.login.Login;
 import util.ShowQRCode;
 
 import java.awt.*;
@@ -20,7 +21,7 @@ import java.util.List;
 import javax.swing.*;
 
 /**
- * å•†å®¶ç»“è´¦é¡µé¢ï¼Œå¯é€‰æ‹©ä¸‰ç§ä»˜æ¬¾æ–¹å¼
+ * ÉÌ¼Ò½áÕËÒ³Ãæ£¬¿ÉÑ¡ÔñÈıÖÖ¸¶¿î·½Ê½
  */
 public class MerPayFrame extends JFrame {
     static Object[][] tableDate;
@@ -31,6 +32,7 @@ public class MerPayFrame extends JFrame {
     }
 
     private void initComponents(final int sumprice) {
+        this.setTitle("ÇëÈ·ÈÏĞÅÏ¢£¬Ñ¡ÔñĞÔ½áÕË");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
         label1 = new JLabel();
@@ -77,13 +79,13 @@ public class MerPayFrame extends JFrame {
         contentPane.add(button3);
         button3.setBounds(new Rectangle(new Point(280, 215), button3.getPreferredSize()));
         button3.setBackground(Color.ORANGE);
-        //æ˜¾ç¤ºæ€»é¢
+        //ÏÔÊ¾×Ü¶î
         textField1.setText(""+sumprice);
         textField2.setText(""+sumprice);
         textField3.setText("0");
         textField1.setEnabled(false);
         textField3.setEnabled(false);
-        //åŠ¨æ€è·å–æ‰¾é›¶
+        //¶¯Ì¬»ñÈ¡ÕÒÁã
         textField2.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -104,27 +106,26 @@ public class MerPayFrame extends JFrame {
 
             }
         });
-        //ç°é‡‘æ”¯ä»˜
+        //ÏÖ½ğÖ§¸¶
         button1.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
                         textField1.setText("");
                         textField2.setText("");
                         textField3.setText("");
-                        //ç”Ÿæˆorderid
-                        String name = "outline";
+                        //Éú³Éorderid
+                        String name = Login.username;
                         String orderid = DaoCreate.CreateOutlineOrdid(name);
-                        //å°†è®¢å•ä¿¡æ¯åŠ å…¥åˆ°comorderæ•°æ®åº“è¡¨ä¸­
+                        //½«¶©µ¥ĞÅÏ¢¼ÓÈëµ½comorderÊı¾İ¿â±íÖĞ
                         OutlineOrderMes.insertComOrd(name,orderid);
-                        //å°†è®¢å•ä¿¡æ¯åŠ å…¥åˆ°detailorderæ•°æ®åº“è¡¨ä¸­
+                        //½«¶©µ¥ĞÅÏ¢¼ÓÈëµ½detailorderÊı¾İ¿â±íÖĞ
                         OutlineOrderMes.insertDetailOrd(tableDate,orderid);
-                        MerSellFrame.Clear();//ä»˜æ¬¾ä¹‹åæ¸…ç©ºè´­ç‰©è½¦
+                        MerSellFrame.Clear();//¸¶¿îÖ®ºóÇå¿Õ¹ºÎï³µ
                     }
                 }
         );
-        //äºŒç»´ç æ”¯ä»˜
+        //¶şÎ¬ÂëÖ§¸¶
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -132,12 +133,12 @@ public class MerPayFrame extends JFrame {
                         final util.Main main = new util.Main();
                         final String[] no = {""};
                         final int[] payStatus = {0};
-                        //ç»™ç”ŸæˆäºŒç»´ç æ·»åŠ ä¸€ä¸ªçº¿ç¨‹
+                        //¸øÉú³É¶şÎ¬ÂëÌí¼ÓÒ»¸öÏß³Ì
                         Thread t1=new Thread(
                                 new Runnable() {
                                     @Override
                                     public void run() {
-                                        //è¿™é‡Œä¸€å®šè¦å˜ä¸ºæ•°ç»„çš„é—®é¢˜æä¸æ‡‚ä¸ºå•¥
+                                        //ÕâÀïÒ»¶¨Òª±äÎªÊı×éµÄÎÊÌâ¸ã²»¶®ÎªÉ¶
                                         no[0] = main.test_trade_precreate(Integer.parseInt(textField1.getText()));
                                         System.out.println(no[0]);
                                         List<File> list = new ArrayList<File>();
@@ -148,7 +149,7 @@ public class MerPayFrame extends JFrame {
                                 }
                         );
                         final Object obj = new Object();
-                        //ç»™éªŒè¯æ”¯ä»˜æˆåŠŸçš„æ–¹æ³•æ·»åŠ ä¸€ä¸ªçº¿ç¨‹
+                        //¸øÑéÖ¤Ö§¸¶³É¹¦µÄ·½·¨Ìí¼ÓÒ»¸öÏß³Ì
                         Thread t2=new Thread(
                                 new Runnable() {
                                     @Override
@@ -159,22 +160,22 @@ public class MerPayFrame extends JFrame {
                                             } catch (InterruptedException ex) {
                                                 ex.printStackTrace();
                                             }
-                                            //è¿™é‡Œä¸€å®šè¦å˜ä¸ºæ•°ç»„çš„é—®é¢˜æä¸æ‡‚ä¸ºå•¥
+                                            //ÕâÀïÒ»¶¨Òª±äÎªÊı×éµÄÎÊÌâ¸ã²»¶®ÎªÉ¶
                                             payStatus[0] = main.test_trade_query(no[0]);
                                             System.out.println(payStatus[0]);
                                             if (payStatus[0]==1){
-                                                System.out.println("æ”¯ä»˜æˆåŠŸ");
-                                                //ç”Ÿæˆorderid
-                                                String name = "outline";
+                                                System.out.println("Ö§¸¶³É¹¦");
+                                                //Éú³Éorderid
+                                                String name = Login.username;
                                                 String orderid = DaoCreate.CreateOutlineOrdid(name);
-                                                //å°†è®¢å•ä¿¡æ¯åŠ å…¥åˆ°comorderæ•°æ®åº“è¡¨ä¸­
+                                                //½«¶©µ¥ĞÅÏ¢¼ÓÈëµ½comorderÊı¾İ¿â±íÖĞ
                                                 OutlineOrderMes.insertComOrd(name,orderid);
-                                                //å°†è®¢å•ä¿¡æ¯åŠ å…¥åˆ°detailorderæ•°æ®åº“è¡¨ä¸­
+                                                //½«¶©µ¥ĞÅÏ¢¼ÓÈëµ½detailorderÊı¾İ¿â±íÖĞ
                                                 OutlineOrderMes.insertDetailOrd(tableDate,orderid);
-                                                MerSellFrame.Clear();//ä»˜æ¬¾ä¹‹åæ¸…ç©ºè´­ç‰©è½¦
-                                                WarnFrame.outlinePoswarnFrame1();//å¼¹å‡ºæ”¯ä»˜æˆåŠŸæ¡†
+                                                MerSellFrame.Clear();//¸¶¿îÖ®ºóÇå¿Õ¹ºÎï³µ
+                                                WarnFrame.outlinePoswarnFrame1();//µ¯³öÖ§¸¶³É¹¦¿ò
                                             }else {
-                                                System.out.println("æ”¯ä»˜å¤±è´¥");
+                                                System.out.println("Ö§¸¶Ê§°Ü");
                                                 WarnFrame.outlinePaywarnFrame();
                                             }
                                         }
@@ -186,7 +187,7 @@ public class MerPayFrame extends JFrame {
                     }
                 }
         );
-        //posæœºæ”¯ä»˜
+        //pos»úÖ§¸¶
         button3.addActionListener(
                 new ActionListener() {
                     @Override

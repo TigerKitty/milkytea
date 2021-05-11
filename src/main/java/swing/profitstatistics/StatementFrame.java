@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * @author lbr
- * åˆ©æ¶¦ç»Ÿè®¡ç•Œé¢
+ * ÀûÈóÍ³¼Æ½çÃæ
  */
 public class StatementFrame extends JFrame {
     public static void main(String[] args) {
@@ -35,6 +35,7 @@ public class StatementFrame extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
+        this.setTitle("ÀûÈóÍ³¼Æ");
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
         menuItem1 = new JMenuItem();
@@ -97,7 +98,7 @@ public class StatementFrame extends JFrame {
                         List<DailyStatisBean> list3 ;
                         DailyStatis dailyStatis=new DailyStatis();
                         list3=dailyStatis.dailystatis(box1Value);
-                        String []name1 ={"æ—¶é—´ï¼ˆæ—¥ï¼‰","æ—¥è®¢å•é‡","æ—¥é”€é‡","æ—¥é”€å”®é¢","æ—¥åˆ©æ¶¦"};
+                        String []name1 ={"Ê±¼ä£¨ÈÕ£©","ÈÕ¶©µ¥Á¿","ÈÕÏúÁ¿","ÈÕÏúÊÛ¶î","ÈÕÀûÈó"};
                         Object tableDate1[][]=new Object[list3.size()][name1.length];
                         for(int i=0;i<list3.size();i++) {
                             for (int j = 0; j < name1.length; j++) {
@@ -142,7 +143,7 @@ public class StatementFrame extends JFrame {
                         List<MonthlyStatisBean> list4 ;
                         MonthlyStatis monthlyStatis=new MonthlyStatis();
                         list4=monthlyStatis.monthlystatis(box2Value);
-                        String []name2 ={"æ—¶é—´ï¼ˆæœˆï¼‰","æœˆè®¢å•é‡","æœˆé”€é‡","æœˆé”€å”®é¢","æœˆåˆ©æ¶¦"};
+                        String []name2 ={"Ê±¼ä£¨ÔÂ£©","ÔÂ¶©µ¥Á¿","ÔÂÏúÁ¿","ÔÂÏúÊÛ¶î","ÔÂÀûÈó"};
                         Object tableDate2[][]=new Object[list4.size()][name2.length];
                         for(int i=0;i<list4.size();i++) {
                             for (int j = 0; j < name2.length; j++) {
@@ -262,7 +263,7 @@ public class StatementFrame extends JFrame {
         scrollPane2.setVisible(false);
 
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

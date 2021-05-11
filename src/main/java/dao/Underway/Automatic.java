@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Automatic {
-    //鑷姩鏀惰揣鏂规硶
+    //自动收货方法
     public static String[] automatic(){
         List<String> list = new ArrayList<String>();
         String times[]=null;
@@ -40,7 +40,7 @@ public class Automatic {
     }
     public static void right(){
         String times[] = automatic();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//璁剧疆鏃ユ湡鏍煎紡
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//设置日期格式
         Date date , mydate;
         Dbutil dbutil = new Dbutil();
         String ordid = null;
@@ -66,7 +66,7 @@ public class Automatic {
                 }
                 date = df.parse((String) times[i]);
                 mydate = df.parse(df.format(new Date()));
-                long day=(mydate.getTime()-date.getTime())/(60*60*1000);//涓庡綋鍓嶆椂闂寸殑闂撮殧(灏忔椂)
+                long day=(mydate.getTime()-date.getTime())/(60*60*1000);//与当前时间的间隔(小时)
                 if(day>=1){
                     String sql1 = "update comorder set status=? where ordid = ?";
                     PreparedStatement ptem = dbutil.getPs(sql1);

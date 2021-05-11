@@ -12,6 +12,8 @@ import listener.sale.WarnFrame;
 import swing.addProduct.addProduct;
 import swing.lnc.OrdersInProgressFrame;
 import swing.onlinesale.SellFrame;
+import swing.profitstatistics.StatementFrame;
+import swing.record.record;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,6 +38,7 @@ public class MerSellFrame extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         //======== this ========
+        this.setTitle("»¶Ó­Ê¹ÓÃNO.3ÄÌ²èµê");
         contentPane = getContentPane();
         contentPane.setLayout(null);
         jPanel=new JPanel();
@@ -106,7 +109,7 @@ public class MerSellFrame extends JFrame {
         button6.setBounds(new Rectangle(new Point(10, 45), button5.getPreferredSize()));
 
         Object tableDate[][]=new Object[0][4];
-        String []name ={"å•†å“ç¼–å·","å•†å“åç§°","å•†å“æ•°é‡","å•†å“ä»·æ ¼"};
+        String []name ={"ÉÌÆ·±àºÅ","ÉÌÆ·Ãû³Æ","ÉÌÆ·ÊıÁ¿","ÉÌÆ·¼Û¸ñ"};
         tableModel=new DefaultTableModel(tableDate,name);
         table=new JTable(tableModel);
         jScrollPane=new JScrollPane(table);
@@ -126,7 +129,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //ï¿½ï¿½ï¿½ë¹ºï¿½ï³µ
+        //
         milkTeaBeans=new ArrayList<MilkTeaBean>();
         button1.addActionListener(
                 new ActionListener() {
@@ -145,7 +148,7 @@ public class MerSellFrame extends JFrame {
                                 tableDate[i][2] = milkTeaBeans.get(i).getNumber();
                                 tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
                             }
-                            String[] name = {"å•†å“ç¼–å·", "å•†å“åç§°", "å•†å“æ•°é‡", "å•†å“ä»·æ ¼"};
+                            String[] name = {"ÉÌÆ·±àºÅ", "ÉÌÆ·Ãû³Æ", "ÉÌÆ·ÊıÁ¿", "ÉÌÆ·¼Û¸ñ"};
                             tableModel = new DefaultTableModel(tableDate, name);
                             table = new JTable(tableModel);
                             jScrollPane = new JScrollPane(table);
@@ -158,7 +161,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //ï¿½ï¿½ï¿½ï¿½
+        //ÖØÖÃ
         button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -168,7 +171,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //Ö§ï¿½ï¿½
+        //½áÕËÖ§¸¶
         button3.addActionListener(
                 new ActionListener() {
                     @Override
@@ -188,7 +191,6 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ó¹ï¿½ï¿½ï³µï¿½Æ³ï¿½
         n=-1;
         button4.addActionListener(
                 new ActionListener() {
@@ -205,7 +207,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //åŠ æ•°é‡
+        //¼ÓÊıÁ¿
         button5.addActionListener(
                 new ActionListener() {
                     @Override
@@ -220,7 +222,7 @@ public class MerSellFrame extends JFrame {
                             tableDate[i][2] = milkTeaBeans.get(i).getNumber();
                             tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
                         }
-                        String[] name = {"å•†å“ç¼–å·", "å•†å“åç§°", "å•†å“æ•°é‡", "å•†å“ä»·æ ¼"};
+                        String[] name = {"ÉÌÆ·±àºÅ", "ÉÌÆ·Ãû³Æ", "ÉÌÆ·ÊıÁ¿", "ÉÌÆ·¼Û¸ñ"};
                         tableModel = new DefaultTableModel(tableDate, name);
                         table = new JTable(tableModel);
                         jScrollPane = new JScrollPane(table);
@@ -230,7 +232,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //å‡æ•°é‡
+        //¼õÊıÁ¿
         button6.addActionListener(
                 new ActionListener() {
                     @Override
@@ -245,7 +247,7 @@ public class MerSellFrame extends JFrame {
                             tableDate[i][2] = milkTeaBeans.get(i).getNumber();
                             tableDate[i][3] = milkTeaBeans.get(i).getSellprice();
                         }
-                        String[] name = {"å•†å“ç¼–å·", "å•†å“åç§°", "å•†å“æ•°é‡", "å•†å“ä»·æ ¼"};
+                        String[] name = {"ÉÌÆ·±àºÅ", "ÉÌÆ·Ãû³Æ", "ÉÌÆ·ÊıÁ¿", "ÉÌÆ·¼Û¸ñ"};
                         tableModel = new DefaultTableModel(tableDate, name);
                         table = new JTable(tableModel);
                         jScrollPane = new JScrollPane(table);
@@ -256,7 +258,7 @@ public class MerSellFrame extends JFrame {
                 }
         );
         menuBar1 = new JMenuBar();
-        JMenuItem menu = new JMenu("æ·»åŠ å•†å“");
+        JMenuItem menu = new JMenu("Ìí¼ÓÉÌÆ·");
         menuBar1.add(menu);
         menu.addMouseListener(
                 new MouseListener() {
@@ -273,7 +275,7 @@ public class MerSellFrame extends JFrame {
                     @Override
                     public void mouseExited(MouseEvent e) { }
                 });
-        JMenuItem menu1 = new JMenu("è®¢å•ç®¡ç†");
+        JMenuItem menu1 = new JMenu("¶©µ¥¹ÜÀí");
           menuBar1.add(menu1);
           menu1.addMouseListener(
                   new MouseListener() {
@@ -290,12 +292,36 @@ public class MerSellFrame extends JFrame {
                       @Override
                       public void mouseExited(MouseEvent e) { }
                   });
-//        item=new JMenuItem("æ­£åœ¨è¿›è¡Œçš„è®¢å•");
-//        menu1.add(item);
-//        item1=new JMenuItem("å·²å®Œæˆè®¢å•è®°å½•");
-//        menu1.add(item1);
-        JMenu menu2 = new JMenu("åˆ©æ¶¦ç»Ÿè®¡");
+        JMenuItem menu2 = new JMenu("ÒÑÍê³ÉµÄ¶©µ¥");
         menuBar1.add(menu2);
+        menu2.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) { new record();}
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
+        JMenuItem menu3 = new JMenu("ÀûÈóÍ³¼Æ");
+        menuBar1.add(menu3);
+        menu3.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { }
+                    @Override
+                    public void mousePressed(MouseEvent e) { new StatementFrame();}
+                    @Override
+                    public void mouseReleased(MouseEvent e) { }
+                    @Override
+                    public void mouseEntered(MouseEvent e) { }
+                    @Override
+                    public void mouseExited(MouseEvent e) { }
+                });
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
@@ -307,7 +333,7 @@ public class MerSellFrame extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    //æ¸…ç©ºè´­ç‰©è½¦
+    //Çå¿Õ¹ºÎï³µ
     public  static void Clear(){
         milkTeaBeans.clear();
         tableModel.setRowCount(0);
@@ -322,8 +348,8 @@ public class MerSellFrame extends JFrame {
     private JButton button2;
     private JButton button3;
     private JButton button4;
-    private JButton button5;//åŠ æ•°é‡
-    private JButton button6;//å‡æ•°é‡
+    private JButton button5;//¼ÓÊıÁ¿
+    private JButton button6;//¼õÊıÁ¿
     private static JTable table;
     private static DefaultTableModel tableModel;
     private static JScrollPane jScrollPane;
