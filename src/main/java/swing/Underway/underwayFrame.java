@@ -195,6 +195,7 @@ public class underwayFrame extends JFrame {
         setLocationRelativeTo(getOwner());
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -215,7 +216,7 @@ class MyRunnable implements Runnable{
         Automatic automatic = new Automatic();
         while (true) {
             try {
-                Thread.sleep(1000*60);
+                Thread.sleep(1000);
                 automatic.right();
             } catch (InterruptedException e) {
                 e.printStackTrace();

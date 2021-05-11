@@ -13,10 +13,11 @@ import java.util.List;
 
 public class Automatic {
     //自动收货方法
+    private static Dbutil dbutil = new Dbutil();
+
     public static String[] automatic(){
         List<String> list = new ArrayList<String>();
         String times[]=null;
-        Dbutil dbutil = new Dbutil();
         String sql = "SELECT TRANTIME\n" +
                 "FROM comorder\n" +
                 "WHERE status=?";
@@ -42,7 +43,6 @@ public class Automatic {
         String times[] = automatic();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//设置日期格式
         Date date , mydate;
-        Dbutil dbutil = new Dbutil();
         String ordid = null;
         for (int i = 0; i < times.length; i++) {
             try {
@@ -54,7 +54,7 @@ public class Automatic {
                     ptm.setString(2, String.valueOf(1));
                     rs = ptm.executeQuery();
                     rs.next();
-                        ordid = rs.getString(1);
+                    ordid = rs.getString(1);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 } finally {
@@ -66,13 +66,16 @@ public class Automatic {
                 }
                 date = df.parse((String) times[i]);
                 mydate = df.parse(df.format(new Date()));
+                String receivetime = df.format(new Date());
                 long day=(mydate.getTime()-date.getTime())/(60*60*1000);//与当前时间的间隔(小时)
                 if(day>=1){
-                    String sql1 = "update comorder set status=? where ordid = ?";
+                    System.out.println("已自动收货");
+                    String sql1 = "update comorder set status=? , receivetime =? where ordid = ?";
                     PreparedStatement ptem = dbutil.getPs(sql1);
                     try {
                         ptem.setString(1,"2");
-                        ptem.setString(2,ordid);
+                        ptem.setString(2, receivetime);
+                        ptem.setString(3, ordid);
                         ptem.executeUpdate();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
