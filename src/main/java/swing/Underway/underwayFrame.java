@@ -16,7 +16,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @author 1 用户查看正在进行的订单
+ * @author 1 鐢ㄦ埛鏌ョ湅姝ｅ湪杩涜鐨勮鍗?
  */
 public class underwayFrame extends JFrame {
     public static void main(String[] args) {
@@ -30,7 +30,7 @@ public class underwayFrame extends JFrame {
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        this.setTitle("我的订单信息");
+        this.setTitle("鎴戠殑璁㈠崟淇℃伅");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         button1 = new JButton();
@@ -61,7 +61,7 @@ public class underwayFrame extends JFrame {
         scrollPane1.setBounds(60, 60, scrollPane1.getPreferredSize().width, 213);
 
         //---- button1 ----
-        button1.setText("\u5237\u65b0");//刷新按钮
+        button1.setText("\u5237\u65b0");//鍒锋柊鎸夐挳
         contentPane.add(button1);
         button1.setBounds(150, 300, 90, button1.getPreferredSize().height);
         button1.addActionListener(
@@ -79,16 +79,16 @@ public class underwayFrame extends JFrame {
         );
 
         //---- button2 ----
-        button2.setText("\u786e\u8ba4\u6536\u8d27");//确认收货
+        button2.setText("\u786e\u8ba4\u6536\u8d27");//纭鏀惰揣
         contentPane.add(button2);
         button2.setBounds(330, 300, 90, 23);
         button2.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//设置日期格式
-                        int count=table1.getSelectedRow();//获取你选中的行号（记录）
-                        String ordid= table1.getValueAt(count, 0).toString();//读取你获取行号的某一列的值（也就是字段）
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//璁剧疆鏃ユ湡鏍煎紡
+                        int count=table1.getSelectedRow();//鑾峰彇浣犻?変腑鐨勮鍙凤紙璁板綍锛?
+                        String ordid= table1.getValueAt(count, 0).toString();//璇诲彇浣犺幏鍙栬鍙风殑鏌愪竴鍒楃殑鍊硷紙涔熷氨鏄瓧娈碉級
                         String receivetime = df.format(new Date());
                         Dbutil dbutil = new Dbutil();
                         String sql = "update comorder set status=? , receivetime = ? where ordid = ?";
@@ -120,7 +120,7 @@ public class underwayFrame extends JFrame {
         scrollPane2.setBounds(60, 60, 452, 213);
 
         //---- button3 ----
-        button3.setText("\u5237\u65b0");//刷新
+        button3.setText("\u5237\u65b0");//鍒锋柊
         contentPane.add(button3);
         button3.setBounds(240, 300, 90, 23);
         button3.setVisible(false);
@@ -140,7 +140,7 @@ public class underwayFrame extends JFrame {
 
 
         //---- button4 ----
-        button4.setText("\u6d3e\u9001\u8ba2\u5355");//正在派送
+        button4.setText("\u6d3e\u9001\u8ba2\u5355");//姝ｅ湪娲鹃??
         button4.setFont(new Font("\u5b8b\u4f53", Font.PLAIN, 22));
         contentPane.add(button4);
         button4.setBounds(125, 10, 150, button4.getPreferredSize().height);
@@ -166,7 +166,7 @@ public class underwayFrame extends JFrame {
         );
 
         //---- button5 ----
-        button5.setText("\u672a\u6d3e\u9001\u8ba2\u5355");//未派送订单
+        button5.setText("\u672a\u6d3e\u9001\u8ba2\u5355");//鏈淳閫佽鍗?
         button5.setFont(new Font("\u5b8b\u4f53", Font.PLAIN, 22));
         contentPane.add(button5);
         button5.setBounds(285, 10, 160, 35);
@@ -194,7 +194,8 @@ public class underwayFrame extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         setVisible(true);
-        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -209,4 +210,17 @@ public class underwayFrame extends JFrame {
     private JButton button5;
 
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+}
+class MyRunnable implements Runnable{
+    public void run(){
+        Automatic automatic = new Automatic();
+        while (true) {
+            try {
+                Thread.sleep(1000);
+                automatic.right();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

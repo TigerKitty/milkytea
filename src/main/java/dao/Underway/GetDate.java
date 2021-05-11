@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-/*用于提取数据库中用户正在进行的订单，然后保存与二维数组中。
+/*鐢ㄤ簬鎻愬彇鏁版嵁搴撲腑鐢ㄦ埛姝ｅ湪杩涜鐨勮鍗曪紝鐒跺悗淇濆瓨涓庝簩缁存暟缁勪腑銆?
 * */
 public class GetDate {
     public static int num = 1;
-    public static String head[] = {"订单编号", "用户名", "下单时间","配送时间","到达时间","订单状态"};
+    public static String head[] = {"璁㈠崟缂栧彿", "鐢ㄦ埛鍚?", "涓嬪崟鏃堕棿","閰嶉?佹椂闂?","鍒拌揪鏃堕棿","璁㈠崟鐘舵??"};
     private Object[][] data = null;
     private String status;
     public Object[][] UsersData() {
@@ -25,11 +25,11 @@ public class GetDate {
         ResultSet rs = null;
         PreparedStatement ptem = dbutil.getPs(sql);
         try {
-            ptem.setString(1,"黄志国");
+            ptem.setString(1,"榛勫織鍥?");
             ptem.setString(2, String.valueOf(num));
             rs=ptem.executeQuery();
-            while (rs.next()) {//每循环一次给用户赋值
-                //将数据库中用户的信息存放在集合中
+            while (rs.next()) {//姣忓惊鐜竴娆＄粰鐢ㄦ埛璧嬪??
+                //灏嗘暟鎹簱涓敤鎴风殑淇℃伅瀛樻斁鍦ㄩ泦鍚堜腑
                 Userinfo userinfo = new Userinfo();
                 userinfo.setOrdid(rs.getString("ordid"));
                 userinfo.setUsername(rs.getString("uname"));
@@ -37,10 +37,10 @@ public class GetDate {
                 userinfo.setTrantime(rs.getString("trantime"));
                 userinfo.setReceivetime((rs.getString("receivetime")));
                 if(num==0) {
-                    status = "未在派送";
+                    status = "鏈湪娲鹃??";
                     userinfo.setStatus(status);
                 }else if(num==1){
-                    status = "正在派送";
+                    status = "姝ｅ湪娲鹃??";
                     userinfo.setStatus(status);
                 }
                 list.add(userinfo);
@@ -49,7 +49,7 @@ public class GetDate {
             e.printStackTrace();
         }
         data = new Object[list.size()][head.length];
-        for (int i = 0; i < list.size(); i++) {//将集合中的信息放入二维数组中
+        for (int i = 0; i < list.size(); i++) {//灏嗛泦鍚堜腑鐨勪俊鎭斁鍏ヤ簩缁存暟缁勪腑
             for (int j = 0; j < head.length; j++) {
                 data[i][0] = list.get(i).getOrdid();
                 data[i][1] = list.get(i).getUsername();
