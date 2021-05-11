@@ -3,10 +3,16 @@
  */
 package swing.lnc;
 import entity.lnc.db.ComOrder;
+import entity.lnc.db.Deliver;
 import util.Dbutil;
+import util.lnc.ReadFile;
+import util.lnc.SendMassage;
+import util.lnc.WriteFile;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,18 +47,19 @@ public class OrdersInProgressFrame extends JFrame {
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
-        DefaultTableModel tableModel = new DefaultTableModel(queryData(0), head) {
+        DefaultTableModel tableMode1 = new DefaultTableModel(queryData(0), head) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        table1.setModel(tableModel);
+        table1.setModel(tableMode1);
         DefaultTableModel tableMode2 = new DefaultTableModel(queryData(1), head) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         table2.setModel(tableMode2);
+
 //利用线程实现自动刷新
         FleshThread fleshThread = new FleshThread(this);
         fleshThread.start();
@@ -118,6 +125,14 @@ public class OrdersInProgressFrame extends JFrame {
                                 ex.printStackTrace();
                             }
                         }
+
+                        //发送短信
+//                        Deliver deliver = new Deliver();
+//                        SendMassage sendMassage = new SendMassage();
+//                        String send = sendMassage.sendSMS(deliver.phone3,ordid);
+//                        System.out.println(send);
+
+
                         //刷新表格
 
                         DefaultTableModel tableMode1 = new DefaultTableModel(queryData(0), head) {
@@ -133,6 +148,15 @@ public class OrdersInProgressFrame extends JFrame {
                             }
                         };
                         table2.setModel(tableMode2);
+
+                        //播报语音
+                        String s = "订单号为" + ordid + "的外卖开始配送";
+                        new WriteFile().writeFile(s);
+                        try {
+                            new ReadFile().readFile();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
         );
@@ -171,7 +195,7 @@ public class OrdersInProgressFrame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int count=table2.getSelectedRow();//获取你选中的行号（记录）
-                        if(count < 0 || count >=table1.getRowCount()){//没选中任何行则没有变化
+                        if(count < 0 || count >=table2.getRowCount()){//没选中任何行则没有变化
                             return;
                         }
                         String ordid= table2.getValueAt(count, 0).toString();//读取你获取行号的某一列的值（也就是字段）
@@ -324,37 +348,19 @@ public class OrdersInProgressFrame extends JFrame {
     private String head[] = {"订单号", "用户名", "下单时间", "派送时间","状态"};
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public JTable getTable1() {
-        return table1;
+    public String[] getHead() {
+        return head;
     }
 
-    public void setTable1(JTable table1) {
-        this.table1 = table1;
+
+    public JTable getTable1() {
+        return table1;
     }
 
     public JTable getTable2() {
         return table2;
     }
 
-    public void setTable2(JTable table2) {
-        this.table2 = table2;
-    }
-
-    public Object[][] getData() {
-        return data;
-    }
-
-    public void setData(Object[][] data) {
-        this.data = data;
-    }
-
-    public String[] getHead() {
-        return head;
-    }
-
-    public void setHead(String[] head) {
-        this.head = head;
-    }
 }
 class FleshThread extends Thread{
     private OrdersInProgressFrame oipf;
@@ -365,18 +371,18 @@ class FleshThread extends Thread{
     public void run() {
         while(true){
             try {
-                sleep(3000);
+                sleep(5000);
                 DefaultTableModel tableModel = new DefaultTableModel(oipf.queryData(0),oipf.getHead()) {
                     public boolean isCellEditable(int row, int column) {
                         return false;
                     }
                 };
-                oipf.getTable1().setModel(tableModel);
                 DefaultTableModel tableMode2 = new DefaultTableModel(oipf.queryData(1), oipf.getHead()) {
                     public boolean isCellEditable(int row, int column) {
                         return false;
                     }
                 };
+                oipf.getTable1().setModel(tableModel);
                 oipf.getTable2().setModel(tableMode2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
