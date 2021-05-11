@@ -1,6 +1,7 @@
 /*
  * Created by JFormDesigner on Mon May 03 20:39:13 CST 2021
- */
+ *//*
+
 package swing.lnc;
 import entity.lnc.db.ComOrder;
 import entity.lnc.db.Deliver;
@@ -20,13 +21,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 
+*/
 /**
  * 商家正在进行的订单：商家在此界面查看正在进行的订单，订单状态为“0” 或者“1”
  * 可以将订单状态由未派送改为正在派送，也可以撤销派送，变回未派送
  * 自动刷新
  * 联系配送员
  * 实现语音播报
- */
+ *//*
+
 public class OrdersInProgressFrame extends JFrame {
     public static void main(String[] args) {
         new OrdersInProgressFrame();
@@ -255,7 +258,9 @@ public class OrdersInProgressFrame extends JFrame {
                     if(Integer.parseInt(rs.getString("status")) == num){
                         ComOrder co = new ComOrder();
                         co.setOrdid(rs.getString("ordid"));
-                        co.setUsername(getRealName(rs.getString("USERNAME")/*方法二*/));
+                        co.setUsername(getRealName(rs.getString("USERNAME")*/
+/*方法二*//*
+));
                         co.setOrdertime(rs.getString("ordertime"));
                         co.setTrantime(rs.getString("trantime"));
                         co.setStatus("未派送");
@@ -268,7 +273,9 @@ public class OrdersInProgressFrame extends JFrame {
                     if(Integer.parseInt(rs.getString("status")) == num){
                         ComOrder co = new ComOrder();
                         co.setOrdid(rs.getString("ordid"));
-                        co.setUsername(getRealName(rs.getString("USERNAME")/*方法二*/));
+                        co.setUsername(getRealName(rs.getString("USERNAME")*/
+/*方法二*//*
+));
                         co.setOrdertime(rs.getString("ordertime"));
                         co.setTrantime(rs.getString("trantime"));
                         co.setStatus("正在派送");
@@ -391,3 +398,4 @@ class FleshThread extends Thread{
 
     }
 }
+*/

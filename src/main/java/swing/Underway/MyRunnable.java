@@ -7,7 +7,7 @@ class MyRunnable implements Runnable{
         Automatic automatic = new Automatic();
         while (true) {
             try {
-                Thread.sleep(1000*60);
+                Thread.sleep(1000);
                 automatic.right();
             } catch (InterruptedException e) {
                 e.printStackTrace();
