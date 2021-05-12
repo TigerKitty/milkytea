@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jacob-1.17-M2">
+    <CLASSES>
+      <root url="jar://D:/蓝桥/jacob-1.17-M2.zip!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/蓝桥/jacob-1.17-M2.zip!/jacob-1.17-M2/docs/api" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

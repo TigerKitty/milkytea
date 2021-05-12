@@ -1,6 +1,8 @@
 /*
  * Created by JFormDesigner on Mon May 03 11:41:30 CST 2021
  */
+/*
+
 
 package swing.outlinesale;
 
@@ -384,3 +386,4 @@ public class MerSellFrame extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
+*/

@@ -1,6 +1,7 @@
 /*
  * Created by JFormDesigner on Mon May 03 15:38:39 CST 2021
- */
+ *//*
+
 
 package swing.outlinesale;
 
@@ -16,9 +17,11 @@ import java.awt.event.ActionListener;
 import java.beans.Visibility;
 import javax.swing.*;
 
+*/
 /**
  * 显示Pos机付款界面
- */
+ *//*
+
 public class MerPosCodePayFrame extends JFrame {
     public MerPosCodePayFrame(int sumprice,Object[][] tableDate) {
         initComponents(sumprice,tableDate);
@@ -84,3 +87,4 @@ public class MerPosCodePayFrame extends JFrame {
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
+*/

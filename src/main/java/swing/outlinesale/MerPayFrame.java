@@ -1,6 +1,7 @@
 /*
  * Created by JFormDesigner on Mon May 03 15:09:06 CST 2021
- */
+ *//*
+
 
 package swing.outlinesale;
 
@@ -20,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+*/
 /**
  * 商家结账页面，可选择三种付款方式
- */
+ *//*
+
 public class MerPayFrame extends JFrame {
     static Object[][] tableDate;
     public MerPayFrame(int sumprice, Object[][] tableDate) {
@@ -216,3 +219,4 @@ public class MerPayFrame extends JFrame {
     private JButton button2;
     private JButton button3;
 }
+*/

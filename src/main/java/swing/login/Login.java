@@ -1,3 +1,5 @@
+/*
+
 package swing.login;
 
 import swing.MainFrame.OnlineMainFrame;
@@ -11,15 +13,19 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import javax.swing.*;
+*/
 /*
  * Created by JFormDesigner on Mon May 03 20:57:43 CST 2021
- */
+ *//*
 
 
 
+
+*/
 /**
  * @author 1
- */
+ *//*
+
 public class Login extends JFrame {
     public static void main(String[] args) {
         new Login();
@@ -116,10 +122,12 @@ public class Login extends JFrame {
                         Connection conn=null;
                         String url="jdbc:oracle:thin:@112.74.59.255:1521:orcl";
                         Statement stmt=null;//SQL语句对象，拼SQL
-                        /*
+                        */
+/*
                          * 1、根据用户名把加密后的密码从数据库拿到
                          * 2、把密码加密后于数据库例取出的密码进行比对
-                         * */
+                         * *//*
+
                         String sql="SELECT password FROM users WHERE username='"+username+"'";
                         ResultSet rs=null;
                         try {
@@ -152,12 +160,14 @@ public class Login extends JFrame {
                             }
                         } catch (SQLException ee) {
                             ee.printStackTrace();
-                            /*
+                            */
+/*
                             } catch (NoSuchAlgorithmException ex) {
                                 ex.printStackTrace();
                             } catch (UnsupportedEncodingException ex) {
                                 ex.printStackTrace();
-                            * */
+                            * *//*
+
 
                         } catch (NoSuchAlgorithmException ex) {
                             ex.printStackTrace();
@@ -195,10 +205,12 @@ public class Login extends JFrame {
                         Connection conn=null;
                         String url="jdbc:oracle:thin:@112.74.59.255:1521:orcl";
                         Statement stmt=null;//SQL语句对象，拼SQL
-                        /*
+                        */
+/*
                          * 1、根据用户名把加密后的密码从数据库拿到
                          * 2、把密码加密后于数据库例取出的密码进行比对
-                         * */
+                         * *//*
+
                         String sql="SELECT password,power FROM users WHERE username='"+username+"'";
 
                         ResultSet rs=null;
@@ -226,11 +238,13 @@ public class Login extends JFrame {
                                     }
 
                                     //隐藏登入窗口，显示MainForm窗口
-                                /*
+                                */
+/*
                                 setVisible(false);
                                 MainForm mf = new MainForm();
                                 mf.setVisible(true);
-                                * */
+                                * *//*
+
                                 }else{
                                     JFrame frame = new JFrame("登入失败");
                                     JOptionPane.showMessageDialog(frame, "密码错误",
@@ -244,12 +258,14 @@ public class Login extends JFrame {
                             }
                         } catch (SQLException ee) {
                             ee.printStackTrace();
-                            /*
+                            */
+/*
                             } catch (NoSuchAlgorithmException ex) {
                                 ex.printStackTrace();
                             } catch (UnsupportedEncodingException ex) {
                                 ex.printStackTrace();
-                            * */
+                            * *//*
+
 
                         } catch (NoSuchAlgorithmException ex) {
                             ex.printStackTrace();
@@ -398,3 +414,4 @@ public class Login extends JFrame {
     public static String username;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
+*/
