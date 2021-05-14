@@ -12,7 +12,7 @@ import java.util.List;
 public class MonthlyState {
     public List monthlystate() {
         List<MonthlyStateBean> list2=new ArrayList<MonthlyStateBean>();
-        String sql = "select distinct substr(ordertime,1,7) as monthtime from comorder";
+        String sql = "select distinct substr(ordertime,1,7) as monthtime from comorder order by monthtime";
         Dbutil dbutil = new Dbutil();
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = dbutil.getPs(sql);

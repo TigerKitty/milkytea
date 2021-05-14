@@ -75,6 +75,7 @@ public class AllMonthStatisFrame extends JFrame {
     private void initComponents(final List<MonthlyStatisBean> list6) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
+        this.setTitle("ÔÂ±¨±í");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         button1 = new JButton();

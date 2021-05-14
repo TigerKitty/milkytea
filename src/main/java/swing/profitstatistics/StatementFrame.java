@@ -176,8 +176,8 @@ public class StatementFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                    AllDayStatisFrame allDayStatisFrame=new AllDayStatisFrame(list5);
-                    allDayStatisFrame.setVisible(true);
+                        AllDayStatisFrame allDayStatisFrame=new AllDayStatisFrame(list5);
+                        allDayStatisFrame.setVisible(true);
                     }
                 }
         );
@@ -226,6 +226,19 @@ public class StatementFrame extends JFrame {
         );
         button4 = new JButton();
         scrollPane2 = new JScrollPane();
+        /*
+        每种奶茶月销量图表统计
+         */
+        button4.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                      MSoleNUM mSoleNUM=new MSoleNUM("奶茶月销量图") ;
+                      mSoleNUM.setVisible(true);
+                    }
+                }
+        );
+
         /*
         导出所有月统计数据
          */
@@ -292,11 +305,11 @@ public class StatementFrame extends JFrame {
                 menu1.setFont(menu1.getFont().deriveFont(menu1.getFont().getStyle() | Font.BOLD, menu1.getFont().getSize() + 3f));
 
                 //---- menuItem1 ----
-                menuItem1.setText("\u65e5\u62a5\u8868");
+                menuItem1.setText("日统计");
                 menu1.add(menuItem1);
 
                 //---- menuItem2 ----
-                menuItem2.setText("\u6708\u62a5\u8868");
+                menuItem2.setText("月统计");
                 menu1.add(menuItem2);
             }
             menuBar1.add(menu1);

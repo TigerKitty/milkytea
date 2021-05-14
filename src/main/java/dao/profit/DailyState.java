@@ -12,7 +12,7 @@ import java.util.List;
 public class DailyState {
     public List dailystate() {
         List<DailyStateBean> list1=new ArrayList<DailyStateBean>();
-        String sql = "select distinct substr(ordertime,1,10) as daytime from comorder";
+        String sql = "select distinct substr(ordertime,1,10) as daytime from comorder order by daytime";
         Dbutil dbutil = new Dbutil();
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = dbutil.getPs(sql);

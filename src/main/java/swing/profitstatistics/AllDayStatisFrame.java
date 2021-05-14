@@ -5,7 +5,6 @@
 package swing.profitstatistics;
 
 import entity.profit.DailyStatisBean;
-import entity.profit.MonthlyStatisBean;
 import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -74,6 +73,7 @@ public class AllDayStatisFrame extends JFrame {
     private void initComponents(final List<DailyStatisBean>list5) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
+        this.setTitle("»’±®±Ì");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         button1 = new JButton();
