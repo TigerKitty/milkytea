@@ -1,6 +1,7 @@
 /*
  * Created by JFormDesigner on Mon Apr 26 13:04:24 CST 2021
- */
+ *//*
+
 
 package swing.MainFrame;
 
@@ -13,9 +14,11 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+*/
 /**
  * @author 1
- */
+ *//*
+
 public class OnlineMainFrame extends JFrame {
     public static void main(String[] args) {
         OnlineMainFrame mainFrame=new OnlineMainFrame();
@@ -95,3 +98,4 @@ public class OnlineMainFrame extends JFrame {
 
 }
 
+*/

@@ -1,3 +1,4 @@
+/*
 package swing.onlinesale;
 
 import entity.sale.MilkTeaBean;
@@ -15,13 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+*/
 /*
  * Created by JFormDesigner on Sun May 02 13:45:46 CST 2021
- */
+ *//*
 
+
+*/
 /**
  * 线上销售界面
- */
+ *//*
+
 public class SellFrame extends JFrame {
     public static void main(String[] args) {
         SellFrame sellFrame=new SellFrame();
@@ -267,3 +272,4 @@ public class SellFrame extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
+*/

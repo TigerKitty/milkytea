@@ -1,4 +1,4 @@
-/*
+package swing.login;/*
 
 package swing.login;
 
@@ -22,9 +22,16 @@ import javax.swing.*;
 
 
 */
+
+import javax.swing.*;
+
 /**
  * @author 1
- *//*
+ */
+public class Login extends JFrame {
+    public static String username = "hzg";
+}
+/*
 
 public class Login extends JFrame {
     public static void main(String[] args) {

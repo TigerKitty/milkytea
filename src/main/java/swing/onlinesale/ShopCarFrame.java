@@ -1,3 +1,4 @@
+/*
 package swing.onlinesale;
 
 import entity.sale.MilkTeaBean;
@@ -10,15 +11,19 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+*/
 /*
  * Created by JFormDesigner on Sun May 02 14:36:59 CST 2021
- */
+ *//*
 
 
 
+
+*/
 /**
  * 购物车界面
- */
+ *//*
+
 public class ShopCarFrame extends JFrame {
     private static List<MilkTeaBean>list;
 
@@ -186,4 +191,4 @@ public class ShopCarFrame extends JFrame {
     private int m;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-}
+}*/

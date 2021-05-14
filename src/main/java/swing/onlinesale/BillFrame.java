@@ -1,3 +1,4 @@
+/*
 package swing.onlinesale;
 
 import dao.sale.DaoCreate;
@@ -19,12 +20,16 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
+*/
 /*
  * Created by JFormDesigner on Sun May 02 15:45:20 CST 2021
- */
+ *//*
+
+*/
 /**
  * Ω·’À√Ê∞Â
- */
+ *//*
+
 public class BillFrame extends JFrame {
     public BillFrame(List<MilkTeaBean>list) {
         initComponents(list);
@@ -163,3 +168,4 @@ public class BillFrame extends JFrame {
     private MerCodePayFrame codePayFrame;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
+*/

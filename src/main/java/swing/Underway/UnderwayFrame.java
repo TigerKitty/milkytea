@@ -49,12 +49,12 @@ public class UnderwayFrame extends JFrame {
             jtype.scrollPane1.setViewportView(jtype.table1);
         }
         contentPane.add(jtype.scrollPane1);
-        jtype.scrollPane1.setBounds(60, 60, jtype.scrollPane1.getPreferredSize().width, 213);
+        jtype.scrollPane1.setBounds(125, 100, 650, 350);
 
         //---- button1 ----
         jtype.button1.setText("\u5237\u65b0");//刷新按钮
         contentPane.add(jtype.button1);
-        jtype.button1.setBounds(150, 300, 90, jtype.button1.getPreferredSize().height);
+        jtype.button1.setBounds(200, 500, 150, 60);
         jtype.button1.addActionListener(
                 new ActionListener() {
                     @Override
@@ -67,7 +67,7 @@ public class UnderwayFrame extends JFrame {
         //---- button2 ----
         jtype.button2.setText("\u786e\u8ba4\u6536\u8d27");//确认收货
         contentPane.add(jtype.button2);
-        jtype.button2.setBounds(330, 300, 90, 23);
+        jtype.button2.setBounds(550, 500, 150, 60);
         jtype.button2.addActionListener(
                 new ActionListener() {
                     @Override
@@ -104,12 +104,12 @@ public class UnderwayFrame extends JFrame {
             jtype.scrollPane2.setViewportView(jtype.table2);
         }
         contentPane.add(jtype.scrollPane2);
-        jtype.scrollPane2.setBounds(60, 60, 452, 213);
+        jtype.scrollPane2.setBounds(125, 100, 650, 350);
 
         //---- button3 ----
         jtype.button3.setText("\u5237\u65b0");//刷新
         contentPane.add(jtype.button3);
-        jtype.button3.setBounds(240, 300, 90, 23);
+        jtype.button3.setBounds(350, 500, 150, 60);
         jtype.button3.setVisible(false);
         jtype.button3.addActionListener(
                 new ActionListener() {
@@ -125,8 +125,7 @@ public class UnderwayFrame extends JFrame {
         jtype.button4.setText("\u6d3e\u9001\u8ba2\u5355");//正在派送
         jtype.button4.setFont(new Font("\u5b8b\u4f53", Font.PLAIN, 22));
         contentPane.add(jtype.button4);
-        jtype.button4.setBounds(125, 10, 150, jtype.button4.getPreferredSize().height);
-        jtype.button4.setBounds(125, 10, 150, jtype.button4.getPreferredSize().height);
+        jtype.button4.setBounds(200, 20, 200, 60);
         jtype.button4.addActionListener(
                 new ActionListener() {
                     @Override
@@ -146,7 +145,7 @@ public class UnderwayFrame extends JFrame {
         jtype.button5.setText("\u672a\u6d3e\u9001\u8ba2\u5355");//未派送订单
         jtype.button5.setFont(new Font("\u5b8b\u4f53", Font.PLAIN, 22));
         contentPane.add(jtype.button5);
-        jtype.button5.setBounds(285, 10, 160, 35);
+        jtype.button5.setBounds(500, 20, 200, 60);
         jtype.button5.addActionListener(
                 new ActionListener() {
                     @Override
@@ -162,7 +161,7 @@ public class UnderwayFrame extends JFrame {
                 }
         );
 
-        contentPane.setPreferredSize(new Dimension(570, 390));
+        contentPane.setPreferredSize(new Dimension(900, 600));
         pack();
         setLocationRelativeTo(getOwner());
         setVisible(true);
