@@ -16,6 +16,9 @@ import entity.profit.MonthlyStatisBean;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -49,8 +52,10 @@ public class StatementFrame extends JFrame {
                         comboBox2.setVisible(false);
                         button1.setVisible(true);
                         button2.setVisible(true);
+                        button5.setVisible(true);
                         button3.setVisible(false);
                         button4.setVisible(false);
+                        button6.setVisible(false);
                         scrollPane1.setVisible(false);
                         scrollPane2.setVisible(false);
                     }
@@ -67,8 +72,10 @@ public class StatementFrame extends JFrame {
                         comboBox2.setVisible(true);
                         button1.setVisible(false);
                         button2.setVisible(false);
+                        button5.setVisible(false);
                         button3.setVisible(true);
                         button4.setVisible(true);
+                        button6.setVisible(true);
                         scrollPane1.setVisible(false);
                         scrollPane2.setVisible(false);
                     }
@@ -121,6 +128,60 @@ public class StatementFrame extends JFrame {
         button2 = new JButton();
         scrollPane1 = new JScrollPane();
         label2 = new JLabel();
+        button5 = new JButton();
+        button6 = new JButton();
+        /*
+         导出所有日统计数据
+         */
+        table1.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent mouseEvent) {
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent mouseEvent) {
+                        DailyStatisBean dailyStatisBean1=new DailyStatisBean();
+                        int count=table1.getSelectedRow();
+                        String dtime1=table1.getValueAt(count,0).toString();
+                        Integer dorderquantity1=Integer.parseInt(table1.getValueAt(count,1).toString());
+                        Integer dsalesvolume1=Integer.parseInt(table1.getValueAt(count,2).toString());
+                        Integer dsales1=Integer.parseInt(table1.getValueAt(count,3).toString());
+                        Integer dprofit1=Integer.parseInt(table1.getValueAt(count,4).toString());
+                        dailyStatisBean1.setDtime(dtime1);
+                        dailyStatisBean1.setDorderquantity(dorderquantity1);
+                        dailyStatisBean1.setDsalesvolume(dsalesvolume1);
+                        dailyStatisBean1.setDsales(dsales1);
+                        dailyStatisBean1.setDprofit(dprofit1);
+                        list5.add(dailyStatisBean1);
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent mouseEvent) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent mouseEvent) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent mouseEvent) {
+
+                    }
+                }
+        );
+        button5.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                    AllDayStatisFrame allDayStatisFrame=new AllDayStatisFrame(list5);
+                    allDayStatisFrame.setVisible(true);
+                    }
+                }
+        );
+
 
         List<MonthlyStateBean> list2;
         MonthlyState monthlyState=new MonthlyState();
@@ -165,6 +226,57 @@ public class StatementFrame extends JFrame {
         );
         button4 = new JButton();
         scrollPane2 = new JScrollPane();
+        /*
+        导出所有月统计数据
+         */
+        table2.addMouseListener(
+                new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent mouseEvent) {
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent mouseEvent) {
+                        MonthlyStatisBean monthlyStatisBean1=new MonthlyStatisBean();
+                        int count=table2.getSelectedRow();
+                        String mtime1=table2.getValueAt(count,0).toString();
+                        Integer morderquantity1=Integer.parseInt(table2.getValueAt(count,1).toString());
+                        Integer msalesvolume1=Integer.parseInt(table2.getValueAt(count,2).toString());
+                        Integer msales1=Integer.parseInt(table2.getValueAt(count,3).toString());
+                        Integer mprofit1=Integer.parseInt(table2.getValueAt(count,4).toString());
+                        monthlyStatisBean1.setMtime(mtime1);
+                        monthlyStatisBean1.setMorderquantity(morderquantity1);
+                        monthlyStatisBean1.setMsalesvolume(msalesvolume1);
+                        monthlyStatisBean1.setMsales(msales1);
+                        monthlyStatisBean1.setMprofit(mprofit1);
+                        list6.add(monthlyStatisBean1);
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent mouseEvent) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent mouseEvent) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent mouseEvent) {
+
+                    }
+                }
+        );
+        button6.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        AllMonthStatisFrame allMonthStatisFrame=new AllMonthStatisFrame(list6);
+                        allMonthStatisFrame.setVisible(true);
+                    }
+                }
+        );
 
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.BOLD | Font.ITALIC, 12));
@@ -195,21 +307,21 @@ public class StatementFrame extends JFrame {
         label1.setText("\u4e0b\u5355\u65f6\u95f4\uff1a");
         label1.setFont(label1.getFont().deriveFont(Font.BOLD, label1.getFont().getSize() + 2f));
         contentPane.add(label1);
-        label1.setBounds(155, 5, 85, 40);
+        label1.setBounds(95, 5, 85, 40);
         contentPane.add(comboBox1);
-        comboBox1.setBounds(245, 10, 120, 30);
+        comboBox1.setBounds(170, 10, 120, 30);
 
         //---- button1 ----
         button1.setText("\u7edf\u8ba1\u6570\u636e");
         button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 3f));
         contentPane.add(button1);
-        button1.setBounds(395, 10, 110, 30);
+        button1.setBounds(320, 10, 110, 30);
 
         //---- button2 ----
         button2.setText("\u56fe\u8868\u7edf\u8ba1");
         button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD, button2.getFont().getSize() + 3f));
         contentPane.add(button2);
-        button2.setBounds(525, 10, 110, 30);
+        button2.setBounds(455, 10, 110, 30);
 
         //======== scrollPane1 ========
         {
@@ -225,21 +337,33 @@ public class StatementFrame extends JFrame {
         label2.setText("\u5e74\u6708\uff1a");
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD, label2.getFont().getSize() + 2f));
         contentPane.add(label2);
-        label2.setBounds(165, 5, 60, 40);
+        label2.setBounds(100, 5, 60, 40);
         contentPane.add(comboBox2);
-        comboBox2.setBounds(235, 10, 125, 30);
+        comboBox2.setBounds(170, 10, 125, 30);
 
         //---- button3 ----
         button3.setText("\u7edf\u8ba1\u6570\u636e");
         button3.setFont(button3.getFont().deriveFont(button3.getFont().getStyle() | Font.BOLD, button3.getFont().getSize() + 2f));
         contentPane.add(button3);
-        button3.setBounds(405, 10, 95, 30);
+        button3.setBounds(320, 10, 105, 30);
 
         //---- button4 ----
         button4.setText("\u56fe\u8868\u7edf\u8ba1");
         button4.setFont(button4.getFont().deriveFont(button4.getFont().getStyle() | Font.BOLD, button4.getFont().getSize() + 3f));
         contentPane.add(button4);
-        button4.setBounds(530, 10, 115, 30);
+        button4.setBounds(455, 10, 105, 30);
+
+        //---- button5 ----
+        button5.setText("导出数据");
+        button5.setFont(button5.getFont().deriveFont(button5.getFont().getStyle() | Font.BOLD, button5.getFont().getSize() + 3f));
+        contentPane.add(button5);
+        button5.setBounds(590, 10, 105, 30);
+
+        //---- button6 ----
+        button6.setText("导出数据");
+        button6.setFont(button6.getFont().deriveFont(button6.getFont().getStyle() | Font.BOLD, button6.getFont().getSize() + 3f));
+        contentPane.add(button6);
+        button6.setBounds(590, 10, 105, 30);
 
         //======== scrollPane2 ========
         {
@@ -259,6 +383,8 @@ public class StatementFrame extends JFrame {
         button2.setVisible(false);
         button3.setVisible(false);
         button4.setVisible(false);
+        button5.setVisible(false);
+        button6.setVisible(false);
         scrollPane1.setVisible(false);
         scrollPane2.setVisible(false);
 
@@ -288,5 +414,9 @@ public class StatementFrame extends JFrame {
     private JTable table2;
     private  String[]comboBoxDate1;
     private  String[]comboBoxDate2;
+    private JButton button5;
+    private JButton button6;
+    List<DailyStatisBean> list5=new ArrayList<DailyStatisBean>();
+    List<MonthlyStatisBean> list6=new ArrayList<MonthlyStatisBean>();
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -10,7 +10,7 @@ import entity.sale.MilkTeaBean;
 import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
 import swing.addProduct.addProduct;
-import swing.lnc.OrdersInProgressFrame;
+//import swing.lnc.OrdersInProgressFrame;
 import swing.onlinesale.SellFrame;
 import swing.profitstatistics.StatementFrame;
 import swing.record.record;
@@ -300,7 +300,7 @@ public class MerSellFrame extends JFrame {
                       public void mouseClicked(MouseEvent e) { }
                       @Override
                       public void mousePressed(MouseEvent e) {
-                          new OrdersInProgressFrame();
+                  //        new OrdersInProgressFrame();
                       }
                       @Override
                       public void mouseReleased(MouseEvent e) { }
