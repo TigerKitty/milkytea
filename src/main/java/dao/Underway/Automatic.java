@@ -35,6 +35,14 @@ public class Automatic {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                ptm.close();
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         times=new String[list.size()];
         for (int i = 0; i <list.size() ; i++) {
             times[i]=list.get(i);
@@ -65,6 +73,7 @@ public class Automatic {
                 } finally {
                     try {
                         ptm.close();
+                        rs.close();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }

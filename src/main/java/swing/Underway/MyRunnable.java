@@ -9,6 +9,7 @@ class MyRunnable implements Runnable{
         this.jTable=jTable;
     }
     public void run(){
+        int i =0;
         Automatic automatic = new Automatic();
         while (true) {
             try {
