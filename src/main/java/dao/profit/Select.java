@@ -13,18 +13,18 @@ import java.util.List;
 获取数据库的商品名称及其销量
  */
 public class Select {
-    public static List<ProductDean> selectm() {
+    public static List<ProductDean> selectm(String box) {
         String sql="select proname,pronumber\n" +
                 "from(select product.proid as proid,count(product.proname) as pronumber \n" +
                 "from detailorder,comorder,product \n" +
-                "where detailorder.ordid=comorder.ordid and substr(comorder.ordertime,6,2)=? and product.proid=detailorder.proid\n" +
+                "where detailorder.ordid=comorder.ordid and substr(comorder.ordertime,1,7)=? and product.proid=detailorder.proid\n" +
                 "group by product.proid) a,product\n" +
                 "where product.proid=a.proid(+)";
         Dbutil dbutil=new Dbutil();
         PreparedStatement preparedStatement= dbutil.getPs(sql);
         List<ProductDean>list=new ArrayList<ProductDean>();
         try {
-            preparedStatement.setString(1,"05");
+            preparedStatement.setString(1,box);
             ResultSet res=preparedStatement.executeQuery();
 
             while (res.next()){

@@ -22,57 +22,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-å¥¶èŒ¶æœˆé”€é‡ç»Ÿè®¡å›¾è¡¨ç•Œé¢
+ÄÌ²èÔÂÏúÁ¿Í³¼ÆÍ¼±í½çÃæ
  */
 public class MSoleNUM extends ApplicationFrame {
-    public MSoleNUM(String title) {
+    private static String box;
+
+    public MSoleNUM(String title, String box) {
         super(title);
-        this.setContentPane(createPanel()); //æ„é€ å‡½æ•°ä¸­è‡ªåŠ¨åˆ›å»ºJavaçš„panelé¢æ¿
+        this.box=box;
+        this.setContentPane(createPanel());//¹¹Ôìº¯ÊıÖĞ×Ô¶¯´´½¨JavaµÄpanelÃæ°å
+
     }
 
-    public static CategoryDataset createDataset() //åˆ›å»ºæŸ±çŠ¶å›¾æ•°æ®é›†
+    public static CategoryDataset createDataset(String box) //´´½¨Öù×´Í¼Êı¾İ¼¯
     {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         List<ProductDean> list = new ArrayList<ProductDean>();
-        list = Select.selectm();
+        list = Select.selectm(box);
         for (int i = 0; i < list.size(); i++) {
             dataset.setValue(Integer.parseInt(list.get(i).getPronumber()), "", list.get(i).getProname());
         }
         return dataset;
     }
 
-    public static JFreeChart createChart(CategoryDataset dataset) //ç”¨æ•°æ®é›†åˆ›å»ºä¸€ä¸ªå›¾è¡¨
+    public static JFreeChart createChart(CategoryDataset dataset) //ÓÃÊı¾İ¼¯´´½¨Ò»¸öÍ¼±í
     {
-        JFreeChart chart = ChartFactory.createBarChart3D("å¥¶èŒ¶æœˆé”€é‡å›¾", // å›¾è¡¨æ ‡é¢˜
-                "å¥¶èŒ¶", // ç›®å½•è½´çš„æ˜¾ç¤ºæ ‡ç­¾
-                "é”€é‡", // æ•°å€¼è½´çš„æ˜¾ç¤ºæ ‡ç­¾
-                dataset, // æ•°æ®é›†
-                PlotOrientation.VERTICAL, // å›¾è¡¨æ–¹å‘ï¼šæ°´å¹³ã€å‚ç›´
-                true, // æ˜¯å¦æ˜¾ç¤ºå›¾ä¾‹(å¯¹äºç®€å•çš„æŸ±çŠ¶å›¾å¿…é¡»æ˜¯false)
-                false, // æ˜¯å¦ç”Ÿæˆå·¥å…·
-                false // æ˜¯å¦ç”ŸæˆURLé“¾æ¥
+        JFreeChart chart = ChartFactory.createBarChart3D("ÄÌ²èÔÂÏúÁ¿Í¼", // Í¼±í±êÌâ
+                "ÄÌ²è", // Ä¿Â¼ÖáµÄÏÔÊ¾±êÇ©
+                "ÏúÁ¿", // ÊıÖµÖáµÄÏÔÊ¾±êÇ©
+                dataset, // Êı¾İ¼¯
+                PlotOrientation.VERTICAL, // Í¼±í·½Ïò£ºË®Æ½¡¢´¹Ö±
+                true, // ÊÇ·ñÏÔÊ¾Í¼Àı(¶ÔÓÚ¼òµ¥µÄÖù×´Í¼±ØĞëÊÇfalse)
+                false, // ÊÇ·ñÉú³É¹¤¾ß
+                false // ÊÇ·ñÉú³ÉURLÁ´½Ó
         );
 
-        // è®¾ç½®å›¾æ˜¾ç¤ºæ ‡é¢˜
-        chart.setTitle(new TextTitle("å¥¶èŒ¶æœˆé”€é‡å›¾", new Font("é»‘ä½“", Font.BOLD, 16)));
+        // ÉèÖÃÍ¼ÏÔÊ¾±êÌâ
+        chart.setTitle(new TextTitle("ÄÌ²èÔÂÏúÁ¿Í¼", new Font("ºÚÌå", Font.BOLD, 16)));
 
-        // å–å¾—ç»Ÿä¸€è¡¨çš„ç¬¬ä¸€ä¸ªå›¾åˆ—
+        // È¡µÃÍ³Ò»±íµÄµÚÒ»¸öÍ¼ÁĞ
         LegendTitle legend = chart.getLegend(0);
-        // ä¿®æ”¹å›¾ä¾‹å­—ä½“
-        legend.setItemFont(new Font("å®‹ä½“", Font.BOLD, 14));
-        // å–å¾—çŠ¶å›¾plotå¯¹è±¡
+        // ĞŞ¸ÄÍ¼Àı×ÖÌå
+        legend.setItemFont(new Font("ËÎÌå", Font.BOLD, 14));
+        // È¡µÃ×´Í¼plot¶ÔÏó
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
-        // è®¾ç½®æŸ±çŠ¶å›¾å„éƒ¨åˆ†æ ‡ç­¾å­—ä½“
+        // ÉèÖÃÖù×´Í¼¸÷²¿·Ö±êÇ©×ÖÌå
         CategoryAxis domainAxis = plot.getDomainAxis();
-        domainAxis.setLabelFont(new Font("éš¶ä¹¦", Font.BOLD, 20));// Xè½´çš„æ ‡é¢˜æ–‡å­—å­—ä½“
-        domainAxis.setTickLabelFont(new Font("éš¶ä¹¦", Font.BOLD, 20));// Xè½´åæ ‡ä¸Šæ•°å€¼å­—ä½“
+        domainAxis.setLabelFont(new Font("Á¥Êé", Font.BOLD, 20));// XÖáµÄ±êÌâÎÄ×Ö×ÖÌå
+        domainAxis.setTickLabelFont(new Font("Á¥Êé", Font.BOLD, 20));// XÖá×ø±êÉÏÊıÖµ×ÖÌå
         ValueAxis rangeAxis = plot.getRangeAxis();
-        rangeAxis.setLabelFont(new Font("éš¶ä¹¦", Font.ITALIC, 20));// yè½´çš„æ ‡é¢˜æ–‡å­—å­—ä½“
-        rangeAxis.setTickLabelFont(new Font("éš¶ä¹¦", Font.BOLD, 20));// yè½´åæ ‡ä¸Šæ•°å€¼å­—ä½“
-        //domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); // Xè½´ä¸Šçš„Lableè®©å…¶45åº¦å€¾æ–œ
-        // è®¾ç½®è·ç¦»å›¾ç‰‡å·¦ç«¯è·ç¦»
+        rangeAxis.setLabelFont(new Font("Á¥Êé", Font.ITALIC, 20));// yÖáµÄ±êÌâÎÄ×Ö×ÖÌå
+        rangeAxis.setTickLabelFont(new Font("Á¥Êé", Font.BOLD, 20));// yÖá×ø±êÉÏÊıÖµ×ÖÌå
+        //domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); // XÖáÉÏµÄLableÈÃÆä45¶ÈÇãĞ±
+        // ÉèÖÃ¾àÀëÍ¼Æ¬×ó¶Ë¾àÀë
         domainAxis.setLowerMargin(0);
-        // è®¾ç½®è·ç¦»å›¾ç‰‡å³ç«¯è·ç¦»
+        // ÉèÖÃ¾àÀëÍ¼Æ¬ÓÒ¶Ë¾àÀë
         domainAxis.setUpperMargin(0);
         return chart;
     }
@@ -81,14 +85,14 @@ public class MSoleNUM extends ApplicationFrame {
 
     public static JPanel createPanel()
     {
-        JFreeChart chart =createChart(createDataset());
-        return new ChartPanel(chart); //å°†chartå¯¹è±¡æ”¾å…¥Panelé¢æ¿ä¸­å»ï¼ŒChartPanelç±»å·²ç»§æ‰¿Jpanel
+        JFreeChart chart =createChart(createDataset(box));
+        return new ChartPanel(chart); //½«chart¶ÔÏó·ÅÈëPanelÃæ°åÖĞÈ¥£¬ChartPanelÀàÒÑ¼Ì³ĞJpanel
     }
     /*
     public static void main(String[] args)
     {
-        MSoleNUM chart=new MSoleNUM("æ˜¾ç¤ºç•Œé¢");
-        chart.pack();//ä»¥åˆé€‚çš„å¤§å°æ˜¾ç¤º
+        MSoleNUM chart=new MSoleNUM("ÏÔÊ¾½çÃæ");
+        chart.pack();//ÒÔºÏÊÊµÄ´óĞ¡ÏÔÊ¾
 
         chart.setVisible(true);
 

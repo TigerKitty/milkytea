@@ -250,7 +250,9 @@ public class StatementFrame extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                      MSoleNUM mSoleNUM=new MSoleNUM("奶茶月销量图") ;
+                        int index1 = comboBox2.getSelectedIndex();
+                        String box = comboBoxDate2[index1];
+                      MSoleNUM mSoleNUM=new MSoleNUM("奶茶月销量图",box) ;
                       mSoleNUM.setVisible(true);
                     }
                 }
