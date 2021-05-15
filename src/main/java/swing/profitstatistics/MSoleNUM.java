@@ -21,7 +21,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+奶茶月销量统计图表界面
+ */
 public class MSoleNUM extends ApplicationFrame {
     public MSoleNUM(String title) {
         super(title);

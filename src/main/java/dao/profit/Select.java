@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+获取数据库的商品名称及其销量
+ */
 public class Select {
     public static List<ProductDean> selectm() {
         String sql="select proname,pronumber\n" +

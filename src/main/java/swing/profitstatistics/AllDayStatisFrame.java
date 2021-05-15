@@ -22,6 +22,10 @@ import javax.swing.table.TableModel;
 
 /**
  * @author lbr
+ * 日报表界面
+ * 每日统计数据导出
+ * 使用jxl将Jtable的导出Excel
+ * jxl.jar是通过java操作excel表格的工具类库
  */
 public class AllDayStatisFrame extends JFrame {
     private static List<DailyStatisBean> list5;
@@ -75,8 +79,8 @@ public class AllDayStatisFrame extends JFrame {
         // Generated using JFormDesigner Evaluation license - unknown
         this.setTitle("日报表");
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
-        button1 = new JButton();
+        table1 = new JTable();//显示每日统计数据
+        button1 = new JButton();//导出按钮
 
         String []name3 ={"时间（日）","日订单量","日销量","日销售额","日利润"};
         Object tableDate3[][]=new Object[list5.size()][name3.length];
@@ -95,7 +99,9 @@ public class AllDayStatisFrame extends JFrame {
             }
         };
         table1.setModel(tableModel3);
-
+        /*
+        点击导出，数据导出到当前目录下的results.xls文件
+         */
         button1.addActionListener(
                 new ActionListener() {
                     @Override
@@ -121,7 +127,7 @@ public class AllDayStatisFrame extends JFrame {
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 0, 800, 425);
 
-        //---- button1 ----
+        //---- button1导出 ----
         button1.setText("\u5bfc\u51fa");
         button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 4f));
         contentPane.add(button1);

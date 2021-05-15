@@ -20,8 +20,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-//年销量
+/*
+奶茶年销量统计图表界面
+ */
 public class YSoleNUM extends ApplicationFrame {
     public YSoleNUM(String title) {
         super(title);

@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Fri May 14 16:41:00 CST 2021
- */
-
 package swing.profitstatistics;
 
 import entity.profit.MonthlyStatisBean;
@@ -23,6 +19,10 @@ import javax.swing.table.TableModel;
 
 /**
  * @author lbr
+ * 月报表界面
+ * 每月统计数据导出
+ * 使用jxl将Jtable的导出Excel
+ * jxl.jar是通过java操作excel表格的工具类库
  */
 public class AllMonthStatisFrame extends JFrame {
     private static List<MonthlyStatisBean> list6;
@@ -36,7 +36,7 @@ public class AllMonthStatisFrame extends JFrame {
             TableModel model = table1.getModel();
             WritableWorkbook wwb = Workbook.createWorkbook(out);
             // 创建字表，并写入数据
-            WritableSheet ws = wwb.createSheet("日报表", 0);
+            WritableSheet ws = wwb.createSheet("月报表", 0);
             // 添加标题
             for (int i = 0; i < model.getColumnCount(); i++) {
                 jxl.write.Label labelN = new jxl.write.Label(i, 0, model.getColumnName(i));
@@ -77,8 +77,8 @@ public class AllMonthStatisFrame extends JFrame {
         // Generated using JFormDesigner Evaluation license - unknown
         this.setTitle("月报表");
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
-        button1 = new JButton();
+        table1 = new JTable();//显示每月统计数据
+        button1 = new JButton();//导出按钮
 
         String []name4 ={"时间（月）","月订单量","月销量","月销售额","月利润"};
         Object tableDate4[][]=new Object[list6.size()][name4.length];
@@ -98,6 +98,9 @@ public class AllMonthStatisFrame extends JFrame {
         };
         table1.setModel(tableModel3);
 
+        /*
+        点击导出，数据导出到当前目录下的results1.xls文件
+         */
         button1.addActionListener(
                 new ActionListener() {
                     @Override
@@ -122,7 +125,7 @@ public class AllMonthStatisFrame extends JFrame {
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 0, 800, 425);
 
-        //---- button1 ----
+        //---- button1导出 ----
         button1.setText("\u5bfc\u51fa");
         button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 5f));
         contentPane.add(button1);

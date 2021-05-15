@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+获取数据库订单时间的年月
+ */
 public class MonthlyState {
     public List monthlystate() {
         List<MonthlyStateBean> list2=new ArrayList<MonthlyStateBean>();

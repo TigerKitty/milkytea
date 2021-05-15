@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+获取数据库的"时间（日）","日订单量","日销量","日销售额","日利润"
+ */
 public class DailyStatis {
         public static List dailystatis(String box1Value) {
             List<DailyStatisBean> list3=new ArrayList<DailyStatisBean>();

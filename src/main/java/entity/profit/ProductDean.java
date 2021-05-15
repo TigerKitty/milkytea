@@ -1,5 +1,8 @@
 package entity.profit;
 
+/*
+用于封装奶茶名称及其销量
+ */
 public class ProductDean {
     private String proname;
     private String pronumber;
