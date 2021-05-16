@@ -9,7 +9,8 @@ import dao.sale.ObtainPrice;
 import entity.sale.MilkTeaBean;
 import listener.sale.JoinShopCar;
 import listener.sale.WarnFrame;
-import swing.addProduct.addProduct;
+
+import swing.addProduct.productList;
 import swing.lnc.OrdersInProgressFrame;
 import swing.profitstatistics.StatementFrame;
 import swing.record.record;
@@ -128,7 +129,7 @@ public class MerSellFrame extends JFrame {
                     }
                 }
         );
-        //
+
         milkTeaBeans=new ArrayList<MilkTeaBean>();
         button1.addActionListener(
                 new ActionListener() {
@@ -274,7 +275,7 @@ public class MerSellFrame extends JFrame {
                 }
         );
         menuBar1 = new JMenuBar();
-        JMenuItem menu = new JMenu("添加商品");
+        JMenuItem menu = new JMenu("商品管理");
         menuBar1.add(menu);
         menu.addMouseListener(
                 new MouseListener() {
@@ -282,7 +283,7 @@ public class MerSellFrame extends JFrame {
                     public void mouseClicked(MouseEvent e) { }
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        new addProduct();
+                        new productList();
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) { }

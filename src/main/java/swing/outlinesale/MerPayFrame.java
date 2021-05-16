@@ -156,7 +156,7 @@ public class MerPayFrame extends JFrame {
                                     public void run() {
                                         synchronized (obj){
                                             try {
-                                                obj.wait(20000);
+                                                obj.wait(25000);
                                             } catch (InterruptedException ex) {
                                                 ex.printStackTrace();
                                             }

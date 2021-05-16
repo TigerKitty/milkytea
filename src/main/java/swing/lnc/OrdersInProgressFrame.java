@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Mon May 03 20:39:13 CST 2021
  */
-
 package swing.lnc;
 import entity.lnc.db.ComOrder;
 import entity.lnc.db.Deliver;
@@ -21,7 +20,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 
-
 /**
  * 商家正在进行的订单：商家在此界面查看正在进行的订单，订单状态为“0” 或者“1”
  * 可以将订单状态由未派送改为正在派送，也可以撤销派送，变回未派送
@@ -29,7 +27,6 @@ import java.util.Date;
  * 联系配送员
  * 实现语音播报
  */
-
 public class OrdersInProgressFrame extends JFrame {
     public static void main(String[] args) {
         new OrdersInProgressFrame();
@@ -64,7 +61,7 @@ public class OrdersInProgressFrame extends JFrame {
         table2.setModel(tableMode2);
 
 //利用线程实现自动刷新
-        FleshThread fleshThread = new FleshThread(this);
+        RefleshThread fleshThread = new RefleshThread(this);
         fleshThread.start();
 
         //======== this ========
@@ -108,9 +105,10 @@ public class OrdersInProgressFrame extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         int count=table1.getSelectedRow();//获取你选中的行号（记录）
                         if(count < 0 || count >=table1.getRowCount()){//没选中任何行则没有变化
+                            new CautionFrame().setVisible(true);
                             return;
                         }
-                        String ordid= table1.getValueAt(count, 0).toString();//读取你获取行号的某一列的值（也就是字段）
+                        ordid= table1.getValueAt(count, 0).toString();//读取你获取行号的某一列的值（也就是字段）
                         Dbutil dbutil = new Dbutil();//连接数据库
                         String sql = "update comorder set status= ? ,trantime = ? where ordid = ?";//?占位符
                         PreparedStatement pstmt = dbutil.getPs(sql);
@@ -129,43 +127,71 @@ public class OrdersInProgressFrame extends JFrame {
                             }
                         }
 
-                        //发送短信
-                        Deliver deliver = new Deliver();
-                        SendMassage sendMassage = new SendMassage();
-                        String send = sendMassage.sendSMS(deliver.phone3,ordid);
-                        System.out.println(send);
+                        Thread t1 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //刷新表格
+                                DefaultTableModel tableMode2 = new DefaultTableModel(queryData(1), head) {
+                                    public boolean isCellEditable(int row, int column) {
+                                        return false;
+                                    }
+                                };
+                                table2.setModel(tableMode2);
 
-
-                        //刷新表格
-
-                        DefaultTableModel tableMode1 = new DefaultTableModel(queryData(0), head) {
-                            public boolean isCellEditable(int row, int column) {
-                                return false;
+                                DefaultTableModel tableMode1 = new DefaultTableModel(queryData(0), head) {
+                                    public boolean isCellEditable(int row, int column) {
+                                        return false;
+                                    }
+                                };
+                                table1.setModel(tableMode1);
                             }
-                        };
-                        table1.setModel(tableMode1);
-
-                        DefaultTableModel tableMode2 = new DefaultTableModel(queryData(1), head) {
-                            public boolean isCellEditable(int row, int column) {
-                                return false;
+                        });
+                        Thread t2 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //发送短信
+                                Deliver deliver = new Deliver();
+                                SendMassage sendMassage = new SendMassage();
+                                send  = sendMassage.sendSMS(deliver.getPhone(2),ordid);
+//                                System.out.println(deliver.getPhone(2));
+                                SMSWindow smsWindow = new SMSWindow(send);
+                                smsWindow.setVisible(true);
                             }
-                        };
-                        table2.setModel(tableMode2);
-
-                        //播报语音
-                        String s = "订单号为" + ordid + "的外卖开始配送";
-                        new WriteFile().writeFile(s);
+                        });
+                        Thread t3 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //播报语音
+                                if(send.equals("短信发送成功!")){
+                                    String s = "订单号为" + ordid + "的外卖开始配送";
+                                    new WriteFile().writeFile(s);
+                                    try {
+                                        new ReadFile().readFile();
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+                        t1.start();
                         try {
-                            new ReadFile().readFile();
-                        } catch (IOException ex) {
+                            t1.join();
+                        } catch (InterruptedException ex) {
                             ex.printStackTrace();
                         }
+                        t2.start();
+                        try {
+                            t2.join();
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                        t3.start();
                     }
                 }
         );
 
         //---- button2 ----
-        button2.setText("\u5237\u65b0");//“更新”按钮，刷新两个表
+        button2.setText("\u5237\u65b0");//“更新”按钮，手动刷新两个表
         contentPane.add(button2);
         button2.setBounds(635, 215, 95, 40);
         button2.addActionListener(
@@ -199,6 +225,7 @@ public class OrdersInProgressFrame extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         int count=table2.getSelectedRow();//获取你选中的行号（记录）
                         if(count < 0 || count >=table2.getRowCount()){//没选中任何行则没有变化
+                            new CautionFrame().setVisible(true);
                             return;
                         }
                         String ordid= table2.getValueAt(count, 0).toString();//读取你获取行号的某一列的值（也就是字段）
@@ -258,8 +285,7 @@ public class OrdersInProgressFrame extends JFrame {
                     if(Integer.parseInt(rs.getString("status")) == num){
                         ComOrder co = new ComOrder();
                         co.setOrdid(rs.getString("ordid"));
-                        co.setUsername(getRealName(rs.getString("USERNAME")
-));
+                        co.setUsername(getRealName(rs.getString("USERNAME")/*方法二*/));
                         co.setOrdertime(rs.getString("ordertime"));
                         co.setTrantime(rs.getString("trantime"));
                         co.setStatus("未派送");
@@ -272,8 +298,7 @@ public class OrdersInProgressFrame extends JFrame {
                     if(Integer.parseInt(rs.getString("status")) == num){
                         ComOrder co = new ComOrder();
                         co.setOrdid(rs.getString("ordid"));
-                        co.setUsername(getRealName(rs.getString("USERNAME")
-));
+                        co.setUsername(getRealName(rs.getString("USERNAME")/*方法二*/));
                         co.setOrdertime(rs.getString("ordertime"));
                         co.setTrantime(rs.getString("trantime"));
                         co.setStatus("正在派送");
@@ -286,6 +311,7 @@ public class OrdersInProgressFrame extends JFrame {
         }finally {
             try {
                 pstmt.close();
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -351,12 +377,13 @@ public class OrdersInProgressFrame extends JFrame {
     private JButton button3;
     private Object[][] data = null;
     private String head[] = {"订单号", "用户名", "下单时间", "派送时间","状态"};
+    String send = "短信发送失败!";
+    String ordid =null;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public String[] getHead() {
         return head;
     }
-
 
     public JTable getTable1() {
         return table1;
@@ -367,16 +394,16 @@ public class OrdersInProgressFrame extends JFrame {
     }
 
 }
-class FleshThread extends Thread{
+class RefleshThread extends Thread{
     private OrdersInProgressFrame oipf;
-    public FleshThread(OrdersInProgressFrame oipf){
+    public RefleshThread(OrdersInProgressFrame oipf){
         this.oipf = oipf;
     }
     @Override
     public void run() {
         while(true){
             try {
-                sleep(5000);
+                sleep(60000);
                 DefaultTableModel tableModel = new DefaultTableModel(oipf.queryData(0),oipf.getHead()) {
                     public boolean isCellEditable(int row, int column) {
                         return false;

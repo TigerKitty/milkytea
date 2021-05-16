@@ -1,5 +1,6 @@
 package dao.Underway;
 
+import swing.login.Login;
 import util.Dbutil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 /*用于提取数据库中用户正在进行的订单，然后保存与二维数组中。
  * */
 public class GetDate {
-    public static int num = 1;
+    public static int num = 0;
     public static String head[] = {"订单编号", "用户名", "下单时间","配送时间","到达时间","订单状态"};
     private Object[][] data = null;
     private String status;
@@ -18,14 +19,15 @@ public class GetDate {
         java.util.List<Userinfo> list = new ArrayList<Userinfo>();
         Dbutil dbutil = new Dbutil();
         String sql = "SELECT *\n" +
-                "FROM(SELECT c.ordid,u.uname,c.ordertime,c.trantime,c.receivetime,c.status\n" +
+                "FROM(SELECT c.ordid,u.uname,u.username,c.ordertime,c.trantime,c.receivetime,c.status\n" +
                 "FROM comorder c,users u\n" +
                 "WHERE c.username=u.username)\n" +
-                "WHERE uname=? and status=?";
+                "WHERE username=? and status=?";
         ResultSet rs = null;
         PreparedStatement ptem = dbutil.getPs(sql);
         try {
-            ptem.setString(1,"黄志国");
+            String username = Login.username;
+            ptem.setString(1,username);
             ptem.setString(2, String.valueOf(num));
             rs=ptem.executeQuery();
             while (rs.next()) {//每循环一次给用户赋值

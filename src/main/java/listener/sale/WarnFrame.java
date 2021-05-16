@@ -50,5 +50,12 @@ public class WarnFrame {
 
                 "加减数量失败", JOptionPane.WARNING_MESSAGE);
     }
+    //商品信息判空
+    public static void productMes(){
+        JFrame frame = new JFrame("商品信息有误");
+        JOptionPane.showMessageDialog(frame, "请确认商品信息",
+
+                "商品信息有误", JOptionPane.WARNING_MESSAGE);
+    }
 
 }

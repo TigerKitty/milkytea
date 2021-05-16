@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+获取数据库的"时间（月）","月订单量","月销量","月销售额","月利润"
+ */
 public class MonthlyStatis {
     public List monthlystatis(String box2Value) {
         List<MonthlyStatisBean> list4=new ArrayList<MonthlyStatisBean>();

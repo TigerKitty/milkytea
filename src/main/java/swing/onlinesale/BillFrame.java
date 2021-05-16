@@ -108,7 +108,7 @@ public class BillFrame extends JFrame {
                                     public void run() {
                                         synchronized (obj){
                                             try {
-                                                obj.wait(20000);
+                                                obj.wait(25000);
                                             } catch (InterruptedException ex) {
                                                 ex.printStackTrace();
                                             }
@@ -117,6 +117,7 @@ public class BillFrame extends JFrame {
                                             System.out.println(payStatus[0]);
                                             if (payStatus[0]==1){
                                                 System.out.println("支付成功");
+                                                setVisible(false);
                                                 //获取登录id
                                                 String username = Login.username;
                                                 //生成订单号
@@ -133,6 +134,7 @@ public class BillFrame extends JFrame {
                                                 WarnFrame.outlinePoswarnFrame1();
                                                 codePayFrame.setVisible(false);
                                             }else {
+                                                codePayFrame.setVisible(false);
                                                 System.out.println("支付失败");
                                                 WarnFrame.outlinePaywarnFrame();
                                             }

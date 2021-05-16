@@ -15,8 +15,6 @@ import javax.swing.*;
  * Created by JFormDesigner on Mon May 03 20:57:43 CST 2021
  */
 
-
-
 /**
  * @author 1
  */
@@ -45,8 +43,6 @@ public class Login extends JFrame {
         button3 = new JButton();//立即注册
         button4 = new JButton();//返回登入
         button5 = new JButton();//商家登入
-
-
 
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
@@ -131,25 +127,27 @@ public class Login extends JFrame {
                             conn = DriverManager.getConnection(url, "naicha", "lanqiaoNAICHA");
                             stmt = conn.createStatement();
                             rs = stmt.executeQuery(sql);
-                            if (rs.next()){//对结果集进行判断，判断数据库是否有该用户
+                            if (rs.next()) {//对结果集进行判断，判断数据库是否有该用户
                                 String encodePassword = rs.getString(1);//获取数据库中进行加密了的密码
-                                if(MD5.checkpassword(password,encodePassword)){//将用户输入的密码加密后和数据库获取到的密码进行比较
-                                    System.out.println("登入成功");
+                                if (MD5.checkpassword(password, encodePassword)) {//将用户输入的密码加密后和数据库获取到的密码进行比较
                                     //隐藏登入窗口，显示SellForm窗口
                                     //setVisible(false);
                                     new SellFrame();
                                     Login.username = username;
-                                }else{
+                                } else {
                                     JFrame frame = new JFrame("登入失败");
                                     JOptionPane.showMessageDialog(frame, "密码错误",
                                             "登入失败", JOptionPane.WARNING_MESSAGE);
+                                    textField2.setText("");
                                 }
-                            }else {
+                            } else {
                                 JFrame frame = new JFrame("登入失败");
                                 JOptionPane.showMessageDialog(frame, "用户名错误",
 
                                         "登入失败", JOptionPane.WARNING_MESSAGE);
+                                textField1.setText("");
                             }
+
                         } catch (SQLException ee) {
                             ee.printStackTrace();
                             /*
@@ -223,34 +221,25 @@ public class Login extends JFrame {
                                         JFrame frame = new JFrame("登入失败");
                                         JOptionPane.showMessageDialog(frame, "请输入商家账号",
                                                 "登入失败", JOptionPane.WARNING_MESSAGE);
+                                        textField1.setText("");
+                                        textField2.setText("");
                                     }
 
-                                    //隐藏登入窗口，显示MainForm窗口
-                                /*
-                                setVisible(false);
-                                MainForm mf = new MainForm();
-                                mf.setVisible(true);
-                                * */
                                 }else{
                                     JFrame frame = new JFrame("登入失败");
                                     JOptionPane.showMessageDialog(frame, "密码错误",
                                             "登入失败", JOptionPane.WARNING_MESSAGE);
+                                    textField2.setText("");
                                 }
                             }else {
                                 JFrame frame = new JFrame("登入失败");
                                 JOptionPane.showMessageDialog(frame, "用户名错误",
 
                                         "登入失败", JOptionPane.WARNING_MESSAGE);
+                                textField1.setText("");
                             }
                         } catch (SQLException ee) {
                             ee.printStackTrace();
-                            /*
-                            } catch (NoSuchAlgorithmException ex) {
-                                ex.printStackTrace();
-                            } catch (UnsupportedEncodingException ex) {
-                                ex.printStackTrace();
-                            * */
-
                         } catch (NoSuchAlgorithmException ex) {
                             ex.printStackTrace();
                         } catch (UnsupportedEncodingException ex) {
@@ -309,6 +298,36 @@ public class Login extends JFrame {
                         String password  = new String(textField2.getPassword());//获取密码
                         String password2 = new String(textField3.getPassword());//获取二次输入密码
                         String uname=textField4.getText();//获取用户姓名
+                        boolean b_username=true;
+                        boolean b_password=true;
+
+                        //判断用户名是否为2-6位的小写字母
+                        if(username.trim().length()>=2&&username.trim().length()<=6) {
+                            for (int i = 0; i < username.length(); i++) {
+                                if (!Character.isLowerCase(username.charAt(i))) {
+                                    b_username = false;
+                                    break;
+                                } else {
+                                    b_username = true;
+                                }
+                            }
+                        }else{
+                            b_username = false;
+                        }
+
+                        //判断密码是否为3-10位的数字或小写字母
+                        if(password.trim().length()>=3&&password.trim().length()<=10) {
+                            for (int i = 0; i < password.length(); i++) {
+                                if (!Character.isDigit(password.charAt(i))&&!Character.isLowerCase(password.charAt(i))) {
+                                    b_password = false;
+                                    break;
+                                } else {
+                                    b_password = true;
+                                }
+                            }
+                        }else{
+                            b_password=false;
+                        }
 
                         Connection conn=null;
                         String url="jdbc:oracle:thin:@112.74.59.255:1521:orcl";
@@ -323,23 +342,49 @@ public class Login extends JFrame {
                         } catch (UnsupportedEncodingException ex) {
                             ex.printStackTrace();
                         }
-                        if (password.equals(password2)){//如果两次密码相同，就进行用户信息添加
-                            System.out.println("注册成功");
-                            try{
-                                Class.forName("oracle.jdbc.driver.OracleDriver");//
-                                conn= DriverManager.getConnection(url,"naicha","lanqiaoNAICHA");
-                                stmt=conn.createStatement();
-                                stmt.executeQuery(sql);
-                            } catch (ClassNotFoundException ex) {
-                                ex.printStackTrace();
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
+                        if (b_username) {//判断用户名是否为2-6位的小写字母
+                            if (b_password){//判断密码是否为3-10位的数字或小写字母
+                                if (password.equals(password2)) {//判断两次密码是否相同，是就进行用户信息添加
+                                    try {
+                                        Class.forName("oracle.jdbc.driver.OracleDriver");//
+                                        conn = DriverManager.getConnection(url, "naicha", "lanqiaoNAICHA");
+                                        stmt = conn.createStatement();
+                                        stmt.executeQuery(sql);
+                                    } catch (ClassNotFoundException ex) {
+                                        ex.printStackTrace();
+                                    } catch (SQLException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                    JFrame frame = new JFrame("用户注册");
+                                    JOptionPane.showMessageDialog(frame, "注册成功",
+
+                                            "用户注册", JOptionPane.WARNING_MESSAGE);
+                                    textField1.setText("");
+                                    textField2.setText("");
+                                    textField3.setText("");
+                                    textField4.setText("");
+                                } else {
+                                    JFrame frame = new JFrame("注册失败");
+                                    JOptionPane.showMessageDialog(frame, "密码输入不一致",
+
+                                            "注册失败", JOptionPane.WARNING_MESSAGE);
+                                    textField3.setText("");
+                                }
+                            }else {
+                                JFrame frame = new JFrame("注册失败");
+                                JOptionPane.showMessageDialog(frame, "请输入3-10位的小写字母或数字作为密码",
+
+                                        "注册失败", JOptionPane.WARNING_MESSAGE);
+                                textField2.setText("");
                             }
+                        } else {
+                            JFrame frame = new JFrame("注册失败");
+                            JOptionPane.showMessageDialog(frame, "请输入2-6位的小写字母作为用户名",
+
+                                    "注册失败", JOptionPane.WARNING_MESSAGE);
+                            textField1.setText("");
                         }
-                        else{
-                            System.out.println("密码输入不一致");
-                            textField3.setText("");
-                        }
+
                     }
                 }
         );

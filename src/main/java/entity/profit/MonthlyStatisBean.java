@@ -1,5 +1,8 @@
 package entity.profit;
 
+/*
+用于封装"时间（月）","月订单量","月销量","月销售额","月利润"
+ */
 public class MonthlyStatisBean {
     private String mtime;
     private int morderquantity;

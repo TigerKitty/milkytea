@@ -8,46 +8,47 @@ import java.io.IOException;
 
 
 public class SendMassage {
-//            public static void main(String[] args) {
-//        SendMassage sendMassage = new SendMassage();
-//        String send = sendMassage.sendSMS("18007886230","hzg202105096");
-//        System.out.println(send);
-//    }
+//        public static void main(String[] args) {
+//                SendMassage sendMassage = new SendMassage();
+//                String send = sendMassage.sendSMS("18007886230","hzg202105096");
+//                System.out.println(send);
+//        }
         public  String sendSMS(String phoneNumber,String code) {
-                String reStr = ""; //å®šä¹‰è¿”å›å€¼
-                // çŸ­ä¿¡åº”ç”¨SDK AppID ? // 1400å¼€å¤´ ? ? ??
+                String reStr = ""; //¶¨Òå·µ»ØÖµ
+                // ¶ÌĞÅÓ¦ÓÃSDK AppID ? // 1400¿ªÍ· ? ? ??
                 int appid =1400519715;
-                // çŸ­ä¿¡åº”ç”¨SDK AppKey ? ? ? ?
+                // ¶ÌĞÅÓ¦ÓÃSDK AppKey ? ? ? ?
                 String appkey = "c72a88c77b6d895081f828ebe7dd5343";
-                // çŸ­ä¿¡æ¨¡æ¿IDï¼Œéœ€è¦åœ¨çŸ­ä¿¡åº”ç”¨ä¸­ç”³è¯· ? ? ??
+                // ¶ÌĞÅÄ£°åID£¬ĞèÒªÔÚ¶ÌĞÅÓ¦ÓÃÖĞÉêÇë ? ? ??
                 int templateId =953946;
-                // ç­¾åï¼Œä½¿ç”¨çš„æ˜¯`ç­¾åå†…å®¹`ï¼Œè€Œä¸æ˜¯`ç­¾åID` ? ? ? ?
-                String smsSign = "é›€é£ŸèŸ€å…„å¼Ÿ";
+                // Ç©Ãû£¬Ê¹ÓÃµÄÊÇ`Ç©ÃûÄÚÈİ`£¬¶ø²»ÊÇ`Ç©ÃûID` ? ? ? ?
+                String smsSign = "È¸Ê³ó°ĞÖµÜ";
                 try {
-                        //å‚æ•°ï¼Œä¸€å®šè¦å¯¹åº”çŸ­ä¿¡æ¨¡æ¿ä¸­çš„å‚æ•°é¡ºåºå’Œä¸ªæ•°ï¼Œ?
+                        //²ÎÊı£¬Ò»¶¨Òª¶ÔÓ¦¶ÌĞÅÄ£°åÖĞµÄ²ÎÊıË³ĞòºÍ¸öÊı£¬?
                         String[] params = {code};
-                        //åˆ›å»ºssenderå¯¹è±¡
+                        //´´½¨ssender¶ÔÏó
                         SmsSingleSender ssender = new SmsSingleSender(appid, appkey);
-                        //å‘é€
+                        //·¢ËÍ
                         SmsSingleSenderResult result = ssender.sendWithParam("86", phoneNumber,templateId, params, smsSign, "", "");
-                        // ç­¾åå‚æ•°æœªæä¾›æˆ–è€…ä¸ºç©ºæ—¶ï¼Œä¼šä½¿ç”¨é»˜è®¤ç­¾åå‘é€çŸ­ä¿¡ ? ? ? ? ? ?
-                        System.out.println(result.toString());
+                        // Ç©Ãû²ÎÊıÎ´Ìá¹©»òÕßÎª¿ÕÊ±£¬»áÊ¹ÓÃÄ¬ÈÏÇ©Ãû·¢ËÍ¶ÌĞÅ ? ? ? ? ? ?
+//                        System.out.println(result.toString());
+//                        \u624B\u673A\u53F71\u5C0F\u65F6\u9891\u7387\u9650\u5236 ÊÖ»úºÅ1Ğ¡Ê±ÆµÂÊÏŞÖÆ
                         if(result.result==0){
-                                reStr = "success";
+                                reStr = "¶ÌĞÅ·¢ËÍ³É¹¦!";
                         }else{
-                                reStr = "error";
+                                reStr = "¶ÌĞÅ·¢ËÍÊ§°Ü!";
                         }
                 } catch (HTTPException e) {
-                        // HTTPå“åº”ç é”™è¯¯
+                        // HTTPÏìÓ¦Âë´íÎó ? ? ? ? ??
                         e.printStackTrace();
                 } catch (JSONException e) {
-                        // jsonè§£æé”™è¯¯ ? ? ? ? ? ?
+                        // json½âÎö´íÎó ? ? ? ? ? ?
                         e.printStackTrace();
                 } catch (IOException e) {
-                        // ç½‘ç»œIOé”™è¯¯ ? ? ? ? ? ?
+                        // ÍøÂçIO´íÎó ? ? ? ? ? ?
                         e.printStackTrace();
                 }catch (Exception e) {
-                        // ç½‘ç»œIOé”™è¯¯ ? ? ? ? ? ?
+                        // ÍøÂçIO´íÎó ? ? ? ? ? ?
                         e.printStackTrace();
                 }
                 return reStr;

@@ -3,6 +3,7 @@ package dao.Underway;
 import swing.Underway.UnderwayFrame;
 import util.Dbutil;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,13 +35,24 @@ public class Automatic {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                ptm.close();
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         times=new String[list.size()];
         for (int i = 0; i <list.size() ; i++) {
             times[i]=list.get(i);
         }
         return times;
     }
-    public static void right(){
+    public JTable jTable;
+    public Refresh refresh = new Refresh();
+    public void Automatic(JTable jTable){
+        this.jTable=jTable;
         String times[] = automatic();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );//设置日期格式
         Date date , mydate;
@@ -61,6 +73,7 @@ public class Automatic {
                 } finally {
                     try {
                         ptm.close();
+                        rs.close();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -78,6 +91,7 @@ public class Automatic {
                         ptem.setString(2, receivetime);
                         ptem.setString(3, ordid);
                         ptem.executeUpdate();
+                        refresh.Refresh(jTable);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     } finally {
@@ -93,4 +107,6 @@ public class Automatic {
             }
         }
     }
+
+
 }

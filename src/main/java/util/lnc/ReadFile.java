@@ -8,13 +8,13 @@ import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
 
-public class ReadFile {
-    public void readFile() throws IOException {
-        ActiveXComponent sap = new ActiveXComponent("Sapi.SpVoice");
-        //输入文件
-        File srcFile = new File("F:/testvoice.txt");
-        //使用包装字符流读取文件
-        BufferedReader br = new BufferedReader(new FileReader(srcFile));
+        public class ReadFile {
+            public void readFile() throws IOException {
+                ActiveXComponent sap = new ActiveXComponent("Sapi.SpVoice");
+                //输入文件
+                File srcFile = new File("F:/testvoice.txt");
+                //使用包装字符流读取文件
+                BufferedReader br = new BufferedReader(new FileReader(srcFile));
         String content = br.readLine();
         try {
             // 音量 0-100

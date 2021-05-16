@@ -1,5 +1,8 @@
 package entity.profit;
 
+/*
+用于封装"时间（日）","日订单量","日销量","日销售额","日利润"
+ */
 public class DailyStatisBean {
     private String dtime;
     private int dorderquantity;
